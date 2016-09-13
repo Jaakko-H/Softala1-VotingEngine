@@ -1,4 +1,4 @@
-package fi.softala.aani;
+package fi.softala.vote.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

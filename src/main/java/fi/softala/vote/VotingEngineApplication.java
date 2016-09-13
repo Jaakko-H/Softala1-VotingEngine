@@ -1,4 +1,4 @@
-package fi.softala.aani;
+package fi.softala.vote;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
