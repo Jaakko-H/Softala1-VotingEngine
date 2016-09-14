@@ -8,10 +8,10 @@ import lombok.Setter;
 public class Innovation {
 	
 	
-@Getter @Setter int id;
+@Getter @Setter public int id;
 
-@Getter @Setter String name;
-@Getter @Setter String topic;
+@Getter @Setter public String name;
+@Getter @Setter public String topic;
 	
 
 }
