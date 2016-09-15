@@ -6,12 +6,7 @@ import lombok.Setter;
 
 
 public class Innovation {
-	
-	
-@Getter @Setter public int id;
-
-@Getter @Setter public String name;
-@Getter @Setter public String topic;
-	
-
+	@Getter @Setter public int id;
+	@Getter @Setter public String name;
+	@Getter @Setter public String topic;
 }

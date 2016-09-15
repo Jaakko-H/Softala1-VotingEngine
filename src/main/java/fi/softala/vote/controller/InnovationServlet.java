@@ -33,27 +33,13 @@ public class InnovationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DaoInnovation dao=new InnovationDaoJDBCSpringimplTest();
+		List<Innovation> innovations=dao.getInnovations();
 		
-	DaoInnovation dao=new InnovationDaoJDBCSpringimplTest();
-	
-	List<Innovation> innovations=dao.getInnovations();
-	
-	
-	for(int i=0; i<innovations.size(); i++){
-		
-		Innovation inno=innovations.get(i);
-		
-		
-		System.out.println("Nimi"+inno.name);
-		
-		
+		for(int i=0; i<innovations.size(); i++){
+			Innovation inno=innovations.get(i);
+			System.out.println("Nimi"+inno.name);
+		}
+		System.out.println("Nimi");
 	}
-	
-
-		
-	System.out.println("Nimi");
-		
-		
-	}
-
 }
