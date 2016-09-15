@@ -8,7 +8,7 @@ public class MainCtrl {
 
     @RequestMapping("/")
     public String index() {
-        return "Hello World";
+        return "Hello";
     }
 
 }
