@@ -1,14 +1,28 @@
 package fi.softala.vote.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 
-@RestController
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 public class MainCtrl {
 
     @RequestMapping("/")
-    public String index() {
-        return "Hello Hello";
+    public String index(Model model) {
+    	
+    	ArrayList<String> innovations = new ArrayList<>();
+    	
+    	innovations.add("one");
+    	innovations.add("two");
+    	innovations.add("three");
+    	innovations.add("four");
+    	innovations.add("five");
+    	
+    	model.addAttribute("innovations", innovations);
+    	
+        return "innovations";
     }
 
 }
