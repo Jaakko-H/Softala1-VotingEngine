@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title> voting engine </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<p> hello world </p>
+    <ul>
+    	<li th:each="innovation : ${innovations}">
+    		<p th:text="${innovation}"> innovation </p>
+    	</li>
+    </ul>
 </body>
 </html>
