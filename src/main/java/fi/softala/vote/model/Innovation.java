@@ -1,9 +1,7 @@
 package fi.softala.vote.model;
-import lombok.AccessLevel;
+
 import lombok.Getter;
 import lombok.Setter;
-
-
 
 public class Innovation {
 	@Getter @Setter public int id;
