@@ -12,8 +12,14 @@ public class MainCtrl {
     @RequestMapping("/")
     public String index(Model model) {
     	
+    // findAll metodin rakentaminen
+    	
     	ArrayList<String> innovations = new ArrayList<>();
     	
+    /*	for (int i = 0; i < innovation.length; i++) {
+			innovations.add .....
+		}
+    */	
     	innovations.add("one");
     	innovations.add("two");
     	innovations.add("three");
@@ -25,4 +31,9 @@ public class MainCtrl {
         return "innovations";
     }
 
+    // findOne metodin rakentaminen
+    
+    // voteInno metodin rakentaminen
+    
+    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superkäyttäjä"
 }
