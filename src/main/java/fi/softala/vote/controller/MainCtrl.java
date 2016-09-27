@@ -1,6 +1,6 @@
 package fi.softala.vote.controller;
 
-import java.util.ArrayList;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -18,14 +18,7 @@ public class MainCtrl {
 		if(session.getAttribute("voterName") != null){
 			return "redirect:/innovations";
 		}
-		ArrayList <String> innovations = new ArrayList<>();
-    	innovations.add("one");
-    	innovations.add("two");
-    	innovations.add("three");
-    	innovations.add("four");
-    	innovations.add("five");
-    	
-    	model.addAttribute("innovations", innovations);
+		
     	
         return "login";
     }

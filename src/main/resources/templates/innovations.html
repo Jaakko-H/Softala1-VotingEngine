@@ -21,18 +21,18 @@
 			<div class='col-md-3'></div>
 			<div class='col-md-6'>
 				<div class='row'>
-					<div th:each="innovation : ${innovations}" class='col-md-12 innovation'>
+					<form th:action="@{/vote}" th:each="innovation : ${innovations}"  class='col-md-12 innovation'>
 		    		
 			    		<div class='row p-a-1'>
 				    		<div class='col-md-8'>
-				    			<div class='row font-weight-bold' th:text="${innovation}"> innovation name </div>
+				    			<div class='row font-weight-bold' th:text="${innovation.name}"> innovation name </div>
 				    			<div class='row'> innovation description </div>
 				    		</div>
 				    		<div class='col-md-4 text-md-right'>
 				    			<button class='btn btn-primary btn-lg'> vote </button>
 				    		</div>
 			    		</div>
-		    		</div>
+		    		</form>
 				</div>
 			</div>
 			<div class='col-md-3'></div>
