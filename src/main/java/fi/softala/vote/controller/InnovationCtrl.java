@@ -10,15 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class MainCtrl {
+public class InnovationCtrl {
 
-	@RequestMapping(path="/", method=RequestMethod.GET)
-	public String showLogin(HttpSession session, Model model){
-		
-		if(session.getAttribute("voterName") != null){
-			return "redirect:/innovations";
-		}
-		ArrayList <String> innovations = new ArrayList<>();
+    @RequestMapping(path="/innovations", method=RequestMethod.GET)
+    public String index(Model model, HttpSession session) {
+    	
+    	if(session.getAttribute("voterName") == null){
+    		return "redirect:/";
+    	}
+
+    	// findAll metodin rakentaminen
+    	
+    	ArrayList<String> innovations = new ArrayList<>();
+    	
+    	/*	for (int i = 0; i < innovation.length; i++) {
+			innovations.add .....
+			}
+    	 */	
+    	
     	innovations.add("one");
     	innovations.add("two");
     	innovations.add("three");
@@ -27,12 +36,12 @@ public class MainCtrl {
     	
     	model.addAttribute("innovations", innovations);
     	
-        return "login";
+        return "innovations";
     }
 
     // findOne metodin rakentaminen
     
     // voteInno metodin rakentaminen
     
-    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superk�ytt�j�"
+    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superkayttaja"
 }
