@@ -28,12 +28,12 @@ public class MainCtrl {
     	
     	model.addAttribute("innovations", innovations);
     	
-        return "innovations";
+        return "login";
     }
 
     // findOne metodin rakentaminen
     
     // voteInno metodin rakentaminen
     
-    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superkäyttäjä"
+    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superkï¿½yttï¿½jï¿½"
 }
