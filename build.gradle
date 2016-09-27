@@ -13,6 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+apply plugin: 'war'
 
 jar {
 	baseName = 'votingEngine'
@@ -22,9 +23,14 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+	 jcenter()
 	mavenCentral()
 }
 
+war {
+    baseName = 'votingEngine'
+    version =  '0.5.0'
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-rest')

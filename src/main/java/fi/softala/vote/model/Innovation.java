@@ -1,5 +1,8 @@
 package fi.softala.vote.model;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +22,8 @@ public class Innovation {
 		this.name = name;
 		this.topic = topic;
 	}
-	
 	public String toString() {
 		return "Innovation [id=" + id + ", name=" + name + ", topic=" + topic
 				+ "]";
 	}
-	
 }

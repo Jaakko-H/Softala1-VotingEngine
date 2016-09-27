@@ -1,14 +1,39 @@
 package fi.softala.vote.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 
-@RestController
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 public class MainCtrl {
 
     @RequestMapping("/")
-    public String index() {
-        return "Hello World";
+    public String index(Model model) {
+    	
+    // findAll metodin rakentaminen
+    	
+    	ArrayList<String> innovations = new ArrayList<>();
+    	
+    /*	for (int i = 0; i < innovation.length; i++) {
+			innovations.add .....
+		}
+    */	
+    	innovations.add("one");
+    	innovations.add("two");
+    	innovations.add("three");
+    	innovations.add("four");
+    	innovations.add("five");
+    	
+    	model.addAttribute("innovations", innovations);
+    	
+        return "innovations";
     }
 
+    // findOne metodin rakentaminen
+    
+    // voteInno metodin rakentaminen
+    
+    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superkäyttäjä"
 }
