@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fi.softala.vote.model.Innovation;
+
 @Controller
 public class InnovationCtrl {
 
@@ -21,18 +23,16 @@ public class InnovationCtrl {
 
     	// findAll metodin rakentaminen
     	
-    	ArrayList<String> innovations = new ArrayList<>();
     	
     	/*	for (int i = 0; i < innovation.length; i++) {
 			innovations.add .....
 			}
     	 */	
     	
-    	innovations.add("one");
-    	innovations.add("two");
-    	innovations.add("three");
-    	innovations.add("four");
-    	innovations.add("five");
+    	ArrayList <Innovation> innovations = new ArrayList<>();
+    	innovations.add(new Innovation(1, "name1", "topic1"));
+    	innovations.add(new Innovation(1, "name2", "topic2"));
+    	innovations.add(new Innovation(1, "name3", "topic3"));
     	
     	model.addAttribute("innovations", innovations);
     	
