@@ -1,8 +1,5 @@
 package fi.softala.vote.model;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 import lombok.Getter;
 import lombok.Setter;
 
