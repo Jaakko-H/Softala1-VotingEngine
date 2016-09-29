@@ -8,17 +8,19 @@ import lombok.ToString;
 
 
 public class Innovation {
-	@Getter @Setter private long innoid;
-	@Getter @Setter private String innoname;
-	@Getter @Setter private String innodesc;
-	@Getter @Setter private long teamid;
+	@Getter @Setter private long innoId;
+	@Getter @Setter private String innoName;
+	@Getter @Setter private String innoDesc;
+	@Getter @Setter private long teamId;
 	
 
 
 	@ToString (includeFieldNames=true)
 	@Data (staticConstructor="of")
 	class Exem<T> {
-		private long innoid;
+		@SuppressWarnings("unused")
+		private long innoId;
+		@SuppressWarnings("unused")
 		private T x;
 	}
 	

@@ -1,30 +1,22 @@
 package fi.softala.vote.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 public class TeamMember {
-	@Getter @Setter private long id;
+	@Getter @Setter private long teamId;
 	@Getter @Setter private String firstName;
 	@Getter @Setter private String lastName;
-	@Getter @Setter private long teamID;
+
 	
-	public TeamMember() {
-		this.id = 0;
-		this.firstName = "";
-		this.lastName = "";
-		this.teamID = 0;
-	}
-	
-	public TeamMember(long id, String firstName, String lastName, long teamID) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.teamID = teamID;
-	}
-	
-	public String toString() {
-		return "TeamMember [id=" + id + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", teamID=" + teamID + "]";
+	@ToString (includeFieldNames=true)
+	@Data (staticConstructor="of")
+	class Exem<T> {
+		@SuppressWarnings("unused")
+		private long teamId;
+		@SuppressWarnings("unused")
+		private T x;
 	}
 }
