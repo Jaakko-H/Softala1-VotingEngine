@@ -1,27 +1,30 @@
 package fi.softala.vote.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
+
 
 public class Innovation {
-	@Getter @Setter public long id;
-	@Getter @Setter public String name;
-	@Getter @Setter public String topic;
+	@Getter @Setter private long innoid;
+	@Getter @Setter private String innoname;
+	@Getter @Setter private String innodesc;
+	@Getter @Setter private long teamid;
 	
-	public Innovation() {
-		id = 0;
-		name = "";
-		topic = "";
+
+
+	@ToString (includeFieldNames=true)
+	@Data (staticConstructor="of")
+	class Exem<T> {
+		private long innoid;
+		private T x;
 	}
 	
-	public Innovation(long id, String name, String topic) {
-		this.id = id;
-		this.name = name;
-		this.topic = topic;
-	}
-	public String toString() {
-		return "Innovation [id=" + id + ", name=" + name + ", topic=" + topic
-				+ "]";
-	}
+	// https://projectlombok.org/features/Data.html
+	// @Data & @ToString annotations
+	
+
 }
 
