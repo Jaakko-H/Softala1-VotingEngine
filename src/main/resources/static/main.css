@@ -54,3 +54,16 @@ ul, li {
 	100% { opacity:1; top:30%; }
 }
 
+.res-btn {
+/*     font-size: 2vw; */
+}
+.form-center {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+	margin-right: auto;
+}
+input.form-center  {
+	display: block;
+}
+
