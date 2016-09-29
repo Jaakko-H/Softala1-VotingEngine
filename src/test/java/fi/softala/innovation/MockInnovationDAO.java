@@ -14,9 +14,9 @@ public class MockInnovationDAO implements InnovationDAO {
 	public List<Innovation>	findAll(){
 		List <Innovation> innovations = new ArrayList<Innovation>();
 		Innovation innovation = new Innovation();
-		innovation.id=1;
-		innovation.name="Virtual glasses";
-		innovation.topic="Virtuality";
+		innovation.innoid=1;
+		innovation.innoname="Virtual glasses";
+		innovation.innodesc="Virtuality";
 		innovations.add(innovation);
 		return innovations;
 	}

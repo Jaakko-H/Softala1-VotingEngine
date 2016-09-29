@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Innovation {
-	@Getter @Setter public int id;
+	@Getter @Setter public long id;
 	@Getter @Setter public String name;
 	@Getter @Setter public String topic;
 	
@@ -14,7 +14,7 @@ public class Innovation {
 		topic = "";
 	}
 	
-	public Innovation(int id, String name, String topic) {
+	public Innovation(long id, String name, String topic) {
 		this.id = id;
 		this.name = name;
 		this.topic = topic;
@@ -24,3 +24,4 @@ public class Innovation {
 				+ "]";
 	}
 }
+
