@@ -25,7 +25,9 @@ targetCompatibility = 1.8
 repositories {
 	jcenter()
 	mavenCentral()
-	url 'https://repo.spring.io/libs-milestone'
+	maven {
+        	url 'https://repo.spring.io/libs-milestone'
+    	}
 }
 
 war {
