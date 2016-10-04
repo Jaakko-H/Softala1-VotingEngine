@@ -39,7 +39,7 @@ public class InnovationDAOSpringJdbcImplTest {
 		this.mockMvc = MockMvcBuilders.standaloneSetup(this.controller).build();
 
 		//configure the return values of the mock object 
-		Mockito.when(mockDao.addNew(new InnoImpl())).thenReturn(new InnoImpl());
+		Mockito.when(mockDao.addNew(new Innovation())).thenReturn(new Innovation());
 	}
 	
 	@Test
@@ -48,7 +48,7 @@ public class InnovationDAOSpringJdbcImplTest {
 		String innoDesc = "uusi kuvaus";
 		long teamID = 1;
 		
-		Innovation mockInno = new InnoImpl();
+		Innovation mockInno = new Innovation();
 		mockInno.setInnoName(innoName);
 		mockInno.setInnoDesc(innoDesc);
 		mockInno.setTeamId(teamID);

@@ -57,12 +57,12 @@ public class MockInnovationDAO implements InnovationDAO {
 	}
 	
 	public Innovation find(long id) {
-		return new InnoImpl();
+		return new Innovation();
 	}
 	
 	public List<Innovation>	findAll(){
 		List <Innovation> innovations = new ArrayList<Innovation>();
-		Innovation inno = new InnoImpl();
+		Innovation inno = new Innovation();
 //		inno.set=1;
 //		innovation.name="Virtual glasses";
 //		innovation.topic="Virtuality";
