@@ -1,17 +1,25 @@
 package fi.softala.vote.model;
 
-// @Entity
-// @Table(name = "inno")
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+ @Entity
+ @Table(name = "inno")
 public class InnoImpl implements Innovation {
 
-	// @Id
-	// @GeneratedValue(strategy = GenerationType.Auto)
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.AUTO)
 	private long innoId;
-	// @Size (min = 1, max = 50)
+	 @Size (min = 1, max = 50)
 	private String innoName;
-	// @Size (min = 1, max = 225)
+	 @Size (min = 1, max = 225)
 	private String innoDesc;
-
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.AUTO)
 	private long teamId;
 	
 	public long getInnoId(){

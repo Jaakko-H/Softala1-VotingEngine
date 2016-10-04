@@ -9,9 +9,7 @@ import fi.softala.vote.model.InnoImpl;
 import fi.softala.vote.model.Innovation;
 
 public class InnoRowMapper implements RowMapper<Innovation> {
-	// should be as below:
-	// public class InnoRowMapper implements RowMapper<Innovation> {
-
+	
 	public Innovation mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Innovation inno = new InnoImpl();
 		inno.setInnoId (rs.getLong("innoId"));

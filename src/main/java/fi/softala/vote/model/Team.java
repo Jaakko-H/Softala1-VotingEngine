@@ -1,22 +1,13 @@
 package fi.softala.vote.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-public class Team {
-	/*
-	@Getter @Setter private long teamId;
-	@Getter @Setter private String teamName;
 
-	@ToString (includeFieldNames=true)
-	@Data (staticConstructor="of")
-	class Exem<T> {
-		@SuppressWarnings("unused")
-		private long teamId;
-		@SuppressWarnings("unused")
-		private T x;
-	}
-	*/
+public interface Team {
+	
+	public abstract long getTeamId();
+	public abstract void setTeamId(long teamId);
+	
+	public abstract String getTeamName();
+	public abstract void seTeamName(String teamName);
+	
 }
