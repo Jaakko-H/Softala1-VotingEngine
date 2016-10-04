@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import fi.softala.vote.model.Innovation;
-import fi.softala.vote.model.Innovation;
+
 
 public class InnoRowMapper implements RowMapper<Innovation> {
 	

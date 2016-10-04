@@ -4,61 +4,63 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
- @Entity
- @Table(name = "inno")
+@Entity
+@Table(name = "inno")
 public class Innovation {
 
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long innoId;
-	 @Size (min = 1, max = 50)
+	@Size(min = 1, max = 50)
 	private String innoName;
-	 @Size (min = 1, max = 225)
+	@Size(min = 1, max = 225)
 	private String innoDesc;
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
-	private long teamId;
-	
-	public long getInnoId(){
+
+	@ManyToOne
+	@JoinColumn(name = "team_id")
+	private Team team;
+
+	public long getInnoId() {
 		return innoId;
 	}
-	
-	public void setInnoId(long innoId){
+
+	public void setInnoId(long innoId) {
 		this.innoId = innoId;
 	}
-	
-	public String getInnoName(){
+
+	public String getInnoName() {
 		return innoName;
 	}
-	
-	public void setInnoName(String innoName){
+
+	public void setInnoName(String innoName) {
 		this.innoName = innoName;
 	}
-	
-	public String getInnoDesc(){
+
+	public String getInnoDesc() {
 		return innoName;
 	}
-	
-	public void setInnoDesc(String innoDesc){
+
+	public void setInnoDesc(String innoDesc) {
 		this.innoDesc = innoDesc;
 	}
 
-	public long getTeamId(){
-		return teamId;
+	public Team getTeam() {
+		return team;
 	}
-	
-	public void setTeamId(long teamId){
-		this.teamId = teamId;
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	@Override
 	public String toString() {
 		return "InnoImpl [innoId=" + innoId + ", innoName=" + innoName
-				+ ", innoDesc=" + innoDesc + ", teamId=" + teamId + "]";
+				+ ", innoDesc=" + innoDesc + ", team=" + team + "]";
 	}
-	
-	
+
 }
