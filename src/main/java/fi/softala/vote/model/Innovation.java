@@ -1,71 +1,21 @@
 package fi.softala.vote.model;
 
+public interface Innovation {
 
-//tähän tulee vielä  muutosta
+	public abstract long getInnoId();
 
-public class Innovation {
-	private long innoId;
-	private String innoName;
-	private String innoDesc;
-	private long teamId;
-	
-	
-	public Innovation(long innoId, String innoName, String innoDesc, long teamId) {
-		super();
-		this.innoId = innoId;
-		this.innoName = innoName;
-		this.innoDesc = innoDesc;
-		this.teamId = teamId;
-	}
+	public abstract void setInnoId(long InnoId);
 
+	public abstract String getInnoName();
 
-	public long getInnoId() {
-		return innoId;
-	}
+	public abstract void setInnoName(String InnoName);
 
+	public abstract String getInnoDesc();
 
-	public void setInnoId(long innoId) {
-		this.innoId = innoId;
-	}
+	public abstract void setInnoDesc(String InnoDesc);
 
+	public abstract long getTeamId();
 
-	public String getInnoName() {
-		return innoName;
-	}
-
-
-	public void setInnoName(String innoName) {
-		this.innoName = innoName;
-	}
-
-
-	public String getInnoDesc() {
-		return innoDesc;
-	}
-
-
-	public void setInnoDesc(String innoDesc) {
-		this.innoDesc = innoDesc;
-	}
-
-
-	public long getTeamId() {
-		return teamId;
-	}
-
-
-	public void setTeamId(long teamId) {
-		this.teamId = teamId;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Innovation [innoId=" + innoId + ", innoName=" + innoName
-				+ ", innoDesc=" + innoDesc + ", teamId=" + teamId + "]";
-	}
-	
-
+	public abstract void setTeamId(long TeamId);
 
 }
-
