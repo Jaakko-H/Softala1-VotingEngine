@@ -5,12 +5,14 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class VotingEngineApplicationTests {
+import fi.softala.test.innovation.InnovationDAOSpringJdbcImplTest;
+import fi.softala.vote.VotingEngineApplication;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = VotingEngineApplication.class)
+public class VotingEngineApplicationTests {
 	@Test
 	public void contextLoads() {
+		
 	}
-
 }

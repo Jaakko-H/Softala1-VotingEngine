@@ -3,13 +3,12 @@ package fi.softala.vote.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.tree.RowMapper;
-import javax.swing.tree.TreePath;
+import org.springframework.jdbc.core.RowMapper;
 
 import fi.softala.vote.model.InnoImpl;
 import fi.softala.vote.model.Innovation;
 
-public class InnoRowMapper implements RowMapper {
+public class InnoRowMapper implements RowMapper<Innovation> {
 	// should be as below:
 	// public class InnoRowMapper implements RowMapper<Innovation> {
 
@@ -22,15 +21,4 @@ public class InnoRowMapper implements RowMapper {
 		
 		return inno;
 	}
-
-	// what's below shouldn't be, nor it's import
-	
-	@Override
-	public int[] getRowsForPaths(TreePath[] path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	
 }
