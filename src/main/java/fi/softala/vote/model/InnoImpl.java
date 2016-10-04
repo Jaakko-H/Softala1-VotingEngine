@@ -2,7 +2,7 @@ package fi.softala.vote.model;
 
 // @Entity
 // @Table(name = "inno")
-public class InnoImpl {
+public class InnoImpl implements Innovation {
 
 	// @Id
 	// @GeneratedValue(strategy = GenerationType.Auto)

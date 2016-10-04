@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class Vote {
-
+ /*
 	@Getter @Setter private long innoId;
 	@Getter @Setter private long voterId;
 	@Getter @Setter private long teamId;
@@ -21,5 +21,5 @@ public class Vote {
 		@SuppressWarnings("unused")
 		private T x;
 	}
-	
+	*/
 }

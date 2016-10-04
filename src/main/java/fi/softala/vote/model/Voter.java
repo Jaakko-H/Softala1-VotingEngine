@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class Voter {
+	/*
 	@Getter @Setter private long voterId;
 	@Getter @Setter private String firstName;
 	@Getter @Setter private String lastName;
@@ -23,5 +24,5 @@ public class Voter {
 		@SuppressWarnings("unused")
 		private T x;
 	}
-	
+	*/
 }

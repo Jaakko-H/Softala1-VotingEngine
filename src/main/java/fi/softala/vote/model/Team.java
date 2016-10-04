@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class Team {
+	/*
 	@Getter @Setter private long teamId;
 	@Getter @Setter private String teamName;
 
@@ -17,5 +18,5 @@ public class Team {
 		@SuppressWarnings("unused")
 		private T x;
 	}
-	
+	*/
 }
