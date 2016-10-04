@@ -1,32 +1,71 @@
 package fi.softala.vote.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-
+//tähän tulee vielä  muutosta
 
 public class Innovation {
-	@Getter @Setter private long innoId;
-	@Getter @Setter private String innoName;
-	@Getter @Setter private String innoDesc;
-	@Getter @Setter private long teamId;
+	private long innoId;
+	private String innoName;
+	private String innoDesc;
+	private long teamId;
 	
+	
+	public Innovation(long innoId, String innoName, String innoDesc, long teamId) {
+		super();
+		this.innoId = innoId;
+		this.innoName = innoName;
+		this.innoDesc = innoDesc;
+		this.teamId = teamId;
+	}
 
 
-	@ToString (includeFieldNames=true)
-	@Data (staticConstructor="of")
-	class Exem<T> {
-		@SuppressWarnings("unused")
-		private long innoId;
-		@SuppressWarnings("unused")
-		private T x;
+	public long getInnoId() {
+		return innoId;
+	}
+
+
+	public void setInnoId(long innoId) {
+		this.innoId = innoId;
+	}
+
+
+	public String getInnoName() {
+		return innoName;
+	}
+
+
+	public void setInnoName(String innoName) {
+		this.innoName = innoName;
+	}
+
+
+	public String getInnoDesc() {
+		return innoDesc;
+	}
+
+
+	public void setInnoDesc(String innoDesc) {
+		this.innoDesc = innoDesc;
+	}
+
+
+	public long getTeamId() {
+		return teamId;
+	}
+
+
+	public void setTeamId(long teamId) {
+		this.teamId = teamId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Innovation [innoId=" + innoId + ", innoName=" + innoName
+				+ ", innoDesc=" + innoDesc + ", teamId=" + teamId + "]";
 	}
 	
-	// https://projectlombok.org/features/Data.html
-	// @Data & @ToString annotations
-	
+
 
 }
 
