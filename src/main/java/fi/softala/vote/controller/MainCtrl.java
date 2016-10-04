@@ -35,5 +35,5 @@ public class MainCtrl {
     
     // voteInno metodin rakentaminen
     
-    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superkäyttäjä"
+    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superi"
 }

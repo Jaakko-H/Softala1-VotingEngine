@@ -6,7 +6,9 @@ import java.util.List;
 import fi.softala.vote.model.Innovation;
 
 public class InnovationDAOSpringJdbcImpl {
-	public Innovation find() {
+	
+	
+	public Innovation find(long id) {
 		return new Innovation();
 	}
 	
