@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fi.softala.vote.model.Innovation;
 
 @Transactional
-public class InnoDAOHibernateImpl implements InnovationDAO {
+public class InnoDAOHibernateImpl  {
 
 	@PersistenceContext
 	private EntityManager em;
