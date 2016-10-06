@@ -23,6 +23,7 @@ public class InnovationCtrl {
 	
 
     @Inject
+    @Qualifier("hibernate")
 	private InnovationDAO hibernateDAO;
 	
 	public InnovationDAO getDao() {
