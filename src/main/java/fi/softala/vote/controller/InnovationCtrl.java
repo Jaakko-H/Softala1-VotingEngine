@@ -28,7 +28,9 @@ public class InnovationCtrl {
 
     @Inject
     @Qualifier("hibernate")
+    
 	private InnoDAOHibernateImpl hibernateDAO;
+
 	
     @Bean
 	public InnoDAOHibernateImpl getDao() {

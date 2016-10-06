@@ -17,7 +17,9 @@ import fi.softala.vote.model.Innovation;
 
 @Transactional
 @Repository("hibernate")
+
 public class InnoDAOHibernateImpl implements InnovationDAO  {
+
 
 	@PersistenceContext
 	private EntityManager em;
