@@ -19,8 +19,9 @@ public class InnoDAOHibernateImpl  {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void addNew(Innovation inno) {
+	public Innovation addNew(Innovation inno) {
 		em.persist(inno);
+		return inno;
 	}
 
 	public List<Innovation> findAll() {

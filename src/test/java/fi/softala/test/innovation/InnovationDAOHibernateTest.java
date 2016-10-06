@@ -16,14 +16,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import fi.softala.vote.controller.MainCtrl;
 import fi.softala.vote.dao.InnovationDAO;
+import fi.softala.vote.dao.InnoDAOHibernateImpl;
 import fi.softala.vote.model.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class InnovationDAOSpringJdbcImplTest {
+public class InnovationDAOHibernateTest {
 	
 	@Inject
 	private MockMvc mockMvc;
@@ -43,15 +47,23 @@ public class InnovationDAOSpringJdbcImplTest {
 	}
 	
 	@Test
-	public void testAddNew() {
+	public void testAddNew() throws Exception {
 		String innoName = "uusi nimi";
 		String innoDesc = "uusi kuvaus";
-		long teamID = 1;
 		
 		Innovation mockInno = new Innovation();
+		Team mockTeam = new Team();
+		
+		mockTeam.setTeamName("uusi tiimi");
 		mockInno.setInnoName(innoName);
 		mockInno.setInnoDesc(innoDesc);
-		mockInno.setTeamId(teamID);
+		mockInno.setTeam(mockTeam);
+		
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/uusi"); //placeholder
+		mockMvc.perform(requestBuilder)
+		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andExpect(MockMvcResultMatchers.model().size(1))
+		.andExpect(MockMvcResultMatchers.view().name("/index")); //placeholder
 		
 		verify(mockDao, times(1)).addNew(mockInno);
 	}
