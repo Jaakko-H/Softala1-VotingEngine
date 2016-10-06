@@ -33,7 +33,7 @@ public class Vote {
 	@NotNull
 	@Column(name = "legit")
 	private boolean legit;
-	// db default 'N', if vote is legit -> 'Y'
+	// SQL default 'N', if vote is legit -> 'Y'
 
 	public boolean isLegit() {
 		return legit;
