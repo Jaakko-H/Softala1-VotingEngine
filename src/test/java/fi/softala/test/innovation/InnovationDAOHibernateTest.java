@@ -44,22 +44,21 @@ public class InnovationDAOHibernateTest {
 
 		//configure the return values of the mock object 
 		Mockito.when(mockDao.addNew(new Innovation())).thenReturn(new Innovation());
+		Mockito.when(mockDao.find(1)).thenReturn(new Innovation());
+		Mockito.when(mockDao.findAll()).thenReturn(new ArrayList<Innovation>());
 	}
 	
 	@Test
 	public void testAddNew() throws Exception {
-		String innoName = "uusi nimi";
-		String innoDesc = "uusi kuvaus";
-		
 		Innovation mockInno = new Innovation();
 		Team mockTeam = new Team();
 		
 		mockTeam.setTeamName("uusi tiimi");
-		mockInno.setInnoName(innoName);
-		mockInno.setInnoDesc(innoDesc);
+		mockInno.setInnoName("uusi nimi");
+		mockInno.setInnoDesc("uusi kuvaus");
 		mockInno.setTeam(mockTeam);
 		
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/uusi"); //placeholder
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/new"); //placeholder
 		mockMvc.perform(requestBuilder)
 		.andExpect(MockMvcResultMatchers.status().isOk())
 		.andExpect(MockMvcResultMatchers.model().size(1))
@@ -69,12 +68,29 @@ public class InnovationDAOHibernateTest {
 	}
 	
 	@Test
-	public void testFind() {
-		
+	public void testFind() throws Exception {
+		//create a request
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/find");
+
+		//check status, model size and view name
+		mockMvc.perform(requestBuilder)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().size(1))
+				.andExpect(MockMvcResultMatchers.view().name("/index"));
+		//verify that the mock has been called
+		verify(mockDao, times(1)).find(1);
 	}
 	
 	@Test
-	public void testFindAll() {
-		
+	public void testFindAll() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/findAll");
+
+		//check status, model size and view name
+		mockMvc.perform(requestBuilder)
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.model().size(1))
+				.andExpect(MockMvcResultMatchers.view().name("/index"));
+		//verify that the mock has been called
+		verify(mockDao, times(1)).findAll();
 	}
 }
