@@ -27,5 +27,5 @@ public class MainCtrl {
     
     // voteInno metodin rakentaminen
     
-    // viewVotes metodi -> ajetaan kun voteInno ajetaan, paitsi jos "superk�ytt�j�"
+
 }

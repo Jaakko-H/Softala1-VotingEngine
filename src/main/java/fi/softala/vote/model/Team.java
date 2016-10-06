@@ -1,24 +1,41 @@
 package fi.softala.vote.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+ @Entity
+ @Table(name = "team")
 public class Team {
-	@Getter @Setter private long teamID;
-	@Getter @Setter private String teamName;
+
+	 
+	 @Id
+	 @GeneratedValue(strategy = GenerationType.AUTO)
+	 private long teamId;
+	 @Size (min = 1, max = 50)
+	 private String teamName;
 	
-	public Team() {
-		teamID = 0;
-		teamName = "";
+	 
+	public long getTeamId() {
+		return teamId;
 	}
 	
-	public Team(long teamID, String teamName) {
-		this.teamID = teamID;
+	public void setTeamId(long teamId) {
+		this.teamId = teamId;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+	
+	
+	public void seTeamName(String teamName) {
 		this.teamName = teamName;
+		
 	}
-	
-	public String toString() {
-		return "Team [teamID=" + teamID + ", teamName=" + teamName + "]";
-	}
-	
+	 
+	 
 }
