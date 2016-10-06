@@ -9,12 +9,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fi.softala.vote.model.Innovation;
 
+
 @Transactional
-public class InnoDAOHibernateImpl  {
+@Repository("hibernate")
+public class InnoDAOHibernateImpl implements InnovationDAO  {
 
 	@PersistenceContext
 	private EntityManager em;
