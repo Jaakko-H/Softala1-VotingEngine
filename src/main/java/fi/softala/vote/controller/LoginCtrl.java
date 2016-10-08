@@ -19,7 +19,7 @@ public class LoginCtrl {
 		
 		session.setAttribute("voterName", voterName);
 		
-		return "redirect:/innovations";
+		return "innovations";
 	}
 	
 }
