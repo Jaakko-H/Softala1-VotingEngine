@@ -22,13 +22,11 @@ import fi.softala.vote.dao.InnovationDAO;
 import fi.softala.vote.model.Innovation;
 
 @Controller
-@RequestMapping (value="/innovations")
+@RequestMapping (value="/innovation")
 public class InnovationCtrl {
 	
-
     @Inject
-    @Qualifier("hibernate")
-    
+    @Qualifier("hibernate")    
 	private InnoDAOHibernateImpl hibernateDAO;
 
 	
