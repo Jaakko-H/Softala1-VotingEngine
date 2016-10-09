@@ -5,4 +5,5 @@
 /build
 .settings/
 bin/*
-bin/application.properties
+gradlew.bat
+

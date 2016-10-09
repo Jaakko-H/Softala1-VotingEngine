@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +16,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fi.softala.vote.dao.InnoDAOHibernateImpl;
+import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.InnovationDAO;
 import fi.softala.vote.model.Innovation;
 
 @Controller
-@RequestMapping (value="/innovations")
+@RequestMapping (value="/innovation")
 public class InnovationCtrl {
 	
-
     @Inject
-    @Qualifier("hibernate")
-    
-	private InnoDAOHibernateImpl hibernateDAO;
-
+	private InnoDAOJdbcImpl dao;
 	
-    @Bean
-	public InnoDAOHibernateImpl getDao() {
-		return hibernateDAO;
+	public InnoDAOJdbcImpl getDao() {
+		return dao;
 	}
 
-	public void setDao(InnoDAOHibernateImpl hibernateDAO) {
-		this.hibernateDAO= hibernateDAO;
+	public void setDao(InnoDAOJdbcImpl dao) {
+		this.dao = dao;
 	}
 
     @RequestMapping(path="/index", method=RequestMethod.GET)
@@ -52,7 +46,7 @@ public class InnovationCtrl {
     	}
     	// findAll metodin rakentaminen
     	
-      		List<Innovation> innovations = hibernateDAO.findAll();
+      		List<Innovation> innovations = dao.findAll();
       		model.addAttribute("innovations", innovations);
       		return "innovations";
     	

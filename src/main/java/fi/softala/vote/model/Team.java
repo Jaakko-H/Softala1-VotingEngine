@@ -32,7 +32,7 @@ public class Team {
 	}
 	
 	
-	public void seTeamName(String teamName) {
+	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 		
 	}
