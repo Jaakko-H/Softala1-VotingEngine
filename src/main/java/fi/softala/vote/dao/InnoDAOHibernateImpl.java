@@ -1,4 +1,4 @@
-package fi.softala.vote.dao;
+/*package fi.softala.vote.dao;
 
 // http://www.java2s.com/Code/Jar/j/Downloadjavaxpersistencejar.htm
 // add a jar in Eclipse by right-clicking on the Project → Build Path → Configure Build Path.
@@ -25,8 +25,9 @@ public class InnoDAOHibernateImpl implements InnovationDAO  {
 	@Inject
 	private EntityManager em;
 
-	public void addNew(Innovation inno) {
+	public Innovation addNew(Innovation inno) {
 		em.persist(inno);
+		return inno;
 	}
 	
 	@Bean
@@ -51,3 +52,4 @@ public class InnoDAOHibernateImpl implements InnovationDAO  {
 	}
 
 }
+*/
