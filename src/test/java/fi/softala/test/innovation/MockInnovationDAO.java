@@ -29,31 +29,29 @@ public class MockInnovationDAO implements InnovationDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public void addNew(Innovation inno) {
-		final String sql = "insert into inno(team_id, inno_name, inno_desc) values(?,?,?)";
-
-		long teamID = 1;
-		String innoNimi = "uusi nimi";
-		String innoKuvaus = "uusi kuvaus";
-
-		KeyHolder idHolder = new GeneratedKeyHolder();
-
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection.prepareStatement(sql,
-						new String[] { "id" });
-				ps.setLong(1, inno.getTeamId());
-				ps.setString(2, inno.getInnoName());
-				ps.setString(3, inno.getInnoDesc());
-				return ps;
-			}
-		}, idHolder);
-
-		inno.setInnoId(idHolder.getKey().longValue());
-		// tallennetaan id takaisin beaniin, koska
-		// kutsujalla pitäisi olla viittaus samaiseen olioon
-		return;
+	public Innovation addNew(Innovation inno) {
+//		final String sql = "insert into inno(team_id, inno_name, inno_desc) values(?,?,?)";
+//
+//		long teamID = 1;
+//		String innoNimi = "uusi nimi";
+//		String innoKuvaus = "uusi kuvaus";
+//
+//		KeyHolder idHolder = new GeneratedKeyHolder();
+//
+//		jdbcTemplate.update(new PreparedStatementCreator() {
+//			public PreparedStatement createPreparedStatement(
+//					Connection connection) throws SQLException {
+//				PreparedStatement ps = connection.prepareStatement(sql,
+//						new String[] { "id" });
+//				ps.setLong(1, inno.getTeamId());
+//				ps.setString(2, inno.getInnoName());
+//				ps.setString(3, inno.getInnoDesc());
+//				return ps;
+//			}
+//		}, idHolder);
+//
+//		inno.setInnoId(idHolder.getKey().longValue());
+		return inno;
 	}
 	
 	public Innovation find(long id) {

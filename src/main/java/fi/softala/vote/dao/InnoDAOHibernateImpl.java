@@ -1,4 +1,4 @@
-package fi.softala.vote.dao;
+/*package fi.softala.vote.dao;
 
 // http://www.java2s.com/Code/Jar/j/Downloadjavaxpersistencejar.htm
 // add a jar in Eclipse by right-clicking on the Project → Build Path → Configure Build Path.
@@ -6,9 +6,11 @@ package fi.softala.vote.dao;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +18,25 @@ import fi.softala.vote.model.Innovation;
 
 @Transactional
 @Repository("hibernate")
-public class InnoDAOHibernateImpl  {
+public class InnoDAOHibernateImpl implements InnovationDAO  {
+
 
 	@PersistenceContext
+	@Inject
 	private EntityManager em;
 
-	public void addNew(Innovation inno) {
+	public Innovation addNew(Innovation inno) {
 		em.persist(inno);
+		return inno;
+	}
+	
+	@Bean
+	public EntityManager getEntityManager() {
+		return em;
+	}
+	
+	public void setEntityManager(EntityManager em) {
+		this.em = em;
 	}
 
 	public List<Innovation> findAll() {
@@ -38,3 +52,4 @@ public class InnoDAOHibernateImpl  {
 	}
 
 }
+*/
