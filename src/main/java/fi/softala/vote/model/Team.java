@@ -7,22 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
- @Entity
- @Table(name = "team")
+@Entity
+@Table(name = "team")
 public class Team {
 
-	 
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
-	 private long teamId;
-	 @Size (min = 1, max = 50)
-	 private String teamName;
-	
-	 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long teamId;
+	@Size(min = 1, max = 50)
+	private String teamName;
+
 	public long getTeamId() {
 		return teamId;
 	}
-	
+
 	public void setTeamId(long teamId) {
 		this.teamId = teamId;
 	}
@@ -30,12 +28,14 @@ public class Team {
 	public String getTeamName() {
 		return teamName;
 	}
-	
-	
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
-		
+
 	}
-	 
-	 
+
+	@Override
+	public String toString() {
+		return "Team [teamId=" + teamId + ", teamName=" + teamName + "]";
+	}
+
 }
