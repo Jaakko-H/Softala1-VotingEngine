@@ -12,7 +12,7 @@
 			document.querySelector('.modal-overlay').style.display = 'block';
 			document.querySelector('.modal').style.display = 'block';
 		}
-	}
+	};
 
 
 	Array.from(document.querySelectorAll("form"))
@@ -25,7 +25,7 @@
 				
 				setTimeout(function(){
 					event.target.submit();
-				},2000);
+				},1500);
 				
 			});
 		});	
