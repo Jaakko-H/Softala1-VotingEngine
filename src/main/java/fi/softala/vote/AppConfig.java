@@ -1,5 +1,7 @@
 package fi.softala.vote;
 
+import java.sql.SQLException;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,12 @@ public class AppConfig {
 		dataSource.setPassword("aani2");
 		dataSource.setInitialSize(1);
 		dataSource.setMaxActive(5);
+		try {
+			dataSource.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return new JdbcTemplate(dataSource);
     }
 }

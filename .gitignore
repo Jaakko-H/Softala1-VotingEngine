@@ -4,5 +4,6 @@
 .DS_Store
 /build
 .settings/
-bin/
+bin/*
 gradlew.bat
+
