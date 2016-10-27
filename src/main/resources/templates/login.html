@@ -4,29 +4,44 @@
 <title>voting engine</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
-<link href="/main.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+<link href="main.css" rel="stylesheet" />
 </head>
 <body>
 
 	<div class='container'>
 
-		<h1 class='row text-md-center text-xs-center p-a-1 m-t-3 m-b-3'>Vote Innovations</h1>
+		<h1 class='row text-md-center text-xs-center p-a-1 m-t-3 m-b-3'>Vote
+			Innovations</h1>
 
 		<div class='row'>
-                    <form class="col-xs-12 col-lg-6 col-md-6 offset-md-3 offset-lg-3" action="#" th:action="@{/login}" method="post">
-                        <div class="row"> 
-                            <div class="col-xs-12 col-md-6 offset-md-3 offset-lg-3 text-md-center text-xs-center p-a-1 m-b-1">
-                                <div class="row"> Enter Name: </div>
-                                <div class="row"> <input size="20" name="voterName" type="text"/> </div>
-                            </div>
-                        </div>
-                        <div class="row"> 
-                            <div class="col-xs-12 col-md-6 offset-md-3 offset-lg-3 text-md-center text-xs-center p-a-1"> 
-                                <button class="btn btn-primary btn-md form-center">Login</button>
-                            </div>
-                        </div>
-                    </form>
+			<form class="col-xs-12 col-lg-6 col-md-6 offset-md-3 offset-lg-3"
+				action="#" th:action="@{/login}" method="post">
+				<div class="row">
+					<div
+						class="col-xs-12 col-md-6 offset-md-3 offset-lg-3 text-md-center text-xs-center p-a-1 m-b-1">
+						<div class="row">Enter Name:</div>
+						<div class="row">
+							<input size="20" name="voterName" type="text" />
+						</div>
+						<div>
+							Enter type: <select>
+								<option value="Student">Student</option>
+								<option value="Teacher">Teacher</option>
+								<option value="Guest">Guest</option>
+								<option value="Team">Team</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div
+						class="col-xs-12 col-md-6 offset-md-3 offset-lg-3 text-md-center text-xs-center p-a-1">
+						<button class="btn btn-primary btn-md form-center">Login</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 
