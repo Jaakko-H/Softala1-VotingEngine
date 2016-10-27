@@ -45,7 +45,7 @@ public class Innovation {
 	}
 
 	public String getInnoDesc() {
-		return innoName;
+		return innoDesc;
 	}
 
 	public void setInnoDesc(String innoDesc) {
