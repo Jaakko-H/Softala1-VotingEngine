@@ -25,6 +25,9 @@ public class Innovation {
 	@JoinColumn(name = "team_id")
 	private Team team;
 
+	@Size(min = 1, max = 100)
+	private String innoOwner;
+
 	public long getInnoId() {
 		return innoId;
 	}
@@ -57,10 +60,19 @@ public class Innovation {
 		this.team = team;
 	}
 
+	public String getInnoOwner() {
+		return innoOwner;
+	}
+
+	public void setInnoOwner(String innoOwner) {
+		this.innoOwner = innoOwner;
+	}
+
 	@Override
 	public String toString() {
 		return "InnoImpl [innoId=" + innoId + ", innoName=" + innoName
-				+ ", innoDesc=" + innoDesc + ", team=" + team + "]";
+				+ ", innoDesc=" + innoDesc + ", team=" + team + ", innoOwner="
+				+ innoOwner + "]";
 	}
 
 }
