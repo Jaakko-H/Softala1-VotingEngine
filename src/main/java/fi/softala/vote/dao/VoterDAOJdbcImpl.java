@@ -12,19 +12,19 @@ public class VoterDAOJdbcImpl implements VoterDAO {
     public Voter findByVoterName(String voterName) {
         String query = "SELECT * FROM voter WHERE voter_name = ?";
         Object[] params = new Object[] { voterName };
-        Voter voter = new Voter();
-        
-        jdbc.queryForObject(query, params, (result, row) -> {
+       
+        Voter found = (Voter) jdbc.queryForObject(query, params, (result, row) -> {
+            Voter voter = new Voter();
             voter.setFirstName(result.getString("fname"));
             voter.setLastName(result.getString("lname"));
             voter.setTeam(new Team());
             voter.setType(result.getString("type"));
             voter.setVoted(result.getBoolean("voted"));
             voter.setVoterId(result.getLong("voter_id"));
-            return null;
+            return voter;
         });
         
-        return voter;
+        return found;
     }
 
     @Override
