@@ -2,12 +2,16 @@ package fi.softala.vote.dao;
 
 import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Voter;
+import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class VoterDAOJdbcImpl implements VoterDAO {
 
+    @Inject
     private JdbcTemplate jdbc;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     
@@ -16,6 +20,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
     
     @Override
     public Voter findByVoterName(String voterName) {
+
         String query = "SELECT * FROM voter WHERE fname = ?";
         Object[] params = new Object[] { voterName };
         

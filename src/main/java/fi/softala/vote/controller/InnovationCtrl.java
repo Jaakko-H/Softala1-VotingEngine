@@ -19,7 +19,7 @@ public class InnovationCtrl {
     public void setDao(InnoDAOJdbcImpl dao) { this.dao = dao; }
 
     @RequestMapping(path="/innovations", method=RequestMethod.GET)
-    public String index(Model model, HttpSession session) {
+    public String viewInnovations(Model model, HttpSession session) {
 
     	if(session.getAttribute("voter") == null){
     		return "redirect:/";

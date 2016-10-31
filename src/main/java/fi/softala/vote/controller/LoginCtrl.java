@@ -3,6 +3,7 @@ package fi.softala.vote.controller;
 import FormValidators.LoginForm;
 import fi.softala.vote.dao.VoterDAOJdbcImpl;
 import fi.softala.vote.model.Voter;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginCtrl {
     
+                 @Inject
                   private VoterDAOJdbcImpl voterdao;
                   private final Logger log = LoggerFactory.getLogger(this.getClass());
     
