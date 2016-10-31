@@ -6,7 +6,7 @@ import fi.softala.vote.model.Innovation;
 
 public interface InnovationDAO {
 	
-	public abstract Innovation addNew (Innovation inno);
+	public abstract Object addNew (Innovation inno);
 	
 	public abstract Innovation find(long id);
 

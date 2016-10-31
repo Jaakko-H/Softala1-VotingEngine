@@ -51,6 +51,10 @@ dependencies {
 	compile('org.projectlombok:lombok')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+                 compile("org.springframework.boot:spring-boot-starter-mail")
+                 compile 'org.webjars:font-awesome:4.6.3'
+                 compile 'org.webjars:jquery:3.1.1'
+                 compile 'org.webjars:bootstrap:4.0.0-alpha.3'
 	 providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.2.Final'

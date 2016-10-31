@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginCtrl {
     
-    
                   private VoterDAOJdbcImpl voterdao;
     
                 @RequestMapping(path="/login", method=RequestMethod.GET)
@@ -32,6 +31,6 @@ public class LoginCtrl {
                           } catch (NullPointerException e){
                              result.rejectValue("voterName", "403", "You are not invited to vote");
                              return "login";
-                          }      
-	}
+                          }
+        }
 }

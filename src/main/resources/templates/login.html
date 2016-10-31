@@ -1,37 +1,45 @@
-<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title>voting engine</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
-<link href="/main.css" rel="stylesheet" />
-</head>
+    <head th:fragment="head :: tags" />
 <body>
-
-	<div class='container'>
-
-		<h1 class='row text-md-center text-xs-center p-a-1 m-t-3 m-b-3'>Vote Innovations</h1>
-
-		<div class='row'>
-                    <form class="col-xs-12 col-lg-6 col-md-6 offset-md-3 offset-lg-3" action="#" th:action="@{/login}" method="post" th:object="${loginForm}">
-                        <div class="row error text-md-center">
-                            <span th:if="${#fields.hasErrors('voterName')}" th:errors="*{voterName}"> error </span>
+    
+    <header></header>
+    
+    <div class='container-fluid'>
+        
+        <div class='row'>
+            <div class='col-md-12'>
+                <div class='jumbotron'> <h1 class='display-1'> Voting Engine </h1> </div>
+            </div>
+        </div>
+        
+        <div class='row'>
+            <div class='col-md-12'>
+                <form  action="#" th:action="@{/login}" method="post" th:object="${loginForm}">
+                    <div class='form-group'> 
+                        <span th:if="${#fields.hasErrors('voterName')}" th:errors="*{voterName}"> error </span> 
+                    </div>
+                    <div class='form-group'>
+                        <div class='input-group'>
+                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
+                            <input size="20" th:field="*{voterName}" type="text" placeholder="voter name" class='form-control' />
                         </div>
-                        <div class="row"> 
-                            <div class="col-xs-12 col-md-6 offset-md-3 offset-lg-3 text-md-center text-xs-center p-a-1 m-b-1">
-                                <div class="row"> Enter Name: </div>
-                                <div class="row"> <input size="20" th:field="*{voterName}" type="text"/> </div>
-                            </div>
-                        </div>
-                        <div class="row"> 
-                            <div class="col-xs-12 col-md-6 offset-md-3 offset-lg-3 text-md-center text-xs-center p-a-1"> 
-                                <button class="btn btn-primary btn-md form-center" type='submit'>Login</button>
-                            </div>
-                        </div>
-                    </form>
-		</div>
-	</div>
+                    </div>
+                    <div class='form-group'>
+                        <select>
+                            <option value='student'> student </option>
+                            <option value='teacher'> teacher </option>
+                            <option value='quest'> quest </option>
+                            <option value='team'> team </option>
+                        </select>
+                    </div>
+                    <div class='form-group'>
+                        <button type='submit' class='form-control'> login </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <footer></footer>
+        
 </body>
 </html>

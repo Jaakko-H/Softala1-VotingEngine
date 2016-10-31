@@ -29,5 +29,4 @@ public class InnovationCtrl {
       	model.addAttribute("innovations", innovations);
       	return "innovations";
     }
-
 }

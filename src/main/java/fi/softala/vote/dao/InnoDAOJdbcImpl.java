@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.dbcp.BasicDataSource;
-
 import javax.inject.Inject;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
