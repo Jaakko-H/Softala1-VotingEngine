@@ -21,7 +21,7 @@ public class InnovationCtrl {
     @RequestMapping(path="/innovations", method=RequestMethod.GET)
     public String index(Model model, HttpSession session) {
 
-    	if(session.getAttribute("voterName") == null){
+    	if(session.getAttribute("voter") == null){
     		return "redirect:/";
     	}
 
