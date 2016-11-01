@@ -32,11 +32,12 @@ public class InnoDAOJdbcImpl {
 	}
 
 	public Innovation addNew(Innovation inno) {
-		final String sql = "insert into inno(team_id, inno_name, inno_desc) values(?,?,?)";
+		final String sql = "insert into inno(team_id, inno_name, inno_desc, inno_owner) values(?,?,?, ?)";
 
 		final long innoTeamID = inno.getTeam().getTeamId();
 		final String innoName = inno.getInnoName();
 		final String innoDesc = inno.getInnoDesc();
+		final String innoOwner = inno.getInnoOwner();
 
 		KeyHolder idHolder = new GeneratedKeyHolder();
 
@@ -48,6 +49,7 @@ public class InnoDAOJdbcImpl {
 				ps.setLong(1, innoTeamID);
 				ps.setString(2, innoName);
 				ps.setString(3, innoDesc);
+				ps.setString(4, innoOwner);
 				return ps;
 			}
 		}, idHolder);
@@ -58,7 +60,7 @@ public class InnoDAOJdbcImpl {
 	}
 
 	public Innovation find(long id) {
-		String sql = "select inno_name, inno_desc, inno_id, team_id from inno where inno_id = ?";
+		String sql = "select inno_name, inno_desc, inno_id, team_id, inno_owner as productowner from inno where inno_id = ?";
 		Object[] parameters = new Object[] { id };
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 
@@ -73,7 +75,7 @@ public class InnoDAOJdbcImpl {
 
 	public List<Innovation> findAll() {
 
-		String sql = "select inno_id, inno_name, inno_desc, team_id from inno";
+		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner as productowner from inno";
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 		List<Innovation> innovations = jdbcTemplate.query(sql, mapper);
 
