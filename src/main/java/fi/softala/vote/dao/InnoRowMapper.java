@@ -17,8 +17,14 @@ public class InnoRowMapper implements RowMapper<Innovation> {
 		inno.setInnoId(rs.getLong("inno_id"));
 		inno.setInnoName(rs.getString("inno_name"));
 		inno.setInnoDesc(rs.getString("inno_desc"));
-		inno.setTeam(new Team());
-		return inno;
+		try{
+			inno.setTeam(teamdao.find(rs.getLong("team_id")));
+			return inno;
+		}catch(Exception e){
+			inno.setTeam(null);
+			return inno;
+		}
+		
 	}
 
 }
