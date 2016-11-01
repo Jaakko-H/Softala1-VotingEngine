@@ -49,11 +49,11 @@ public class VoteDAOJdbcImpl implements VoteDAO {
 	}
 
 	@Override
-	public List<Vote> findByVoterAndType(Voter voter, String type) {
+	public Vote findByVoterAndType(Voter voter, String type) {
 		String query = "SELECT * FROM vote WHERE voter_id=? AND type=?";
 		Object[] params = new Object[] { voter.getVoterId(), type };
 
-		return this.jdbc.query(query, params, (result, row) -> {
+		return this.jdbc.queryForObject(query, params, (result, row) -> {
 			Vote vote = new Vote();
 			vote.setVoteId(result.getLong("vote_id"));
 			vote.setLegit(result.getBoolean("legit"));
@@ -62,5 +62,18 @@ public class VoteDAOJdbcImpl implements VoteDAO {
 			return vote;
 		});
 
+	}
+
+	@Override
+	public List<Vote> findAllVotes() {
+		String query = "SELECT * FROM vote";
+		return this.jdbc.query(query, (result, row) -> {
+			Vote vote = new Vote();
+			vote.setVoteId(result.getLong("vote_id"));
+			vote.setLegit(result.getBoolean("legit"));
+			vote.setInnovation(innovationdao.find(result.getLong("inno_id")));
+			vote.setVoter(voterdao.find(result.getLong("voter_id")));
+			return vote;
+		});
 	}
 }

@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface VoteDAO {
     public abstract void add(Vote vote);
-    public abstract List<Vote> findByVoterAndType(Voter voter, String type);
+    public abstract Vote findByVoterAndType(Voter voter, String type);
+    public abstract List<Vote> findAllVotes();
 }
