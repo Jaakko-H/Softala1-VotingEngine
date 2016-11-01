@@ -31,3 +31,11 @@ public class InnovationCtrl {
       	return "innovations";
     }
 }
+
+
+/*
+ * 
+ * OPPILAS => opiskelijatunnus
+ * 
+ * 
+ * */
