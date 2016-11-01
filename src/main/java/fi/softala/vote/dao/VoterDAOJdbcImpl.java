@@ -47,12 +47,11 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 
     @Override
     public Voter find(long id) {
-        String query = "SELECT * FROM voter WHERE voter_id = ?";
+        String query = " SELECT fname as firstname, sname as surname, type, team_name as teamname, voted FROM voter JOIN team USING(team_id) WHERE voter_id = ?";
         Object[] params = new Object[]{ id };
         
         return (Voter) this.jdbc.queryForObject(query, params, (result, row) -> {
             Voter voter = new Voter();
-            voter.setVoterId(result.getLong("voter_id"));
             voter.setFirstName(result.getString("fname"));
             voter.setLastName(result.getString("sname"));
             voter.setType(result.getString("type"));
