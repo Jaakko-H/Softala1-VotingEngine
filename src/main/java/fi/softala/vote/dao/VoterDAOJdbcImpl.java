@@ -1,11 +1,20 @@
 package fi.softala.vote.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Voter;
+
 import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -43,8 +52,30 @@ public class VoterDAOJdbcImpl implements VoterDAO {
     }
 
     @Override
-    public void addVoter(Voter voter) {
-        
+    public Voter addVoter(Voter voter) {
+		String SQL = "insert into voter(fname, sname, type, team_id) values(?, ?, ?, ?)";
+		final String FNAME = voter.getFirstName();
+		final String SNAME = voter.getLastName();
+		final String TYPE = voter.getType();
+		final long TEAMID = voter.getTeam().getTeamId();
+		
+		KeyHolder idHolder = new GeneratedKeyHolder();
+		
+		jdbc.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(Connection connection)
+					throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(SQL, new String[] { "voter_id" });
+				ps.setString(1, FNAME);
+				ps.setString(2, SNAME);
+				ps.setString(3, TYPE);
+				ps.setLong(4, TEAMID);
+				return ps;
+			}
+		}, idHolder);
+		
+		voter.setVoterId(idHolder.getKey().longValue());
+		
+		return voter;
     }
 
     @Override
