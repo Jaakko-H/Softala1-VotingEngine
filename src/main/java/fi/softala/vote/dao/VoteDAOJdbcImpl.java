@@ -1,14 +1,16 @@
 package fi.softala.vote.dao;
 
-import fi.softala.vote.model.Innovation;
-import javax.inject.Inject;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-import fi.softala.vote.model.Vote;
-import fi.softala.vote.model.Voter;
 import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import fi.softala.vote.model.Vote;
+import fi.softala.vote.model.Voter;
 
 @Repository
 public class VoteDAOJdbcImpl implements VoteDAO {
