@@ -33,9 +33,11 @@ public class VoteDAOJdbcImpl implements VoteDAO {
 	}
 
 	public void add(Vote vote) {
-		String query = "INSERT INTO vote(voter_id, inno_id, legit) values(?, ?, ?)";
-		Object[] params = new Object[] { vote.getVoter().getVoterId(),
-				vote.getInnovation().getInnoId(), vote.isLegit() };
+		String query = "INSERT INTO vote(voter_id, inno_id, legit) values(?, ?,'Y')";
+		Object[] params = new Object[] { 
+				vote.getVoter().getVoterId(),
+				vote.getInnovation().getInnoId(),
+				};
 		int rows = this.jdbc.update(query, params);
 		if (rows < 1) {
 			log.warn("Could not add vote for innovation=%d", vote

@@ -1,96 +1,99 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="partials/head :: tags" />
 <body>
-    
-    <header></header>
-    
-    <main>
-        <div class='container'>
-        
-        <div class='row m-t-2'>
-            <div class='col-md-12'>
-                <div class='jumbotron' style="background:transparent;"> <h1 class='display-1 text-md-center'> Add Innovation </h1> </div>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='col-md-6 col-xs-12 offset-md-3'>
-                <form  action="#" th:action="@{/add_innovation}" method="post" th:object="${LoginForm}">
-                    <div class='form-group text-md-center'> 
-                        
-                    </div>
-                    <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="20"  type="text" placeholder="first name" class='form-control' />
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="20"  type="text" placeholder="surname" class='form-control' />
-                        </div>
-                    </div>
-                     <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="20"  type="text" placeholder="innovation_name" class='form-control' />
-                        </div>
-                        
-                    </div>
-                     <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="50" type="text" placeholder="Innovation Description" class='form-control' />
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <button type='submit' class='form-control'> Add Innovation </button>
-                    </div>
-                </form>
-                
-                
-<!--                 Add voter -->
-                
-                <form  action="#" th:action="@{/add_voter}" method="post" th:object="${LoginForm}">
-                 <div class='form-group text-md-center'> 
-                        
-                    </div>
-                    <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="20"  type="text" placeholder="first name" class='form-control' />
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="20"  type="text" placeholder="surname" class='form-control' />
-                        </div>
-                    </div>
-                     <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="20"  type="text" placeholder="voterType" class='form-control' />
-                        </div>
-                        
-                    </div>
-                     <div class='form-group'>
-                        <div class='input-group'>
-                            <span class='input-group-addon'> <i class='fa fa-user'></i> </span>
-                            <input size="50" type="text" placeholder="Innovation Description" class='form-control' />
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <button type='submit' class='form-control'> Add Voters </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-            
-        </div>
-    </main>
 
-    <footer></footer>
-        
+	<header></header>
+
+	<main>
+	<div class='container'>
+
+		<div class='row m-t-2'>
+			<div class='col-md-12'>
+				<div class='jumbotron' style="background: transparent;">
+					<h1 class='display-1 text-md-center'>Add Innovation</h1>
+				</div>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-md-6 col-xs-12 offset-md-3'>
+				<form action="#" th:action="@{/add_innovation}" method="post"
+					th:object="${LoginForm}">
+					<div class='form-group text-md-center'></div>
+					<div class='form-group'>
+						<div class='input-group'>
+							<span class='input-group-addon'> <i class='fa fa-user'></i>
+							</span> <input size="20" type="text" placeholder="first name"
+								class='form-control' />
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='input-group'>
+							<span class='input-group-addon'> <i class='fa fa-user'></i>
+							</span> <input size="20" type="text" placeholder="surname"
+								class='form-control' />
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='input-group'>
+							<span class='input-group-addon'> <i class='fa fa-user'></i>
+							</span> <input size="20" type="text" placeholder="innovation_name"
+								class='form-control' />
+						</div>
+
+					</div>
+					<div class='form-group'>
+						<div class='input-group'>
+							<span class='input-group-addon'> <i class='fa fa-user'></i>
+							</span> <input size="50" type="text"
+								placeholder="Innovation Description" class='form-control' />
+						</div>
+					</div>
+					<div class='form-group'>
+						<button type='submit' class='form-control'>Add Innovation
+						</button>
+					</div>
+				</form>
+
+
+				<!--                 Add voter -->
+
+				<form action="#" th:action="@{/add_voter}" method="post"
+					th:object="${LoginForm}">
+					<div class='form-group text-md-center'></div>
+					<div class='form-group'>
+						<div class='input-group'>
+							<span class='input-group-addon'> <i class='fa fa-user'></i>
+							</span> <input size="20" type="text" placeholder="first name"
+								class='form-control' />
+						</div>
+					</div>
+					<div class='form-group'>
+						<div class='input-group'>
+							<span class='input-group-addon'> <i class='fa fa-user'></i>
+							</span> <input size="20" type="text" placeholder="surname"
+								class='form-control' />
+						</div>
+					</div>
+					<div class='form-group'>
+						<label for="sel1">Voter Type:</label> <select
+							class="form-control" id="sel1">
+							<option>Student</option>
+							<option>Teacher</option>
+							<option>Guest</option>
+						</select>
+					</div>
+
+					<div class='form-group'>
+						<button type='submit' class='form-control'>Add Voters</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	</main>
+
+	<footer></footer>
+
 </body>
 </html>
