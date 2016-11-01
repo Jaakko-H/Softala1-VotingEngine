@@ -1,39 +1,57 @@
 package fi.softala.vote.controller;
-
+import FormValidators.InnovationForm;
+import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import fi.softala.vote.dao.VoteDAOJdbcImpl;
+import fi.softala.vote.model.Innovation;
+import fi.softala.vote.model.Vote;
+import fi.softala.vote.model.Voter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import fi.softala.vote.dao.InnoDAOJdbcImpl;
-import fi.softala.vote.dao.VoteDAOJdbcImpl;
-import fi.softala.vote.model.Innovation;
-
 @Controller
-
 public class VoteCtrl {
 	@Inject
-	private VoteDAOJdbcImpl dao;
+	private VoteDAOJdbcImpl votedao;
+        
+                 @Inject
+                 private InnoDAOJdbcImpl innovationdao;
+                 
+                 private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	public VoteDAOJdbcImpl getDao() {
-		return dao;
-	}
+                  @RequestMapping(path="/vote", method=RequestMethod.POST)
+	public String handleVote(InnovationForm innoForm, BindingResult results, @RequestParam(required=true) long innoId,  HttpSession session){
+                           Vote vote = new Vote();
+                           Voter voter;
+                           
+                           Innovation innovation = innovationdao.find(innoId);
 
-	public void setDao(VoteDAOJdbcImpl dao) {
-		this.dao = dao;
-	}
-	
-	@RequestMapping(path="/vote", method=RequestMethod.POST)
-	public String handleVote(@RequestParam(required=true) String innoId, HttpSession session){
-		Innovation inno = new Innovation();
-		inno.setInnoId(Long.parseLong(innoId));
-		dao.addNew(inno);
-		
-		session.invalidate();
-		return "redirect:/";
+                          try{
+                            voter = (Voter) session.getAttribute("voter");
+                            
+                            if(voter.getTeam().equals(innovation.getTeam())){
+                              results.rejectValue("error", "403", "You can't vote your own innovation");
+                              return "redirect:/innovations";
+                          }
+                                       
+                           vote.setInnovation(innovation);
+                           vote.setVoter(voter);
+                           vote.setLegit(true);
+                           
+                           votedao.add(vote);
+                
+                           session.invalidate();
+                
+                          return "redirect:/";
+                           
+                          } catch(Exception e){
+                            return "redirect:/";
+                          }
 	}
 }

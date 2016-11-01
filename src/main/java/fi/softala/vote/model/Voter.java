@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "voter")
@@ -20,17 +21,24 @@ public class Voter {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long voterId;
 
+                  @NotNull
+                  @NotEmpty
 	@Size(min = 1, max = 225)
 	private String firstName;
 
+                  @NotNull
+                  @NotEmpty
 	@Size(min = 1, max = 225)
 	private String lastName;
 
+                  @NotNull
+                  @NotEmpty
 	@Size(min = 7, max = 7)
 	@Column(name = "type")
 	private String type;
 	// SQL default; visitor - student, teacher, innomem
 
+                  @NotEmpty
 	@org.hibernate.annotations.Type(type = "yes_no")
 	@NotNull
 	@Column(name = "voted")

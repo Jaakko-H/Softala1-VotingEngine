@@ -11,42 +11,14 @@ ul, li {
 }
 
 .innovation {
-	border-bottom: 1px dashed lightgrey;
+    padding:3px;
+    border-bottom: 1px dashed lightgrey;
+    margin-bottom:5px;
 }
 
-.modal {
-	display:none;
-	position:fixed;
-	height:200px;
-	width:400px;
-	top:30%;
-	left:50%;
-	z-index:2000;
-	transform: translateX(-50%) translateY(-50%);
-	background:#FFFFFF;
-	borderRadius:2px;
-	box-shadow:1px 1px 7px #888888;
-	transition: all 0.2s ease-in-out;
-	animation: fade-in 0.2s ease-in-out;
-}
 
-.modal section {
-	height:100%;
-	width:100%;
-	font-size:140%;
-}
-
-.modal-overlay {
-	display:none;
-	position: fixed;
-	top:0;
-	left:0;
-	height:100%;
-	width:100%;
-	z-index:1000;
-	opacity: 0.2;
-	background: #333;
-	transition: all 0.3s;
+.error {
+    color:crimson;
 }
 
 @keyframes fade-in {

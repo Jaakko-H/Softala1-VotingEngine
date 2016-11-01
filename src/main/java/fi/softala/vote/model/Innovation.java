@@ -1,5 +1,6 @@
 package fi.softala.vote.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "inno")
@@ -16,9 +19,17 @@ public class Innovation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long innoId;
-	@Size(min = 1, max = 50)
+        
+                 @NotNull
+                 @NotEmpty
+                 @Size(min = 1, max = 50)
+                 @Column(name = "inno_name", nullable = false, unique = true)
 	private String innoName;
+        
+                  @NotNull
+                  @NotEmpty
 	@Size(min = 1, max = 225)
+                  @Column(name = "inno_desc", nullable = false)
 	private String innoDesc;
 
 	@ManyToOne
@@ -70,7 +81,7 @@ public class Innovation {
 
 	@Override
 	public String toString() {
-		return "InnoImpl [innoId=" + innoId + ", innoName=" + innoName
+		return "Inno[innoId=" + innoId + ", innoName=" + innoName
 				+ ", innoDesc=" + innoDesc + ", team=" + team + ", innoOwner="
 				+ innoOwner + "]";
 	}
