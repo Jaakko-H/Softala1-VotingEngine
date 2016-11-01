@@ -32,8 +32,9 @@
             </div>
             <div class='row innovations m-t-3'>
                 <div class='col-md-4 col-xs-12 offset-md-4'>
-                    <form class='row innovation' th:each='innovation, status : ${innovations}'  th:action="@{/vote}" method="post">
+                    <form class='row innovation' th:each='innovation, status : ${innovations}'  th:action="@{/vote}" method="post" >
                         <div class='col-md-10'>
+                            
                             <div class='row'>
                                 <div class='col-md-12 font-weight-bold' th:text="${innovation.innoName}"></div>
                             </div>
@@ -44,6 +45,7 @@
                         <div class='col-md-2 text-md-right'>
                             <button type='submit' class='btn btn-primary'> vote </button>
                         </div>
+                            <input type="hidden" name="innoId" th:value="${innovation.innoId}" />
                     </form>
                </div>
             </div>

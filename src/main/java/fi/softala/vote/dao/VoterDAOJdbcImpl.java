@@ -13,6 +13,10 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 
     @Inject
     private JdbcTemplate jdbc;
+
+   @Inject
+   private TeamDAOJdbcImpl teamdao;
+    
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     
     public JdbcTemplate getJdbcTemplate() { return this.jdbc; }
@@ -39,8 +43,26 @@ public class VoterDAOJdbcImpl implements VoterDAO {
     }
 
     @Override
-    public void AddVoter(Voter voter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addVoter(Voter voter) {
+        
+    }
+
+    @Override
+    public Voter find(long id) {
+        String query = "SELECT * FROM voter WHERE voter_id = ?";
+        Object[] params = new Object[]{ id };
+        
+        return (Voter) this.jdbc.queryForObject(query, params, (result, row) -> {
+            Voter voter = new Voter();
+            voter.setVoterId(result.getLong("voter_id"));
+            voter.setFirstName(result.getString("fname"));
+            voter.setLastName(result.getString("sname"));
+            voter.setType(result.getString("type"));
+            voter.setTeam(teamdao.find(result.getLong("team_id")));
+            voter.setVoted(result.getBoolean("voted"));
+            return voter;
+        });
+        
     }
     
 }

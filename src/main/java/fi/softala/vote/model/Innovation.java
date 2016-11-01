@@ -81,7 +81,7 @@ public class Innovation {
 
 	@Override
 	public String toString() {
-		return "InnoImpl [innoId=" + innoId + ", innoName=" + innoName
+		return "Inno[innoId=" + innoId + ", innoName=" + innoName
 				+ ", innoDesc=" + innoDesc + ", team=" + team + ", innoOwner="
 				+ innoOwner + "]";
 	}
