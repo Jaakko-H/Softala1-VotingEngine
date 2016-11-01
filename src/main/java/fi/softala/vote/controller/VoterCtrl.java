@@ -21,7 +21,7 @@ public class VoterCtrl {
     
     public void setDao(VoterDAOJdbcImpl dao) { this.dao = dao; }
     
-    @RequestMapping(path="/vote", method=RequestMethod.POST)
+    @RequestMapping(path="/voter", method=RequestMethod.POST)
     public String addNewVoter(Model model, HttpSession session) {
     	Voter voter = new Voter();
     	voter.setFirstName("testi");

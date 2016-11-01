@@ -1,5 +1,7 @@
 package fi.softala.vote.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,10 +20,10 @@ public class Team {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long teamId;
         
-                 @NotNull
-                 @NotEmpty()
-                 @Size(min = 1, max = 50)
-                 @Column(name = "team_name", nullable = false)
+    @NotNull
+    @NotEmpty()
+    @Size(min = 1, max = 50)
+    @Column(name = "team_name", nullable = false)
 	private String teamName;
 
 	public long getTeamId() {
@@ -35,9 +37,23 @@ public class Team {
 	public String getTeamName() {
 		return teamName;
 	}
+	
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 
+	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj != this) return false;
+		if(!(obj instanceof Team)) return false;
+		Team team = (Team) obj;
+		return this.teamId == team.getTeamId() && this.getTeamName() == team.getTeamName();
+	}
+	
+	@Override
+	public int hashCode(){
+		return Objects.hash(this.teamId, this.teamName);
 	}
 
 	@Override
