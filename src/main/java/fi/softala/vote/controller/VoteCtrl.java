@@ -1,6 +1,7 @@
 package fi.softala.vote.controller;
 import FormValidators.InnovationForm;
 import fi.softala.vote.dao.InnoDAOJdbcImpl;
+import fi.softala.vote.dao.VoterDAOJdbcImpl;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class VoteCtrl {
 	@Inject
 	private VoteDAOJdbcImpl votedao;
+	
+	@Inject
+	private VoterDAOJdbcImpl voterdao;
         
                  @Inject
                  private InnoDAOJdbcImpl innovationdao;
@@ -51,6 +55,7 @@ public class VoteCtrl {
                            voter.setVoted(true);
                            
                            votedao.add(vote);
+                           voterdao.Voter(voter);
                 
                            session.invalidate();
                 
