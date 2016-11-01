@@ -39,6 +39,11 @@ public class VoteCtrl {
                               results.rejectValue("error", "403", "You can't vote your own innovation");
                               return "redirect:/innovations";
                           }
+                            else if(voter.isVoted()) {
+                            	results.rejectValue("error", "403", "You can't vote again");
+                                return "redirect:/login";
+                            }
+                            
                                        
                            vote.setInnovation(innovation);
                            vote.setVoter(voter);

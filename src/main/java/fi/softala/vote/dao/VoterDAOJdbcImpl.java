@@ -81,16 +81,25 @@ public class VoterDAOJdbcImpl implements VoterDAO {
         String query = " SELECT fname as firstname, sname as surname, type, team_name as teamname, voted FROM voter JOIN team USING(team_id) WHERE voter_id = ?";
         Object[] params = new Object[]{ id };
         
+        
+        
         return (Voter) this.jdbc.queryForObject(query, params, (result, row) -> {
             Voter voter = new Voter();
             voter.setFirstName(result.getString("fname"));
             voter.setLastName(result.getString("sname"));
             voter.setType(result.getString("type"));
             voter.setTeam(teamdao.findByTeamName(result.getString("team_name")));
-            voter.setVoted(result.getBoolean("voted"));
+            String votedString = result.getString("voted");
+            if (votedString.equalsIgnoreCase("Y")) {
+            	voter.setVoted(true);
+            } else if (votedString.equalsIgnoreCase("N")) {
+            	voter.setVoted(false);
+            }
             return voter;
         });
         
     }
+    
+
     
 }
