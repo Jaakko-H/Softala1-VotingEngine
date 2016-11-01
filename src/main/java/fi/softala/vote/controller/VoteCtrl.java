@@ -43,6 +43,7 @@ public class VoteCtrl {
                            vote.setInnovation(innovation);
                            vote.setVoter(voter);
                            vote.setLegit(true);
+                           voter.setVoted(true);
                            
                            votedao.add(vote);
                 
