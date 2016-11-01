@@ -47,7 +47,7 @@ public class InnovationCtrl {
 
     	dao.addNew(inno);
     	
-		return "redirect:/admin";
+		return "redirect:/login";
     }
 }
 
