@@ -27,4 +27,17 @@ public class TeamDAOJdbcImpl implements TeamDAO {
         
     }
 
+
+	@Override
+	public Team findByTeamName(String teamName) {
+		String query = "SELECT * FROM team WHERE team_name = ?";
+		Object[] params = new Object[]{ teamName };
+		return this.jdbc.queryForObject(query, params, (result, row) -> {
+			Team team = new Team();
+			team.setTeamId(result.getLong("team_id"));
+			team.setTeamName(result.getString("team_name"));
+			return team;
+		});
+	}
+
 }

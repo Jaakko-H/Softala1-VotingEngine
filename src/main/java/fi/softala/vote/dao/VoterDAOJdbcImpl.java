@@ -86,7 +86,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
             voter.setFirstName(result.getString("fname"));
             voter.setLastName(result.getString("sname"));
             voter.setType(result.getString("type"));
-            voter.setTeam(teamdao.find(result.getLong("team_id")));
+            voter.setTeam(teamdao.findByTeamName(result.getString("team_name")));
             voter.setVoted(result.getBoolean("voted"));
             return voter;
         });
