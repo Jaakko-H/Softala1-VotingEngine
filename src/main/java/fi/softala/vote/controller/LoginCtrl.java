@@ -15,27 +15,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginCtrl {
-    
-                 @Inject
-                  private VoterDAOJdbcImpl voterdao;
-                  private final Logger log = LoggerFactory.getLogger(this.getClass());
-    
-                @RequestMapping(path="/login", method=RequestMethod.GET)
-                public String viewLogin(LoginForm loginForm){
-                    return "login";
-                }
 
-	@RequestMapping(path="/login", method=RequestMethod.POST)
-	public String handleLogin(@Valid LoginForm loginForm,  BindingResult result, HttpSession session){
-           if(result.hasErrors()){ return "login"; }
-           Voter voter;
-                          try {
-                            voter = voterdao.findByVoterName(loginForm.getVoterFirstName(), loginForm.getVoterSirName());
-                            session.setAttribute("voter", voter);
-                            return "redirect:/innovations";
-                          } catch (Exception e){
-                             result.rejectValue("voterFirstName", "403", "You are not invited to vote");
-                             return "login";
-                          }
-        }
+	@Inject
+	private VoterDAOJdbcImpl voterdao;
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	@RequestMapping(path = "/login", method = RequestMethod.GET)
+	public String viewLogin(LoginForm loginForm) {
+		return "login";
+	}
+
+	@RequestMapping(path = "/login", method = RequestMethod.POST)
+	public String handleLogin(@Valid LoginForm loginForm, BindingResult result,
+			HttpSession session) {
+		if (result.hasErrors()) {
+			return "login";
+		}
+		Voter voter;
+		try {
+			voter = voterdao.findByVoterName(loginForm.getVoterFirstName(),
+					loginForm.getVoterSirName());
+			session.setAttribute("voter", voter);
+			return "redirect:/innovations";
+		} catch (Exception e) {
+			result.rejectValue("voterFirstName", "403",
+					"You are not invited to vote");
+			return "login";
+		}
+	}
 }
