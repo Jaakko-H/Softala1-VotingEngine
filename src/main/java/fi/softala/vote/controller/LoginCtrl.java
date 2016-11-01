@@ -27,14 +27,14 @@ public class LoginCtrl {
 
 	@RequestMapping(path="/login", method=RequestMethod.POST)
 	public String handleLogin(@Valid LoginForm loginForm,  BindingResult result, HttpSession session){
-                          if(result.hasErrors()){ return "login"; }
-                          Voter voter;
+           if(result.hasErrors()){ return "login"; }
+           Voter voter;
                           try {
-                            voter = voterdao.findByVoterName(loginForm.getVoterName());
+                            voter = voterdao.findByVoterName(loginForm.getVoterFirstName(), loginForm.getVoterSirName());
                             session.setAttribute("voter", voter);
                             return "redirect:/innovations";
-                          } catch (NullPointerException e){
-                             result.rejectValue("voterName", "403", "You are not invited to vote");
+                          } catch (Exception e){
+                             result.rejectValue("voterFirstName", "403", "You are not invited to vote");
                              return "login";
                           }
         }

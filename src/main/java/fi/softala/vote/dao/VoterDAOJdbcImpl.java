@@ -23,12 +23,11 @@ public class VoterDAOJdbcImpl implements VoterDAO {
     public void setJdbcTemplate(JdbcTemplate jdbc) { this.jdbc = jdbc; }
     
     @Override
-    public Voter findByVoterName(String voterName) {
+    public Voter findByVoterName(String fname, String sname) throws Exception {
+        String query = "SELECT * FROM voter WHERE fname = ? AND sname = ?";
+        Object[] params = new Object[] { fname, sname };
 
-        String query = "SELECT * FROM voter WHERE fname = ?";
-        Object[] params = new Object[] { voterName };
-        
-        Voter found = jdbc.queryForObject(query, params, (result, row) -> {
+        return jdbc.queryForObject(query, params, (result, row) -> {
             Voter voter = new Voter();
             voter.setFirstName(result.getString("fname"));
             voter.setLastName(result.getString("sname"));
@@ -38,8 +37,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
             voter.setVoterId(result.getLong("voter_id"));
             return voter;
         });
-        
-        return found;
+
     }
 
     @Override

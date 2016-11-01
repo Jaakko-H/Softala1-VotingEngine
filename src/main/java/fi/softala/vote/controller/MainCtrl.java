@@ -10,7 +10,7 @@ public class MainCtrl {
 
     @RequestMapping(path="/", method=RequestMethod.GET)
     public String showLogin(HttpSession session, Model model){
-	if(session.getAttribute("voterName") != null){
+	if(session.getAttribute("voter") != null){
 		return "redirect:/innovations";
 	}
         return "redirect:/login";
