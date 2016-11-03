@@ -60,7 +60,7 @@ public class InnoDAOJdbcImpl {
 	}
 
 	public Innovation find(long id) {
-		String sql = "select inno_name, inno_desc, inno_id, team_id, inno_owner as productowner from inno where inno_id = ?";
+		String sql = "select inno_name, inno_desc, inno_id, team_id, inno_owner from inno where inno_id = ?";
 		Object[] parameters = new Object[] { id };
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 
@@ -75,7 +75,7 @@ public class InnoDAOJdbcImpl {
 
 	public List<Innovation> findAll() {
 
-		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner as productowner from inno";
+		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner from inno";
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 		List<Innovation> innovations = jdbcTemplate.query(sql, mapper);
 
