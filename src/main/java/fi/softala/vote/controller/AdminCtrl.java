@@ -22,6 +22,11 @@ public class AdminCtrl {
         return "admin";
     }
     
+    @RequestMapping(path="/admin/login", method=RequestMethod.POST)
+    public String adminAuth(){
+        return "redirect:/admin";
+    }
+    
     @RequestMapping(path="/admin/votes", method=RequestMethod.GET)
     public String showVotes(Model model) {
     	List<Vote> votes = votedao.findAllVotes();
