@@ -1,5 +1,7 @@
 package fi.softala.vote.controller;
 
+import java.util.List;
+
 import FormValidators.InnovationForm;
 import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.VoterDAOJdbcImpl;
@@ -16,6 +18,7 @@ import fi.softala.vote.model.Voter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +31,7 @@ public class VoteCtrl {
 
 	@Inject
 	private VoterDAOJdbcImpl voterdao;
-	
+
 	@Inject
 	private InnoDAOJdbcImpl innovationdao;
 
@@ -62,13 +65,46 @@ public class VoteCtrl {
 			votedao.add(vote);
 			voterdao.updateVoted(voter.getVoterId());
 
-			session.invalidate();
+			//session.invalidate();
 
-			return "redirect:/";
+			return "redirect:/votes";
 
 		} catch (Exception e) {
 			return "redirect:/";
 		}
 
+	}
+	
+	@RequestMapping(path = "/votes", method = RequestMethod.GET)
+	public String getAllVotes(InnovationForm innovationForm, Model model, HttpSession session) {
+		List<Vote> votes = votedao.findAllVotes();
+		List<Innovation> innos = innovationdao.findAll();
+		
+		for (int i = 0; i < innos.size(); i++) {
+			Innovation inno = innos.get(i);
+			long voteCount = 0;
+			
+			for (int j = 0; j < votes.size(); j++) {
+				if (inno.getInnoId() == votes.get(j).getInnovation().getInnoId()) {
+					voteCount++;
+				}
+			}
+			
+			inno.setVoteCount(voteCount);
+		}
+		
+		innos.sort((obj1, obj2) -> {
+			return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
+		});
+		
+		for (int i = 0; i < innos.size(); i++) {
+			System.out.println("Innovation: " + innos.get(i).getInnoName() + ", Vote count: " +
+					innos.get(i).getVoteCount());
+		}
+		
+		model.addAttribute("innovations", innos);
+		session.invalidate(); //remove when returns to a results page
+		
+		return "redirect:/";
 	}
 }

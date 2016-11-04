@@ -38,6 +38,8 @@ public class Innovation {
 
 	@Size(min = 1, max = 100)
 	private String innoOwner;
+	
+	private long voteCount;
 
 	public long getInnoId() {
 		return innoId;
@@ -77,6 +79,14 @@ public class Innovation {
 
 	public void setInnoOwner(String innoOwner) {
 		this.innoOwner = innoOwner;
+	}
+	
+	public long getVoteCount() {
+		return voteCount;
+	}
+	
+	public void setVoteCount(long voteCount) {
+		this.voteCount = voteCount;
 	}
 
 	@Override
