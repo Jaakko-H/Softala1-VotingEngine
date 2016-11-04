@@ -21,12 +21,12 @@ public class VoterCtrl {
     
     public void setDao(VoterDAOJdbcImpl dao) { this.dao = dao; }
     
-    @RequestMapping(path="/voter", method=RequestMethod.POST)
+    @RequestMapping(path="/addVoter", method=RequestMethod.POST)
     public String addNewVoter(Model model, HttpSession session) {
     	Voter voter = new Voter();
-    	voter.setFirstName("testi");
-    	voter.setLastName("voter");
-    	voter.setType("tyyppi");
+    	voter.setFirstName("fname");
+    	voter.setLastName("sname");
+    	voter.setType("vType");
     	Team team = new Team();
     	team.setTeamId(1);
     	voter.setTeam(team);

@@ -12,7 +12,10 @@
                 <div class='jumbotron' style="background:transparent;"> <h1 class='display-1 text-md-center'> Voting Engine </h1> </div>
             </div>
         </div>
-        
+        <a th:href="@{/admin}">admin</a>
+        <form  action="#" th:action="@{/admin}" method="GET" th:object="${loginForm}">
+         <button type='submit' class='form-control'> Admin </button>
+         </form>
         <div class='row'>
             <div class='col-md-6 col-xs-12 offset-md-3'>
                 <form  action="#" th:action="@{/login}" method="post" th:object="${loginForm}">
