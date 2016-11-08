@@ -38,13 +38,13 @@ public class VoteCtrl {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(path = "/vote", method = RequestMethod.POST)
-	public String handleVote(InnovationForm innoForm, BindingResult results,
+	public String handleVote(InnovationForm innoForm, Model model, BindingResult results,
 			@RequestParam(required = true) long innoId, HttpSession session) {
 		Vote vote = new Vote();
 		Voter voter;
 
 		Innovation innovation = innovationdao.find(innoId);
-
+		
 		try {
 			voter = (Voter) session.getAttribute("voter");
 
@@ -66,8 +66,10 @@ public class VoteCtrl {
 			voterdao.updateVoted(voter.getVoterId());
 
 			//session.invalidate();
-
-			return "redirect:/votes";
+			List<Innovation> innovations = innovationdao.findAll();
+			model.addAttribute("innovations", innovations);
+			
+			return "redirect:/results";
 
 		} catch (Exception e) {
 			return "redirect:/";
