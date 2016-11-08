@@ -1,9 +1,18 @@
 package fi.softala.vote.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+
 import fi.softala.vote.model.Team;
+
 import javax.inject.Inject;
+
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -57,4 +66,23 @@ public class TeamDAOJdbcImpl implements TeamDAO {
 		});
 	}
 
+	@Override
+	public Team addNew(Team team) {
+		String SQL = "INSERT INTO team(team_name) values(?)";
+		KeyHolder idHolder = new GeneratedKeyHolder();
+
+		jdbc.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(SQL,
+						new String[] { "team_id" });
+				ps.setString(1, team.getTeamName());
+				return ps;
+			}
+		}, idHolder);
+
+		team.setTeamId(idHolder.getKey().longValue());
+		
+		return team;
+	}
 }
