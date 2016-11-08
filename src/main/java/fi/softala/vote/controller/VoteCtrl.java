@@ -69,7 +69,7 @@ public class VoteCtrl {
 			List<Innovation> innovations = innovationdao.findAll();
 			model.addAttribute("innovations", innovations);
 			
-			return "redirect:/results";
+			return "results";
 
 		} catch (Exception e) {
 			return "redirect:/";
