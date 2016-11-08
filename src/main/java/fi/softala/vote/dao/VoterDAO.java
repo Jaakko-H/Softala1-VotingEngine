@@ -1,5 +1,6 @@
 package fi.softala.vote.dao;
 
+import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Voter;
 
 public interface VoterDAO {
@@ -7,4 +8,5 @@ public interface VoterDAO {
     public abstract Voter find(long id);
     public abstract Voter findByVoterName(String fname, String sname) throws Exception;
     public abstract void updateVoted(long id);
+    public abstract void updateTeam(Voter voter, Team team);
 }
