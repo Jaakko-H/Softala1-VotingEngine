@@ -8,17 +8,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fi.softala.vote.dao.InnoDAOJdbcImpl;
+import fi.softala.vote.dao.TeamDAOJdbcImpl;
 import fi.softala.vote.dao.VoteDAOJdbcImpl;
+import fi.softala.vote.model.Innovation;
+import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Vote;
 
 @Controller
 public class AdminCtrl {
+	
 	@Inject
 	private VoteDAOJdbcImpl votedao;
+	@Inject
+	private TeamDAOJdbcImpl dao;
+
    
     @RequestMapping(path="/admin", method=RequestMethod.GET)
     public String showAdmin(Model model){
 	
+    	List<Team> teams = dao.findAll();
+    	teams.remove(0);
+      	model.addAttribute("teams", teams);
+      	
         return "admin";
     }
     

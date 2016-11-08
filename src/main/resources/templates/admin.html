@@ -41,8 +41,13 @@
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input size="20" type="text" name ="teamName" placeholder="Team Name"
-										class='form-control' />
+									</span>
+									<label for="sel2">Team Name:</label>
+									 <select name="TeamName" class="form-control" id="sel2">
+										<option th:each="team : ${teams}" th:value="${team.teamName}" th:text="${team.teamName}"
+										 ></option>
+									</select>
+									
 								</div>
 							</div>
 							<div class='form-group'>
@@ -56,8 +61,8 @@
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input size="50" type="text"
-										placeholder="Innovation Description" th:field="*{innoDesc}" class='form-control' />
+									</span> <input size="50" type="text" name="innoDesc"
+										placeholder="Innovation Description"  class='form-control' />
 								</div>
 							</div>
 							<div class='form-group'>
@@ -76,23 +81,28 @@
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input th:field="*{fName}" size="20" type="text" placeholder="first name"
+									</span> <input  name="fName" size="20" type="text" placeholder="first name"
 										class='form-control' />
+										
+										
+<!-- 										th:field="*{fName}" -->
+
+
 								</div>
 							</div>
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input th:field="*{sName}" size="20" type="text" placeholder="surname"
+									</span> <input name="sName" size="20" type="text" placeholder="surname"
 										class='form-control' />
 								</div>
 							</div>
 							<div class='form-group'>
-								<label for="sel1">Voter Type:</label> <select th:field="*{vType}"
+								<label for="sel1">Voter Type:</label> <select name="vType"
 									class="form-control" id="sel1">
-									<option th:value="${Student}">Student</option>
-									<option th:value="${Teacher}">Teacher</option>
-									<option th:value="${Guest}">Guest</option>
+									<option value="${Student">Student</option>
+									<option value="Teacher">Teacher</option>
+									<option value="Guest">Guest</option>
 								</select>
 							</div>
 

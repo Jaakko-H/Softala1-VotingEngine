@@ -7,8 +7,16 @@ public class InnovationForm {
     public long innoId;
     public String innoName;
     public String innoDesc;
-    public Team team;
-    public String innoOwner;
+    public String teamName;
+    public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
+	public String innoOwner;
     
     public long getInnoId() {
 		return innoId;
@@ -34,14 +42,7 @@ public class InnovationForm {
 		this.innoDesc = innoDesc;
 	}
 
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
+	
 	public String getInnoOwner() {
 		return innoOwner;
 	}
