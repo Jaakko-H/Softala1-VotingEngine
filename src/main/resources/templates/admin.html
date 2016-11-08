@@ -56,8 +56,8 @@
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input size="50" type="text" name="innoDesc"
-										placeholder="Innovation Description" class='form-control' />
+									</span> <input size="50" type="text"
+										placeholder="Innovation Description" th:field="*{innoDesc}" class='form-control' />
 								</div>
 							</div>
 							<div class='form-group'>
@@ -76,23 +76,23 @@
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input name="fname" size="20" type="text" placeholder="first name"
+									</span> <input th:field="*{fName}" size="20" type="text" placeholder="first name"
 										class='form-control' />
 								</div>
 							</div>
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input name="sname" size="20" type="text" placeholder="surname"
+									</span> <input th:field="*{sName}" size="20" type="text" placeholder="surname"
 										class='form-control' />
 								</div>
 							</div>
 							<div class='form-group'>
-								<label for="sel1">Voter Type:</label> <select name="vType"
+								<label for="sel1">Voter Type:</label> <select th:field="*{vType}"
 									class="form-control" id="sel1">
-									<option>Student</option>
-									<option>Teacher</option>
-									<option>Guest</option>
+									<option th:value="${Student}">Student</option>
+									<option th:value="${Teacher}">Teacher</option>
+									<option th:value="${Guest}">Guest</option>
 								</select>
 							</div>
 

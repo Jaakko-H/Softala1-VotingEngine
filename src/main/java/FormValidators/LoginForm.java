@@ -12,8 +12,8 @@ public class LoginForm {
     public String voterFirstName;
     
     @NotNull
-    @NotEmpty(message="sirname can't be empty")
-    @Size(min=3, max=20, message="sirname size must be between 3 to 20 chars")
+    @NotEmpty(message="surname can't be empty")
+    @Size(min=3, max=20, message="surname size must be between 3 to 20 chars")
     public String voterSirName;
     
     public void setVoterFirstName(String voterFirstName){ this.voterFirstName = voterFirstName; }
