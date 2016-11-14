@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import fi.softala.vote.model.Innovation;
 import fi.softala.vote.model.Vote;
 import fi.softala.vote.model.Voter;
 
@@ -78,4 +79,20 @@ public class VoteDAOJdbcImpl implements VoteDAO {
 			return vote;
 		});
 	}
+
+	@Override
+	public List<Vote> findByInnovation(Innovation innovation) {
+		String query = "SELECT * FROM vote WHERE inno_id = ?";
+		Object[] params = new Object[] { innovation.getInnoId() };
+		
+		return this.jdbc.query(query, params, (result, row) -> {
+			Vote vote = new Vote();
+			vote.setVoteId(result.getLong("vote_id"));
+			vote.setLegit(result.getBoolean("legit"));
+			vote.setInnovation(innovationdao.find(result.getLong("inno_id")));
+			vote.setVoter(voterdao.find(result.getLong("voter_id")));
+			return vote;
+		});
+	}
+	
 }
