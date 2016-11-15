@@ -6,10 +6,11 @@
 
 	<main>
 	<div class='container'>
-		<h2>Dynamic Tabs</h2>
+		<h2></h2>
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="#1">Home</a></li>
-			<li role="presentation"><a href="#2">Profile</a></li>
+<!-- 			<li role="presentation" class="active"><a data-toggle="tab" href="#1">Innovation</a></li> -->
+<!-- 			<li role="presentation"><a data-toggle="tab" href="#2">Voter</a></li> -->
+<li><a href="login">Home</a></li>
 		</ul>
 
 
@@ -24,8 +25,8 @@
 			<div class='row'>
 				<div class='col-md-6 col-xs-12 offset-md-3'>
 
-					<div id="2" class="tab-pane fade in active">
-
+					<div id="1" class="tab-pane fade in active">
+					<h3>Add Innovation</h3>
 						<form action="#" th:action="@{/innovationAdd}" method="post"
 							th:object="${InnovationForm}">
 							
@@ -73,8 +74,11 @@
 					</div>
 
 					<!--                 Add voter -->
-
+<br></br>
+<hr></hr>
+<br></br>
 					<div id="2" class="tab-pane ">
+					<h3>Add Voter</h3>
 						<form action="#" th:action="@{/addVoter}" method="post"
 							th:object="${VoterForm}">
 							<div class='form-group text-md-center'></div>
@@ -100,9 +104,9 @@
 							<div class='form-group'>
 								<label for="sel1">Voter Type:</label> <select name="vType"
 									class="form-control" id="sel1">
-									<option value="${Student">Student</option>
-									<option value="Teacher">Teacher</option>
-									<option value="Guest">Guest</option>
+									<option value="STUDENT">Student</option>
+									<option value="TEACHER">Teacher</option>
+									<option value="VISITOR">Guest</option>
 								</select>
 							</div>
 
