@@ -28,6 +28,24 @@ public class VoterCtrl {
     public String addNewVoter(@ModelAttribute(value="VoterForm") VoterForm voterForm,
     		HttpSession session) {
     	
+    	/*
+    	   ArrayList voters = new ArrayList();
+    	 
+    	for (int i = 0; i < voters.size(); i++) {
+    		Voter voter = new Voter();
+        	voter.setFirstName(voters[i].getfName());
+        	voter.setLastName(voterForm.getsName());
+        	voter.setType(voterForm.getvType());
+        	
+        	Team team = new Team();
+        	team.setTeamId(1);
+        	voter.setTeam(team);
+        	
+        	dao.addVoter(voter);
+		}
+    	  
+    	 */
+    	
     	Voter voter = new Voter();
     	voter.setFirstName(voterForm.getfName());
     	voter.setLastName(voterForm.getsName());
