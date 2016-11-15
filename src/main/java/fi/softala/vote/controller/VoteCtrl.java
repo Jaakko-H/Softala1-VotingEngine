@@ -38,7 +38,7 @@ public class VoteCtrl {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(path = "/vote", method = RequestMethod.POST)
-	public String handleVote(InnovationForm innoForm, Model model, BindingResult results,
+	public String handleVote(InnovationForm innovationForm, BindingResult results, Model model, 
 			@RequestParam(required = true) long innoId, HttpSession session) {
 		Vote vote = new Vote();
 		Voter voter;
@@ -49,11 +49,12 @@ public class VoteCtrl {
 			voter = (Voter) session.getAttribute("voter");
 
 			if (voter.getTeam().equals(innovation.getTeam())) {
-				results.rejectValue("error", "403",
-						"You can't vote your own innovation");
+				results.rejectValue("error", "403","You can't vote your own innovation");
 				return "redirect:/innovations";
 			} else if (voter.isVoted()) {
-				results.rejectValue("error", "403", "You can't vote again");
+				results.rejectValue("error", "403", "You can't vote the same again");
+				log.info("you have already voted");
+				session.invalidate();
 				return "redirect:/login";
 			}
 
@@ -65,13 +66,21 @@ public class VoteCtrl {
 			votedao.add(vote);
 			voterdao.updateVoted(voter.getVoterId());
 
-			//session.invalidate();
+			session.invalidate();
+			
 			List<Innovation> innovations = innovationdao.findAll();
+	
+			// set vote count
+			for( Innovation inno : innovations){
+				inno.setVoteCount(votedao.findByInnovation(inno).size());
+			}
+			
 			model.addAttribute("innovations", innovations);
 			
 			return "results";
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "redirect:/";
 		}
 

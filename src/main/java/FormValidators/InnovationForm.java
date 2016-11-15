@@ -8,6 +8,8 @@ public class InnovationForm {
     public String innoName;
     public String innoDesc;
     public String teamName;
+    public String error;
+    
     public String getTeamName() {
 		return teamName;
 	}
@@ -50,5 +52,14 @@ public class InnovationForm {
 	public void setInnoOwner(String innoOwner) {
 		this.innoOwner = innoOwner;
 	}
+	
+	public String getError(){
+		return this.error;
+	}
+	
+	public void setError(String error){
+		this.error = error;
+	}
+	
     
 }
