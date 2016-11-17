@@ -9,4 +9,5 @@ public interface VoterDAO {
     public abstract Voter findByVoterName(String fname, String sname) throws Exception;
     public abstract void updateVoted(long id);
     public abstract void updateTeam(Voter voter, Team team);
+	public abstract Voter findByVoterTeam(long team_id) throws Exception;
 }

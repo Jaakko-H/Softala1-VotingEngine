@@ -55,6 +55,26 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 		});
 
 	}
+	
+	@Override
+	public Voter findByVoterTeam(long team_id) throws Exception {
+		String query = "SELECT * FROM voter WHERE team_id = ? AND voted = 'N' ORDER BY voter_id ASC Limit 1";
+		Object[] params = new Object[] { team_id };
+
+		return jdbc.queryForObject(query, params, (result, row) -> {
+			
+			Voter voter = new Voter();
+			voter.setFirstName(result.getString("fname"));
+			voter.setLastName(result.getString("sname"));
+			voter.setTeam(new Team());
+			voter.setType(result.getString("type"));
+			voter.setVoted(result.getBoolean("voted"));
+			voter.setVoterId(result.getLong("voter_id"));
+			System.out.println(voter);
+			return voter;
+		});
+
+	}
 
 	@Override
 	public Voter addVoter(Voter voter) {
