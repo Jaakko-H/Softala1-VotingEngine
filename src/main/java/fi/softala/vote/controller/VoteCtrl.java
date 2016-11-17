@@ -1,5 +1,7 @@
 package fi.softala.vote.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import FormValidators.InnovationForm;
@@ -102,6 +104,8 @@ public class VoteCtrl {
 			}
 			
 			inno.setVoteCount(voteCount);
+			
+			
 		}
 		
 		innos.sort((obj1, obj2) -> {
@@ -113,7 +117,20 @@ public class VoteCtrl {
 					innos.get(i).getVoteCount());
 		}
 		
+		List<Vote> votec = votedao.findAllVotes();
+		int allvotes = 0;
+		
+		for (int o = 1; o < votec.size(); o++) {
+			System.out.println(votec.get(o));
+				allvotes = o;
+		}
+		
+		System.out.println(allvotes + " annetut äänet yhteensä");
+		
+		
+		
 		model.addAttribute("innovations", innos);
+		model.addAttribute("allvotes", allvotes);
 		session.invalidate(); //remove when returns to a results page
 		
 		return "redirect:/";

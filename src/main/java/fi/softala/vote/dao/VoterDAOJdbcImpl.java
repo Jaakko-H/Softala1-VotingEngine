@@ -38,10 +38,11 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 
 	@Override
 	public Voter findByVoterName(String fname, String sname) throws Exception {
-		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ?";
+		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ? AND voted = 'N' ORDER BY voter_id ASC Limit 1";
 		Object[] params = new Object[] { fname, sname };
 
 		return jdbc.queryForObject(query, params, (result, row) -> {
+			
 			Voter voter = new Voter();
 			voter.setFirstName(result.getString("fname"));
 			voter.setLastName(result.getString("sname"));
@@ -49,6 +50,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 			voter.setType(result.getString("type"));
 			voter.setVoted(result.getBoolean("voted"));
 			voter.setVoterId(result.getLong("voter_id"));
+			System.out.println(voter);
 			return voter;
 		});
 
