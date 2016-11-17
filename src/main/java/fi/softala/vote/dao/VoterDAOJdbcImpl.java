@@ -3,8 +3,10 @@ package fi.softala.vote.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import fi.softala.vote.model.Team;
+import fi.softala.vote.model.Vote;
 import fi.softala.vote.model.Voter;
 
 import javax.inject.Inject;
@@ -73,7 +75,6 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 			System.out.println(voter);
 			return voter;
 		});
-
 	}
 
 	@Override
@@ -126,6 +127,23 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 					return voter;
 				});
 
+	}
+	
+	@Override
+	public List<Voter> findAll() {
+		String query = "SELECT * FROM voter";
+		return this.jdbc.query(query, (result, row) -> {
+			Voter voter = new Voter();
+			voter.setVoterId(result.getLong("voter_id"));
+			voter.setFirstName(result.getString("fname"));
+			voter.setLastName(result.getString("sname"));
+			voter.setType(result.getString("type"));
+			voter.setVoted(result.getBoolean("voted"));
+			Team team = new Team();
+			team.setTeamId(result.getLong("team_id"));
+			voter.setTeam(team);
+			return voter;
+		});
 	}
 
 	@Override
