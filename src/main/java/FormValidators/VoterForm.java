@@ -5,6 +5,7 @@ public class VoterForm {
     public String fName;
     public String sName;
     public String vType;
+    
 	public String getfName() {
 		return fName;
 	}
