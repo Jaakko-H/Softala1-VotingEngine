@@ -48,9 +48,10 @@ public class LoginCtrl {
 		}
 		
 		Voter voter;
-		if (loginForm.getVoterType() != null) {
+		if (loginForm.getTeamName() != null) {
 			try {
-				voter = voterdao.findByVoterTeam(loginForm.voterFirstName, loginForm.voterSirName, loginForm.getVoterType());
+				voter = voterdao.findByVoterTeam(loginForm.getVoterFirstName(), loginForm.getVoterSirName(), loginForm.getTeamName());
+				System.out.println(loginForm.getTeamName());
 				session.setAttribute("voter", voter);
 				System.out.print(voter);
 				return "redirect:/innovations";

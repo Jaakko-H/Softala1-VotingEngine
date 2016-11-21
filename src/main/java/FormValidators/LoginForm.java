@@ -16,7 +16,7 @@ public class LoginForm {
     @Size(min=3, max=20, message="surname size must be between 3 to 20 chars")
     public String voterSirName;
     
-    public String voterType;
+    public String TeamName;
     
     public void setVoterFirstName(String voterFirstName){ this.voterFirstName = voterFirstName; }
     public String getVoterFirstName(){ return this.voterFirstName; }
@@ -24,7 +24,7 @@ public class LoginForm {
     public void setVoterSirName(String voterSirName){ this.voterSirName = voterSirName; }
     public String getVoterSirName(){ return this.voterSirName; }
     
-    public void setVoterType(String voterType){ this.voterType= voterType; }
-    public String getVoterType(){ return this.voterType; }
+    public void setTeamName(String TeamName){ this.TeamName= TeamName; }
+    public String getTeamName(){ return this.TeamName; }
     
 }
