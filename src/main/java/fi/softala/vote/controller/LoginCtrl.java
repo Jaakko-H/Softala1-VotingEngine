@@ -48,7 +48,7 @@ public class LoginCtrl {
 		}
 		
 		Voter voter;
-		if (loginForm.getTeamName() != null) {
+		if (!loginForm.getTeamName().equalsIgnoreCase("not_in_team")) {
 			try {
 				voter = voterdao.findByVoterTeam(loginForm.getVoterFirstName(), loginForm.getVoterSirName(), loginForm.getTeamName());
 				System.out.println(loginForm.getTeamName());
@@ -56,8 +56,9 @@ public class LoginCtrl {
 				System.out.print(voter);
 				return "redirect:/innovations";
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				System.out.println("No Vote");
+				return "login";
 			}
 		}
 		try {

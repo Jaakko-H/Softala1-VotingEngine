@@ -16,6 +16,7 @@ public class LoginForm {
     @Size(min=3, max=20, message="surname size must be between 3 to 20 chars")
     public String voterSirName;
     
+    @NotEmpty(message="you are not a member of this team")
     public String TeamName;
     
     public void setVoterFirstName(String voterFirstName){ this.voterFirstName = voterFirstName; }

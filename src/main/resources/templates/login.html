@@ -73,7 +73,7 @@
                     <div class='form-group innomem'>
                         <input style="display:inline-block;" id="radio_button" type='radio' > <label>Innovation Member</label>    </input>
                         <select  id="nimi" name="TeamName" class="form-control">
-                        	<option value="not in team">Not in Team</option>
+                        	<option value="not_in_team">Not in Team</option>
 							<option th:each="team : ${teams}" th:value="${team.teamName}" th:text="${team.teamName}">pöö</option>
 						</select>
                         
