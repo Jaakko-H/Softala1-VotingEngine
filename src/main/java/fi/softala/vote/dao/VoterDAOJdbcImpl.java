@@ -61,7 +61,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	
 	@Override
 	public Voter findByVoterTeam(String fname, String sname, String team_name) throws Exception {
-		String query = "SELECT voter_id, fname, sname, type, voted, team_id FROM voter JOIN team ON team.team_id = voter.team_id WHERE fname = ? AND sname = ? AND team_name = ? AND voted = 'N' ORDER BY voter_id ASC Limit 1";
+		String query = "SELECT voter_id, fname, sname, type, voted, team_id FROM voter JOIN team ON team.team_id = voter.team_id JOIN team_member ON team_member.team_id = team.team_id WHERE fname = ? AND sname = ? AND team_name = ? AND voted = 'N' ORDER BY voter_id ASC Limit 1";
 		Object[] params = new Object[] { fname, sname, team_name };
 
 		Voter voter = new Voter();

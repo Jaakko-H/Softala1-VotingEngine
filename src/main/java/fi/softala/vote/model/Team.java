@@ -23,9 +23,10 @@ public class Team {
     @NotNull
     @NotEmpty()
     @Size(min = 1, max = 50)
-    @Column(name = "team_name", nullable = false)
+    @Column(name = "team_name", nullable = false, columnDefinition="String default 'not_in_team'")
 	private String teamName;
 
+    @Column (name = "team_id", columnDefinition="Bigint default '1'")
 	public long getTeamId() {
 		return teamId;
 	}

@@ -27,7 +27,7 @@ public class TeamMember {
                  @NotNull
                  @NotEmpty
 	@Size(min = 1, max = 225)
-                 @Column(name="lname", nullable = false)
+                 @Column(name="sname", nullable = false)
 	private String lastName;
 
 	@ManyToOne
