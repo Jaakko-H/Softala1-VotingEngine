@@ -30,6 +30,8 @@ public class Team {
 	public long getTeamId() {
 		return teamId;
 	}
+    
+    // team_id ja team_name default setup = columnDefinition...
 
 	public void setTeamId(long teamId) {
 		this.teamId = teamId;
