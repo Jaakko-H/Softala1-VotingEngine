@@ -49,7 +49,8 @@ public class VoteCtrl {
 		
 		try {
 			voter = (Voter) session.getAttribute("voter");
-
+			System.out.println("mikÃ¤ sinÃ¤ olet " + innovation.getTeam() + "ja tiimi on " + voter.getTeam());
+			//INNOVAATION TIIMIN ARVOKSI TULEE NULL, INNOROWMAPPER EI TOIMI
 			if (voter.getTeam().equals(innovation.getTeam())) {
 				results.rejectValue("error", "403","You can't vote your own innovation");
 				return "redirect:/innovations";
@@ -72,7 +73,7 @@ public class VoteCtrl {
 			
 			List<Innovation> innovations = innovationdao.findAll();
 	
-			// set vote count
+			// set vote count 
 			for( Innovation inno : innovations){
 				inno.setVoteCount(votedao.findByInnovation(inno).size());
 			}
@@ -89,6 +90,7 @@ public class VoteCtrl {
 	}
 	
 	@RequestMapping(path = "/votes", method = RequestMethod.GET)
+	//NÃ„MÃ„ EIVÃ„T VOI OLLA OMA METODINSA, EDELLISEN OSAKSI
 	public String getAllVotes(InnovationForm innovationForm, Model model, HttpSession session) {
 		List<Vote> votes = votedao.findAllVotes();
 		List<Innovation> innos = innovationdao.findAll();
@@ -125,7 +127,7 @@ public class VoteCtrl {
 				allvotes = o;
 		}
 		
-		System.out.println(allvotes + " annetut äänet yhteensä");
+		System.out.println(allvotes + " annetut ï¿½ï¿½net yhteensï¿½");
 		
 		
 		
@@ -133,6 +135,6 @@ public class VoteCtrl {
 		model.addAttribute("allvotes", allvotes);
 		session.invalidate(); //remove when returns to a results page
 		
-		return "redirect:/";
+		return "results";
 	}
 }

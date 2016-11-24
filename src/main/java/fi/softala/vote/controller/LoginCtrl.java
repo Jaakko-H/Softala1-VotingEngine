@@ -35,7 +35,7 @@ public class LoginCtrl {
 		List<Team> teams = dao.findAll();
 		teams.remove(0);
 	  	model.addAttribute("teams", teams);
-	  	System.out.print(teams);
+	  	
 	  	
 		return "login";
 	}
@@ -46,19 +46,21 @@ public class LoginCtrl {
 		if (result.hasErrors()) {
 			return "login";
 		}
-		
+		System.out.println(loginForm.getVoterTeam() + " hello");
 		Voter voter;
-		if (!loginForm.getTeamName().equalsIgnoreCase("not_in_team")) {
+		if (!loginForm.getVoterTeam().equalsIgnoreCase("not_in_team")) {
 			try {
-				voter = voterdao.findByVoterTeam(loginForm.getVoterFirstName(), loginForm.getVoterSirName(), loginForm.getTeamName());
-				System.out.println(loginForm.getTeamName());
+				voter = voterdao.findByVoterTeam(loginForm.getVoterFirstName(), loginForm.getVoterSirName(), loginForm.getVoterTeam());
+				
 				session.setAttribute("voter", voter);
 				System.out.print(voter);
 				return "redirect:/innovations";
 			} catch (Exception e) {
-				
+				result.rejectValue("voterTeam", "403",
+						"You are not invited to vote");
+				System.out.println(loginForm.getVoterTeam() + " hello");
 				System.out.println("No Vote");
-				return "login";
+				return "redirect:/login";
 			}
 		}
 		try {

@@ -16,8 +16,9 @@ public class LoginForm {
     @Size(min=3, max=20, message="surname size must be between 3 to 20 chars")
     public String voterSirName;
     
+    @NotNull
     @NotEmpty(message="you are not a member of this team")
-    public String TeamName;
+    public String voterTeam;
     
     public void setVoterFirstName(String voterFirstName){ this.voterFirstName = voterFirstName; }
     public String getVoterFirstName(){ return this.voterFirstName; }
@@ -25,7 +26,9 @@ public class LoginForm {
     public void setVoterSirName(String voterSirName){ this.voterSirName = voterSirName; }
     public String getVoterSirName(){ return this.voterSirName; }
     
-    public void setTeamName(String TeamName){ this.TeamName= TeamName; }
-    public String getTeamName(){ return this.TeamName; }
+    public void setVoterTeam(String voterTeam){
+    	this.voterTeam= voterTeam;
+    	}
+    public String getVoterTeam(){ return this.voterTeam; }
     
 }
