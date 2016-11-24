@@ -78,8 +78,22 @@ public class VoteCtrl {
 				inno.setVoteCount(votedao.findByInnovation(inno).size());
 			}
 			
-			model.addAttribute("innovations", innovations);
+			innovations.sort((obj1, obj2) -> {
+				return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
+			});
 			
+			List<Vote> votec = votedao.findAllVotes();
+			int allvotes = 0;
+			
+			for (int o = 1; o < votec.size(); o++) {
+				System.out.println(votec.get(o));
+					allvotes = o;
+			}
+			
+			System.out.println(allvotes + " annetut ��net yhteens�");
+			
+			model.addAttribute("innovations", innovations);
+			model.addAttribute("allvotes", allvotes);
 			return "results";
 
 		} catch (Exception e) {
@@ -87,54 +101,5 @@ public class VoteCtrl {
 			return "redirect:/";
 		}
 
-	}
-	
-	@RequestMapping(path = "/votes", method = RequestMethod.GET)
-	//NÄMÄ EIVÄT VOI OLLA OMA METODINSA, EDELLISEN OSAKSI
-	public String getAllVotes(InnovationForm innovationForm, Model model, HttpSession session) {
-		List<Vote> votes = votedao.findAllVotes();
-		List<Innovation> innos = innovationdao.findAll();
-		
-		for (int i = 0; i < innos.size(); i++) {
-			Innovation inno = innos.get(i);
-			long voteCount = 0;
-			
-			for (int j = 0; j < votes.size(); j++) {
-				if (inno.getInnoId() == votes.get(j).getInnovation().getInnoId()) {
-					voteCount++;
-				}
-			}
-			
-			inno.setVoteCount(voteCount);
-			
-			
-		}
-		
-		innos.sort((obj1, obj2) -> {
-			return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
-		});
-		
-		for (int i = 0; i < innos.size(); i++) {
-			System.out.println("Innovation: " + innos.get(i).getInnoName() + ", Vote count: " +
-					innos.get(i).getVoteCount());
-		}
-		
-		List<Vote> votec = votedao.findAllVotes();
-		int allvotes = 0;
-		
-		for (int o = 1; o < votec.size(); o++) {
-			System.out.println(votec.get(o));
-				allvotes = o;
-		}
-		
-		System.out.println(allvotes + " annetut ��net yhteens�");
-		
-		
-		
-		model.addAttribute("innovations", innos);
-		model.addAttribute("allvotes", allvotes);
-		session.invalidate(); //remove when returns to a results page
-		
-		return "results";
 	}
 }
