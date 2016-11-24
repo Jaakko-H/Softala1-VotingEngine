@@ -60,7 +60,7 @@ public class InnoDAOJdbcImpl {
 	}
 
 	public Innovation find(long id) {
-		String sql = "select inno_name, inno_desc, inno_id, team_id, inno_owner from inno where inno_id = ?";
+		String sql = "select inno_name, inno_desc, inno_id, inno.team_id, inno_owner, team_name from inno join team using(team_id) where inno_id = ?";
 		Object[] parameters = new Object[] { id };
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 
