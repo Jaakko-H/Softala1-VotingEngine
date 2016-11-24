@@ -51,7 +51,7 @@ public class VoteCtrl {
 			voter = (Voter) session.getAttribute("voter");
 			System.out.println("mikä sinä olet " + innovation.getTeam() + "ja tiimi on " + voter.getTeam());
 			//INNOVAATION TIIMIN ARVOKSI TULEE NULL, INNOROWMAPPER EI TOIMI
-			if (voter.getTeam().equals(innovation.getTeam())) {
+			if (voter.getTeam().getTeamId() == innovation.getTeam().getTeamId()) {
 				results.rejectValue("error", "403","You can't vote your own innovation");
 				return "redirect:/innovations";
 			} else if (voter.isVoted()) {
