@@ -89,7 +89,7 @@ public class VoteCtrl {
 				System.out.println(votec.get(o));
 					allvotes = o;
 			}
-			
+			allvotes = votec.size();
 			System.out.println(allvotes + " annetut ��net yhteens�");
 			
 			model.addAttribute("innovations", innovations);
