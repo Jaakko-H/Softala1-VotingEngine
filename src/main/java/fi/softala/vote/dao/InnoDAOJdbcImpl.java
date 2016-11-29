@@ -75,7 +75,7 @@ public class InnoDAOJdbcImpl {
 
 	public List<Innovation> findAll() {
 
-		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner from inno";
+		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner, team_name from inno join team using(team_id)";
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 		List<Innovation> innovations = jdbcTemplate.query(sql, mapper);
 
