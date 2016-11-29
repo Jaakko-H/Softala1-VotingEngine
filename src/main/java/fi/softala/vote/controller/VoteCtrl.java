@@ -82,14 +82,8 @@ public class VoteCtrl {
 				return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
 			});
 			
-			List<Vote> votec = votedao.findAllVotes();
-			int allvotes = 0;
+			int allvotes = votedao.findAllVotes().size();
 			
-			for (int o = 1; o < votec.size(); o++) {
-				System.out.println(votec.get(o));
-					allvotes = o;
-			}
-			allvotes = votec.size();
 			System.out.println(allvotes + " annetut ��net yhteens�");
 			
 			model.addAttribute("innovations", innovations);
