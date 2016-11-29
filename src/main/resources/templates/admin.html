@@ -1,0 +1,155 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="partials/head :: tags" />
+<body>
+
+	<header></header>
+
+	<main>
+	<div class='container'>
+		<h2></h2>
+		<ul class="nav nav-tabs">
+<!-- 			<li role="presentation" class="active"><a data-toggle="tab" href="#1">Innovation</a></li> -->
+<!-- 			<li role="presentation"><a data-toggle="tab" href="#2">Voter</a></li> -->
+<li><a href="login">Home</a></li>
+		</ul>
+
+
+		<div class='row m-t-2'>
+			<div class='col-md-12'>
+				<div class='jumbotron' style="background: transparent;">
+					<h1 class='display-1 text-md-center'>Admin</h1>
+				</div>
+			</div>
+		</div>
+		<div class="tab-content">
+			<div class='row'>
+				<div class='col-md-6 col-xs-12 offset-md-3'>
+
+					<div id="1" class="tab-pane fade in active">
+					<h3>Add Innovation</h3>
+						<form action="#" th:action="@{/innovationAdd}" method="post"
+							th:object="${InnovationForm}">
+							
+							<div class='form-group text-md-center'></div>
+							
+							<div class='form-group'>
+								<div class='input-group'>
+									<span class='input-group-addon'> <i class='fa fa-user'></i>
+									</span> <input size="20" type="text" name="innoName" placeholder="Innovation Name"
+										class='form-control' />
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='input-group'>
+									<span class='input-group-addon'> <i class='fa fa-user'></i>
+									</span>
+									<label for="sel2">Team Name:</label>
+									 <select name="TeamName" class="form-control" id="sel2">
+										<option th:each="team : ${teams}" th:value="${team.teamName}" th:text="${team.teamName}"
+										 ></option>
+									</select>
+									
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='input-group'>
+									<span class='input-group-addon'> <i class='fa fa-user'></i>
+									</span> <input size="20" type="text" name="innoOwner" placeholder="Innovation Owner"
+										class='form-control' />
+								</div>
+
+							</div>
+							<div class='form-group'>
+								<div class='input-group'>
+									<span class='input-group-addon'> <i class='fa fa-user'></i>
+									</span> <input size="50" type="text" name="innoDesc"
+										placeholder="Innovation Description"  class='form-control' />
+								</div>
+							</div>
+							<div class='form-group'>
+								<button type='submit' class='form-control'>Add
+									Innovation</button>
+							</div>
+						</form>
+					</div>
+
+					<!--                 Add voter -->
+<br></br>
+<hr></hr>
+<br></br>
+					<div id="2" class="tab-pane ">
+					<h3>Add Voter</h3>
+						<form action="#" th:action="@{/addVoter}" method="post"
+							th:object="${VoterForm}">
+							<div class='form-group text-md-center'></div>
+							<div class='form-group'>
+								<div class='input-group'>
+									<span class='input-group-addon'> <i class='fa fa-user'></i>
+									</span> <input  name="fName" size="20" type="text" placeholder="first name"
+										class='form-control' />
+										
+										
+<!-- 										th:field="*{fName}" -->
+
+
+								</div>
+							</div>
+							<div class='form-group'>
+								<div class='input-group'>
+									<span class='input-group-addon'> <i class='fa fa-user'></i>
+									</span> <input name="sName" size="20" type="text" placeholder="surname"
+										class='form-control' />
+								</div>
+							</div>
+							<div class='form-group'>
+								<label for="sel1">Voter Type:</label> <select name="vType"
+									class="form-control" id="sel1">
+									<option value="STUDENT">Student</option>
+									<option value="TEACHER">Teacher</option>
+									<option value="VISITOR">Guest</option>
+									<option id="radio_button" value ="INNOMEM">Member of Innovation Team</option>
+									
+								<!--  kokeilua alla --> 
+									
+									
+								
+								</select>
+								<div class='form-group innomem'> 
+								
+									<select id="nimi" name="tName" class="form-control">
+									<option value="not_in_team"> -- </option>
+									<option th:each="team : ${teams}" th:value="${team.teamName}" th:text="${team.teamName}"
+										 ></option>
+									</select>
+									</div>
+							</div>
+
+							<div class='form-group'>
+								<button type='submit' class='form-control'>Add Voters</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	</main>
+
+	<footer></footer>
+
+	<script>
+	$("#nimi").hide();
+	$(document).ready(function(){
+		$("#radio_button").click(function() {
+			$("#radio_button").slideUp();
+			$("#nimi").slideDown();
+	    });
+		
+			
+			
+		});
+	</script>
+
+</body>
+</html>

@@ -7,8 +7,35 @@ ul, li {
 }
 
 .innovations {
+	
 }
 
 .innovation {
-	border-bottom: 1px solid grey;
+    padding:3px;
+    border-bottom: 1px dashed lightgrey;
+    margin-bottom:5px;
 }
+
+
+.error {
+    color:crimson;
+}
+
+@keyframes fade-in {
+	0%   { opacity:0; top:25%; }
+	100% { opacity:1; top:30%; }
+}
+
+.res-btn {
+/*     font-size: 2vw; */
+}
+.form-center {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+	margin-right: auto;
+}
+input.form-center  {
+	display: block;
+}
+
