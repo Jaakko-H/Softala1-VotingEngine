@@ -27,7 +27,7 @@ public class VoterForm {
 	}
     
 	public String gettName() {
-		return vType;
+		return tName;
 	}
 	public void settName(String tName) {
 		this.tName = tName;

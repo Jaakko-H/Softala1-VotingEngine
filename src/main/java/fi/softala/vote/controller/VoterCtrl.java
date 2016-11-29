@@ -59,16 +59,13 @@ public class VoterCtrl {
     	
     	Team team = new Team();
     	
-    	if (voter.getType() == "INNOMEM"){
-    		// team.setTeamName(voterForm.gettName());
-    		
-    		team.setTeamId(teamId);
-    		voter.setTeam(teamdao.findByTeamName(voterForm.gettName()));
- 
-    	} else {
-    	
-    	team.setTeamId(1);
-    	voter.setTeam(team);
+    	if (voter.getType().equals("INNOMEM")){
+    		team = teamdao.findByTeamName(voterForm.gettName());
+    		voter.setTeam(team);
+    	} 
+    	else {
+	    	team.setTeamId(1);
+	    	voter.setTeam(team);
     	}
     
     	dao.addVoter(voter); 
