@@ -82,13 +82,7 @@ public class VoteCtrl {
 				return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
 			});
 			
-			List<Vote> votec = votedao.findAllVotes();
-			int allvotes = 0;
-			
-			for (int o = 1; o < votec.size(); o++) {
-				System.out.println(votec.get(o));
-					allvotes = o;
-			}
+			int allvotes = votedao.findAllVotes().size();
 			
 			System.out.println(allvotes + " annetut ��net yhteens�");
 			
