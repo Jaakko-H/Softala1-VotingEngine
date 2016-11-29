@@ -5,6 +5,7 @@ public class VoterForm {
     public String fName;
     public String sName;
     public String vType;
+    public String tName;
     
 	public String getfName() {
 		return fName;
@@ -25,6 +26,11 @@ public class VoterForm {
 		this.vType = vType;
 	}
     
-   
+	public String gettName() {
+		return vType;
+	}
+	public void settName(String tName) {
+		this.tName = tName;
+	}
     
 }

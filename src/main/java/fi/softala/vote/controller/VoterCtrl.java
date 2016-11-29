@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import FormValidators.VoterForm;
+import fi.softala.vote.dao.TeamDAOJdbcImpl;
 import fi.softala.vote.dao.VoterDAOJdbcImpl;
 import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Voter;
@@ -19,6 +20,9 @@ import fi.softala.vote.model.Voter;
 public class VoterCtrl {
 	@Inject
     private VoterDAOJdbcImpl dao;
+	
+	@Inject
+    private TeamDAOJdbcImpl teamdao;
 	
     public VoterDAOJdbcImpl getDao() { return dao; }
     
@@ -47,16 +51,27 @@ public class VoterCtrl {
     	 */
     	
     	Voter voter = new Voter();
+    	
+    	
     	voter.setFirstName(voterForm.getfName());
     	voter.setLastName(voterForm.getsName());
     	voter.setType(voterForm.getvType());
     	
     	Team team = new Team();
+    	
+    	if (voter.getType() == "INNOMEM"){
+    		// team.setTeamName(voterForm.gettName());
+    		
+    		team.setTeamId(teamId);
+    		voter.setTeam(teamdao.findByTeamName(voterForm.gettName()));
+ 
+    	} else {
+    	
     	team.setTeamId(1);
     	voter.setTeam(team);
-    	
-    	dao.addVoter(voter);
-    	
+    	}
+    
+    	dao.addVoter(voter); 
     	return "admin";
     }
 }
