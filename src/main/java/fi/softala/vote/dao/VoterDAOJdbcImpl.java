@@ -147,6 +147,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 			voter.setVoted(result.getBoolean("voted"));
 			Team team = new Team();
 			team.setTeamId(result.getLong("team_id"));
+			team = teamdao.find(result.getLong("team_id"));
 			voter.setTeam(team);
 			return voter;
 		});
