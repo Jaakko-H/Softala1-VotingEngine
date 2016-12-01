@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.TeamDAOJdbcImpl;
 import fi.softala.vote.dao.VoteDAOJdbcImpl;
+import fi.softala.vote.dao.VoterDAO;
+import fi.softala.vote.dao.VoterDAOJdbcImpl;
 import fi.softala.vote.model.Innovation;
 import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Vote;
+import fi.softala.vote.model.Voter;
 
 @Controller
 public class AdminCtrl {
@@ -21,15 +24,24 @@ public class AdminCtrl {
 	@Inject
 	private VoteDAOJdbcImpl votedao;
 	@Inject
-	private TeamDAOJdbcImpl dao;
+	private VoterDAOJdbcImpl voterdao;
+	@Inject
+	private TeamDAOJdbcImpl teamdao;
+	@Inject
+	private InnoDAOJdbcImpl innodao;
 
    
     @RequestMapping(path="/admin", method=RequestMethod.GET)
     public String showAdmin(Model model){
 	
-    	List<Team> teams = dao.findAll();
+    	List<Team> teams = teamdao.findAll();
+    	List<Innovation> innovations = innodao.findAll();
+    	List<Voter> voters = voterdao.findAll();
+    	
     	teams.remove(0);
       	model.addAttribute("teams", teams);
+      	model.addAttribute("innovations", innovations);
+      	model.addAttribute("voters", voters);
       	
         return "admin";
     }
