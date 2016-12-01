@@ -1,9 +1,22 @@
 package FormValidators;
 
-public class VoterForm {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class VoterForm {
+	
+	@NotNull
+	@NotEmpty(message="firstname can't be empty")
+	@Size(min=2, max=20, message="Firstname size must be between 2 to 20 chars")
     public String fName;
+	 
+	@NotNull
+	@NotEmpty(message="Surname can't be empty")
+	@Size(min=2, max=20, message="Surname size must be between 2 to 20 chars")
     public String sName;
+	 
     public String vType;
     public String tName;
     

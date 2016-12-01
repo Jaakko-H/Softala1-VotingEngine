@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import FormValidators.InnovationForm;
+import FormValidators.VoterForm;
 import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.TeamDAOJdbcImpl;
 import fi.softala.vote.dao.VoteDAOJdbcImpl;
@@ -25,8 +27,7 @@ public class AdminCtrl {
 
    
     @RequestMapping(path="/admin", method=RequestMethod.GET)
-    public String showAdmin(Model model){
-	
+    public String showAdmin(VoterForm voterForm, InnovationForm innovationForm, Model model){
     	List<Team> teams = dao.findAll();
     	teams.remove(0);
       	model.addAttribute("teams", teams);

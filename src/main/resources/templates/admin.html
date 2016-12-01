@@ -79,17 +79,20 @@
 <br></br>
 					<div id="2" class="tab-pane ">
 					<h3>Add Voter</h3>
-						<form action="#" th:action="@{/addVoter}" method="post"
-							th:object="${VoterForm}">
+					 
+						<form action="#" th:action="@{/addVoter}" method="post" th:object="${voterForm}">
+							<span th:if="${#fields.hasErrors('fName')}" th:errors="*{fName}" class='error'> error </span>
+							<span th:if="${#fields.hasErrors('sName')}" th:errors="*{fName}" class='error'> error </span>
+							
 							<div class='form-group text-md-center'></div>
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input  name="fName" size="20" type="text" placeholder="first name"
+									</span> <input th:field="*{fName}" size="20" type="text" placeholder="first name"
 										class='form-control' />
 										
 										
-<!-- 										th:field="*{fName}" -->
+										 
 
 
 								</div>
@@ -97,7 +100,7 @@
 							<div class='form-group'>
 								<div class='input-group'>
 									<span class='input-group-addon'> <i class='fa fa-user'></i>
-									</span> <input name="sName" size="20" type="text" placeholder="surname"
+									</span> <input  th:field="*{sName}"  size="20" type="text" placeholder="surname"
 										class='form-control' />
 								</div>
 							</div>

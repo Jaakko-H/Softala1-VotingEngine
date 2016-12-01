@@ -119,7 +119,7 @@ public class InnovationCtrl {
 
     	dao.addNew(inno);
     	
-		return "admin";
+		return "redirect:/admin";
     }
 }
 
