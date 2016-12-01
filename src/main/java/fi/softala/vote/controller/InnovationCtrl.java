@@ -48,6 +48,7 @@ public class InnovationCtrl {
     	
       	List<Innovation> innovations = dao.findAll();
       	for (int i = 0; i < innovations.size(); i++) {
+      		System.out.println("" + innovations.get(i));
       		if (voter.getTeam().getTeamId() == innovations.get(i).getTeam().getTeamId()) {
       			innovations.remove(i);
       		}

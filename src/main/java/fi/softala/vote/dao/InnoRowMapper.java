@@ -25,6 +25,8 @@ public class InnoRowMapper implements RowMapper<Innovation> {
 			inno.setTeam(team);
 			return inno;
 		}catch(Exception e){
+			System.out.print(e);
+			System.out.print("ooooooo\naaa");
 			inno.setTeam(null);
 			return inno;
 		}
