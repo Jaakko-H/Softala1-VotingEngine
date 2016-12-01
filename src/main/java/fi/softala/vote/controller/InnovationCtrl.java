@@ -99,7 +99,7 @@ public class InnovationCtrl {
     			
     			if (voterToAdd.getFirstName().equals(voter.getFirstName()) &&
     					voterToAdd.getLastName().equals(voter.getLastName())) {
-    				if (voter.getTeam().getTeamId() != 1) {
+    				if (voter.getTeam().getTeamId() != 9999) {
     					System.out.println("" + voterToAdd.getFirstName() + " " + voterToAdd.getLastName() +
     							" is already a member of a team.");
     				}

@@ -161,6 +161,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 
 	@Override
 	public void updateTeam(Voter voter, Team team) {
+		System.out.println("team.teamid: " + team.getTeamId() + ", voter.voterid:" + voter.getVoterId());
 		final String SQL = "UPDATE voter SET team_id=? WHERE voter_id=?";
 		Object[] params = new Object[] { team.getTeamId(), voter.getVoterId() };
 		jdbc.update(SQL, params);
