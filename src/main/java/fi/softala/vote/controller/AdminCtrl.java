@@ -2,6 +2,7 @@ package fi.softala.vote.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,29 @@ public class AdminCtrl {
       	model.addAttribute("voters", voters);
       	
         return "admin";
+    }
+    
+    @RequestMapping(path="/teamadmin", method=RequestMethod.GET)
+    public String showTeamAdmin(Model model, HttpSession session){
+	
+    	Voter voter = (Voter) session.getAttribute("voter");
+    	
+    	if(voter == null){
+    		return "redirect:/";
+    	}
+    	
+    	Team team = new Team();
+    	team = teamdao.find(voter.getTeam().getTeamId());
+    	
+    	List<Innovation> innovations = innodao.findByTeamId(team.getTeamId());
+    	
+    	List<Voter> voters = voterdao.findByTeamId(team.getTeamId());
+    	
+      	model.addAttribute("innovations", innovations);
+      	model.addAttribute("team", team);
+      	model.addAttribute("voters", voters);
+      	
+        return "teamadmin";
     }
     
     @RequestMapping(path="/admin/login", method=RequestMethod.POST)

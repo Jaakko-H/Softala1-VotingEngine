@@ -81,4 +81,12 @@ public class InnoDAOJdbcImpl {
 
 		return innovations;
 	}
+
+	public List<Innovation> findByTeamId(long teamId) {
+		String sql = "select * from inno where team_id = ?";
+		Object[] params = new Object[] { teamId };
+		RowMapper<Innovation> mapper = new InnoRowMapper();
+		List<Innovation> innovations = jdbcTemplate.query(sql, params, mapper);
+		return innovations;
+	}
 }
