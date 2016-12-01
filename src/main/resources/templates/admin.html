@@ -109,16 +109,10 @@
 									class="form-control" id="sel1">
 									<option value="STUDENT">Student</option>
 									<option value="TEACHER">Teacher</option>
-									<option value="VISITOR">Guest</option>
-									<option id="radio_button" value ="INNOMEM">Member of Innovation Team</option>
-									
-								<!--  kokeilua alla --> 
-									
-									
-								
+									<option value="VISITOR">Guest</option>		
 								</select>
 								<div class='form-group innomem'> 
-								
+								<input id="radio_button" type='radio' > <label>Innovation Member</label></input>
 									<select id="nimi" name="tName" class="form-control">
 									<option value="not_in_team"> -- </option>
 									<option th:each="team : ${teams}" th:value="${team.teamName}" th:text="${team.teamName}"
@@ -143,10 +137,18 @@
 
 	<script>
 	$("#nimi").hide();
+	
 	$(document).ready(function(){
-		$("#radio_button").click(function() {
+		function something(){
+		    alert("Hello"); 
+		    }
+		
+		
+		$("#sl1").on('change',function() {
+			
 			$("#radio_button").slideUp();
 			$("#nimi").slideDown();
+			
 	    });
 		
 			
