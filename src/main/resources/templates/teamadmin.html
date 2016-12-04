@@ -63,16 +63,26 @@
 									<div class='col-md-12'>
 										<div class='tab-content'>
 											<div class='tab-pane fade in active' id='innovations-tab-list'>
-												<ul class='container-fluid'>
-													<li th:each='innovation : ${innovations}' class='row p-a-1'>
-														<div class='col-md-3 truncate' th:text='${innovation.innoName}'>  </div>
-														<div class='col-md-4 truncate' th:text='${innovation.innoDesc}'>  </div>
-														<div class='col-md-3 truncate' th:text='${team.getTeamName()}'></div>
-														<div class='col-md-2 text-md-right'>
-															<button class='btn btn-clear' style='color:crimson;'> <i class='fa fa-trash'></i> </button>
-														</div>
-													</li>
-												</ul>
+												<table class='table table-hover table-bordered'>
+													<thead>
+														<tr>
+															<td> <b>name</b> </td>
+															<td> <b>description</b> </td>
+															<td> <b>team</b> </td>
+															<td> <b>actions</b> </td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each='innovation : ${innovations}'>
+															<td class='truncate' th:text='${innovation.innoName}'></td>
+															<td class='truncate' th:text='${innovation.innoDesc}'></td>
+															<td class='truncate' th:text='${innovation.getTeam().getTeamName()}'></td>
+															<td class='truncate'>
+																<button class='btn btn-clear' style='color:crimson;'> <i class='fa fa-trash'></i> </button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 											<div class='tab-pane fade in' id='innovations-tab-add'>
 												<form action='#' th:action="@{/innovationAdd}" method="post" th:object='${innovationForm}'>
@@ -134,21 +144,32 @@
 									<div class='col-md-12'>
 										<div class='tab-content'>
 											<div class='tab-pane fade in active' id='voters-tab-list'>
-												<ul class='container-fluid' style='overflow-y:auto;'>
-													<li th:each='voter : ${voters}' class='row p-a-1'>
-														<div class='col-md-2 truncate' th:text='${voter.firstName}'></div>
-														<div class='col-md-2 truncate' th:text='${voter.lastName}'></div>
-														<div class='col-md-2 truncate' th:text='${voter.type}'></div>
-														<div class='col-md-3 truncate'>
-															<span th:if='${voter.getTeam().getTeamName().equals("not_in_team")}'> </span>
-															<span th:unless='${voter.getTeam().getTeamName().equals("not_in_team")}' th:text='${voter.getTeam().getTeamName()}'> </span>
-														</div>
-														<div class='col-md-3 text-md-right'>
-															<span th:if='${voter.voted}'> voted: <i class='fa fa-check' style='color:aquamarine;'></i> </span>
-															<span th:unless='${voter.voted}'> voted: <i class='fa fa-check' style='color:crimson;'></i> </span>
-														</div>
-													</li>
-												</ul>
+												<table class='table table-hover table-bordered'>
+													<thead>
+														<tr>
+															<td> <b> first name </b> </td>
+															<td> <b> sir name </b> </td>
+															<td> <b> type </b> </td>
+															<td> <b> team </b> </td>
+															<td> <b> voted </b> </td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each='voter : ${voters}'>
+															<td class='truncate' th:text='${voter.firstName}'></td>
+															<td class='truncate' th:text='${voter.lastName}'></td>
+															<td class='truncate' th:text='${voter.type}'></td>
+															<td class='truncate'>
+																<span th:if='${voter.getTeam().getTeamName().equals("not_in_team")}'> </span>
+																<span th:unless='${voter.getTeam().getTeamName().equals("not_in_team")}' th:text='${voter.getTeam().getTeamName()}'> </span>
+															</td>
+															<td>
+																<span th:if='${voter.voted}'> <i class='fa fa-check' style='color:aquamarine;'></i> </span>
+																<span th:unless='${voter.voted}'> <i class='fa fa-check' style='color:crimson;'></i> </span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 											<div class='tab-pane fade in' id='voters-tab-add'>
 												<form action='#' th:action="@{/addVoter}" method="post" th:object='${VoterForm}'>
