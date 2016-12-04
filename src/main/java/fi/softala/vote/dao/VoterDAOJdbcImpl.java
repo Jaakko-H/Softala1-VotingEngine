@@ -40,7 +40,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 
 	@Override
 	public Voter findByVoterName(String fname, String sname) throws Exception {
-		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ? AND voted = 'N' ORDER BY voter_id ASC Limit 1";
+		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ? AND type != 'INNOMEM' AND voted = 'N' ORDER BY voter_id ASC Limit 1";
 		Object[] params = new Object[] { fname, sname };
 
 		return jdbc.queryForObject(query, params, (result, row) -> {
@@ -147,6 +147,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 			voter.setVoted(result.getBoolean("voted"));
 			Team team = new Team();
 			team.setTeamId(result.getLong("team_id"));
+			team = teamdao.find(result.getLong("team_id"));
 			voter.setTeam(team);
 			return voter;
 		});
@@ -164,5 +165,23 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 		final String SQL = "UPDATE voter SET team_id=? WHERE voter_id=?";
 		Object[] params = new Object[] { team.getTeamId(), voter.getVoterId() };
 		jdbc.update(SQL, params);
+	}
+
+	public List<Voter> findByTeamId(long teamId) {
+		final String SQL = "SELECT * FROM voter WHERE team_id = ?";
+		Object[] params = new Object[] { teamId };
+		return jdbc.query(SQL, params, (result, row) -> {
+			Voter voter = new Voter();
+			voter.setVoterId(result.getLong("voter_id"));
+			voter.setFirstName(result.getString("fname"));
+			voter.setLastName(result.getString("sname"));
+			voter.setType(result.getString("type"));
+			voter.setVoted(result.getBoolean("voted"));
+			Team team = new Team();
+			team.setTeamId(result.getLong("team_id"));
+			team = teamdao.find(result.getLong("team_id"));
+			voter.setTeam(team);
+			return voter;
+		});
 	}
 }

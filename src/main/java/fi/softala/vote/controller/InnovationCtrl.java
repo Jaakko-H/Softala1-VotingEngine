@@ -42,8 +42,16 @@ public class InnovationCtrl {
     	if(session.getAttribute("voter") == null){
     		return "redirect:/";
     	}
-
+    	Voter voter = new Voter();
+    	voter = (Voter) session.getAttribute("voter");
+    	System.out.println("tämän äänestäjän tiimi on " + voter.getTeam());
+    	
       	List<Innovation> innovations = dao.findAll();
+      	for (int i = 0; i < innovations.size(); i++) {
+      		if (voter.getTeam().getTeamId() == innovations.get(i).getTeam().getTeamId()) {
+      			innovations.remove(i);
+      		}
+		}
       	model.addAttribute("innovations", innovations);
       	return "innovations";
     }
