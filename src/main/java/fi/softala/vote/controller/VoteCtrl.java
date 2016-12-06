@@ -83,9 +83,7 @@ public class VoteCtrl {
 			});
 			
 			int allvotes = votedao.findAllVotes().size();
-			
-			System.out.println(allvotes + " annetut ��net yhteens�");
-			
+
 			model.addAttribute("innovations", innovations);
 			model.addAttribute("allvotes", allvotes);
 			return "results";

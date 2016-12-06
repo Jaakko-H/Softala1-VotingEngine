@@ -2,13 +2,18 @@ package fi.softala.vote.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import FormValidators.InnovationForm;
+import FormValidators.VoterForm;
 import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.TeamDAOJdbcImpl;
 import fi.softala.vote.dao.VoteDAOJdbcImpl;
@@ -33,7 +38,7 @@ public class AdminCtrl {
 
    
     @RequestMapping(path="/admin", method=RequestMethod.GET)
-    public String showAdmin(Model model){
+    public String showAdmin(Model model, InnovationForm innovationForm, VoterForm voterForm, BindingResult results, HttpServletRequest request){
 	
     	List<Team> teams = teamdao.findAll();
     	List<Innovation> innovations = innodao.findAll();
@@ -43,20 +48,22 @@ public class AdminCtrl {
       	model.addAttribute("teams", teams);
       	model.addAttribute("innovations", innovations);
       	model.addAttribute("voters", voters);
+      	model.addAttribute("src", request.getRequestURI());
       	
         return "admin";
     }
     
     @RequestMapping(path="/teamadmin", method=RequestMethod.GET)
-    public String showTeamAdmin(Model model, HttpSession session){
+    public String showTeamAdmin(Model model, HttpSession session, InnovationForm innovationForm, VoterForm voterForm, BindingResult results, HttpServletRequest request){
 	
     	Voter voter = (Voter) session.getAttribute("voter");
     	
-    	if(voter == null){
+    	if(voter == null || voter.getTeam().getTeamName() == "not_in_team" ){
     		return "redirect:/";
     	}
     	
     	Team team = new Team();
+    	
     	team = teamdao.find(voter.getTeam().getTeamId());
     	
     	List<Innovation> innovations = innodao.findByTeamId(team.getTeamId());
@@ -66,6 +73,8 @@ public class AdminCtrl {
       	model.addAttribute("innovations", innovations);
       	model.addAttribute("team", team);
       	model.addAttribute("voters", voters);
+      	model.addAttribute("src", request.getRequestURI());
+      
       	
         return "teamadmin";
     }

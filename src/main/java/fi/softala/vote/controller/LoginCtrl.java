@@ -44,7 +44,7 @@ public class LoginCtrl {
 	public String handleLogin(@Valid LoginForm loginForm, BindingResult result,
 			HttpSession session) {
 		if (result.hasErrors()) {
-			return "login";
+			return "redirect:/login";
 		}
 		System.out.println(loginForm.getVoterTeam() + " hello");
 		Voter voter;
@@ -75,7 +75,7 @@ public class LoginCtrl {
 			result.rejectValue("voterFirstName", "403",
 					"You are not invited to vote");
 			System.out.println("No Vote");
-			return "login";
+			return "redirect:/login";
 		}
 	}
 }

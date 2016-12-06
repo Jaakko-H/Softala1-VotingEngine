@@ -16,9 +16,11 @@
         </div>
     </div>
 	
-    <header th:if='${session.voter.getTeam() != null}' class='row'>
+    <header th:if='${session.voter.getTeam().getTeamName() != "not_in_team"}' class='row'>
     	<div class='col-md-1 offset-md-11 text-md-center p-a-1'>
-    		<a href='#' th:href='@{/teamadmin}' style='color:rgba(0,0,0,1)'> <i class='fa fa-group'></i> </a>
+    		<a href='#' th:href='@{/teamadmin}' style='color:rgba(0,0,0,1)'> 
+    			<span class='text-muted'> team <i class='fa fa-group'></i></span>
+    		</a>
     	</div>
     </header>
     

@@ -62,36 +62,48 @@
 									<div class='col-md-12'>
 										<div class='tab-content'>
 											<div class='tab-pane fade in active' id='innovations-tab-list'>
-												<ul class='container-fluid'>
-													<li th:each='innovation : ${innovations}' class='row p-a-1'>
-														<div class='col-md-3 truncate' th:text='${innovation.innoName}'>  </div>
-														<div class='col-md-4 truncate' th:text='${innovation.innoDesc}'>  </div>
-														<div class='col-md-3 truncate' th:text='${innovation.getTeam().getTeamName()}'></div>
-														<div class='col-md-2 text-md-right'>
-															<button class='btn btn-clear' style='color:crimson;'> <i class='fa fa-trash'></i> </button>
-														</div>
-													</li>
-												</ul>
+												<table class='table table-hover table-bordered'>
+													<thead>
+														<tr>
+															<td> <b>name</b> </td>
+															<td> <b>description</b> </td>
+															<td> <b>team</b> </td>
+															<td> <b>actions</b> </td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each='innovation : ${innovations}'>
+															<td class='truncate' th:text='${innovation.innoName}'></td>
+															<td class='truncate' th:text='${innovation.innoDesc}'></td>
+															<td class='truncate' th:text='${innovation.getTeam().getTeamName()}'></td>
+															<td class='truncate text-md-center'>
+																--
+															</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 											<div class='tab-pane fade in' id='innovations-tab-add'>
 												<form action='#' th:action="@{/innovationAdd}" method="post" th:object='${innovationForm}'>
 													<div class='form-group has-error'>
 														<label for='innoName'> Name </label>
-														<input class='form-control' size='20' type='text' name='innoName' placeholder='innovation name' />
+														<input class='form-control' size='20' type='text' th:field='*{innoName}' name='innoName' placeholder='innovation name' />
 													</div>
 													<div class='form-group has-error'>
 														<label for='innoDesc'> Description </label>
-														<input class='form-control' size='50' type='text' name='innoDesc' placeholder='innovation description' />
+														<input class='form-control' size='50' type='text' name='innoDesc' th:field='*{innoDesc}' placeholder='innovation description' />
 													</div>
 													<div class='form-group has-error'>
 														<label for='teamName'> Team </label>
 														<select name='teamName' class='form-control'>
-															<option th:each='team : ${teams}' th:value='${team.teamName}' th:text='${team.teamName}'></option>
+															<option th:each='team : ${teams}' th:value='${team.teamName}' th:field='*{teamName}' th:text='${team.teamName}'></option>
 														</select>
 													</div>
 													<div class='form-group'>
 														<button type='submit' class='form-control'> add innovation </button>
 													</div>
+													<input type='hidden' th:field='*{innoOwner}' th:value='${1}' />
+													<input type='hidden' name='src' th:value='${src}' />
 												</form>
 											</div>
 										</div>
@@ -135,35 +147,48 @@
 									<div class='col-md-12'>
 										<div class='tab-content'>
 											<div class='tab-pane fade in active' id='voters-tab-list'>
-												<ul class='container-fluid'>
-													<li th:each='voter : ${voters}' class='row p-a-1'>
-														<div class='col-md-2 truncate' th:text='${voter.firstName}'></div>
-														<div class='col-md-2 truncate' th:text='${voter.lastName}'></div>
-														<div class='col-md-2 truncate' th:text='${voter.type}'></div>
-														<div class='col-md-3 truncate'>
-															<span th:if='${voter.getTeam().getTeamName().equals("not_in_team")}'> </span>
-															<span th:unless='${voter.getTeam().getTeamName().equals("not_in_team")}' th:text='${voter.getTeam().getTeamName()}'> </span>
-														</div>
-														<div class='col-md-3 text-md-right'>
-															<span th:if='${voter.voted}'> voted: <i class='fa fa-check' style='color:aquamarine;'></i> </span>
-															<span th:unless='${voter.voted}'> voted: <i class='fa fa-check' style='color:crimson;'></i> </span>
-														</div>
-													</li>
-												</ul>
+											
+											<table class='table table-hover table-bordered'>
+													<thead>
+														<tr>
+															<td> <b> first name </b> </td>
+															<td> <b> sir name </b> </td>
+															<td> <b> type </b> </td>
+															<td> <b> team </b> </td>
+															<td> <b> voted </b> </td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each='voter : ${voters}'>
+															<td class='truncate' th:text='${voter.firstName}'></td>
+															<td class='truncate' th:text='${voter.lastName}'></td>
+															<td class='truncate' th:text='${voter.type}'></td>
+															<td class='truncate'>
+																<span th:if='${voter.getTeam().getTeamName().equals("not_in_team")}'> </span>
+																<span th:unless='${voter.getTeam().getTeamName().equals("not_in_team")}' th:text='${voter.getTeam().getTeamName()}'> </span>
+															</td>
+															<td class='text-md-center'>
+																<span th:if='${voter.voted}'> <i class='fa fa-check' style='color:aquamarine;'></i> </span>
+																<span th:unless='${voter.voted}'> <i class='fa fa-check' style='color:crimson;'></i> </span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+
 											</div>
 											<div class='tab-pane fade in' id='voters-tab-add'>
-												<form action='#' th:action="@{/addVoter}" method="post" th:object='${VoterForm}'>
+												<form action='#' th:action="@{/addVoter}" method="post" th:object='${voterForm}'>
 													<div class='form-group has-error'>
 														<label for='fname'> First name </label>
-														<input class='form-control' size='20' type='text' name='fname' placeholder='first name' />
+														<input class='form-control' size='20' type='text' th:field='*{fName}' name='fname' placeholder='first name' />
 													</div>
 													<div class='form-group has-error'>
 														<label for='sname'> Sir name </label>
-														<input class='form-control' size='20' type='text' name='sname' placeholder='sir name' />
+														<input class='form-control' size='20' type='text' name='sname' th:field='*{sName}' placeholder='sir name' />
 													</div>
 													<div class='form-group'>
 														<label for='vType'> Type </label>
-														<select name='vType' class='form-control' onchange='teamMemberSelected(this)'>
+														<select name='vType' class='form-control' th:field='*{vType}' onchange='teamMemberSelected(this)'>
 															<option value="STUDENT"> student </option>
 															<option value="TEACHER"> teacher </option>
 															<option value="VISITOR"> guest </option>
@@ -172,14 +197,15 @@
 													</div>
 													<div class='form-group' id='voters-tab-add-team' style='display:none;'>
 														<label for='tName'> Team name </label>
-														<select name='tName' class='form-control'>
+														<select name='tName' class='form-control' th:field='*{tName}'>
 															<option value='not_in_team' selected='selected'> -- </option>
 															<option th:each='team : ${teams}' th:value='${team.teamName}' th:text='${team.teamName}'></option>
 														</select>
 													</div>
 													<div class='form-group'>
-														<button type='submit' class='form-control'> add innovation </button>
+														<button type='submit' class='form-control'> add voter </button>
 													</div>
+													<input type='hidden' name='src' th:value='${src}' />
 												</form>
 											</div>
 										</div>
