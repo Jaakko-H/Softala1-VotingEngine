@@ -20,6 +20,9 @@
 						<li class='nav-item text-md-center'>
 							<a data-toggle='tab' href='#voters-tab'> voters </a>
 						</li>
+						<li class='nav-item text-md-center'>
+							<a data-toggle='tab' href='#teams-tab'> teams </a>
+						</li>
 					</ul>	
 				</div>
 				
@@ -213,6 +216,76 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class='tab-pane fade' id='teams-tab'>
+							<div class='container-fluid'>
+								<div class='row'>
+									<div class='col-md-12'>
+										<div class='row'>
+											<div class='col-md-12'>
+												<div class='jumbotron' style='background:none;'>
+													<h2 class='display-5 text-muted'> Teams </h2>
+												</div>
+											</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-12'>
+											
+												<!-- teams navigation -->
+												<ul class='nav nav-tabs'>
+													<li class='nav-item active'>
+														<a data-toggle='tab' href='#teams-tab-list'> list </a>
+													</li>
+													<li class='nav-item p-l-1'>
+														<a data-toggle='tab' href='#teams-tab-add'> add </a>
+													</li>
+												</ul>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class='row p-t-1' style='overflow-y:auto; height:calc(100% - 300px)'>
+									<div class='col-md-12'>
+										<div class='tab-content'>
+											<div class='tab-pane fade in active' id='teams-tab-list'>
+											
+											<table class='table table-hover table-bordered'>
+													<thead>
+														<tr>
+															<td> <b> name </b> </td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each='team : ${teams}'>
+															<td class='truncate' th:text='${team.teamName}'></td>
+														</tr>
+													</tbody>
+												</table>
+
+											</div>
+											<div class='tab-pane fade in' id='teams-tab-add'>
+												<form action='#' th:action="@{/team/add}" method="post" th:object='${teamForm}'>
+													<div class='form-group has-error'>
+														<label for='fname'> Team name </label>
+														<input class='form-control' size='20' type='text' th:field='*{name}' name='teamName' placeholder='team name' />
+													</div>
+													
+													<div class='form-group'>
+														<button type='submit' class='form-control'> add team </button>
+													</div>
+													<input type='hidden' name='src' th:value='${src}' />
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+						</div>
+						
+						
 					</div>
 				</div>
 				

@@ -4,6 +4,7 @@ import FormValidators.InnovationForm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -45,17 +46,23 @@ public class InnovationCtrl {
     	if(session.getAttribute("voter") == null){
     		return "redirect:/";
     	}
-    	Voter voter = new Voter();
-    	voter = (Voter) session.getAttribute("voter");
-    	System.out.println("tämän äänestäjän tiimi on " + voter.getTeam());
     	
-      	List<Innovation> innovations = dao.findAll();
-      	for (int i = 0; i < innovations.size(); i++) {
-      		if (voter.getTeam().getTeamId() == innovations.get(i).getTeam().getTeamId()) {
-      			innovations.remove(i);
-      		}
-		}
+    	Voter voter;
+    	
+    	voter = (Voter) session.getAttribute("voter");
+    	
+    	List<Innovation> innovations = dao.findAll();
+    	
+    	if(voter.getTeam() == null || voter.getTeam().getTeamName() == "not_in_team"){
+    		innovations = dao.findAll();
+    	} else {
+    		innovations = dao.findAll().stream()
+    			.filter( innovation -> voter.getTeam().getTeamId() != innovation.getTeam().getTeamId() )
+          		.collect(Collectors.toList());
+    	}
+    	
       	model.addAttribute("innovations", innovations);
+      	
       	return "innovations";
     }
     

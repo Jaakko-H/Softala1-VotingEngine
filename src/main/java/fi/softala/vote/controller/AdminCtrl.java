@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import FormValidators.InnovationForm;
+import FormValidators.TeamForm;
 import FormValidators.VoterForm;
 import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.TeamDAOJdbcImpl;
@@ -38,7 +39,7 @@ public class AdminCtrl {
 
    
     @RequestMapping(path="/admin", method=RequestMethod.GET)
-    public String showAdmin(Model model, InnovationForm innovationForm, VoterForm voterForm, BindingResult results, HttpServletRequest request){
+    public String showAdmin(Model model, InnovationForm innovationForm, VoterForm voterForm, TeamForm teamForm, BindingResult results, HttpServletRequest request){
 	
     	List<Team> teams = teamdao.findAll();
     	List<Innovation> innovations = innodao.findAll();
