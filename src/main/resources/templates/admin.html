@@ -20,9 +20,6 @@
 						<li class='nav-item text-md-center'>
 							<a data-toggle='tab' href='#voters-tab'> voters </a>
 						</li>
-						<li class='nav-item text-md-center'>
-							<a data-toggle='tab' href='#teams-tab'> teams </a>
-						</li>
 					</ul>	
 				</div>
 				
@@ -79,8 +76,8 @@
 															<td class='truncate' th:text='${innovation.innoName}'></td>
 															<td class='truncate' th:text='${innovation.innoDesc}'></td>
 															<td class='truncate' th:text='${innovation.getTeam().getTeamName()}'></td>
-															<td class='truncate text-md-center'>
-																--
+															<td class='truncate'>
+																<button class='btn btn-clear' style='color:crimson;'> <i class='fa fa-trash'></i> </button>
 															</td>
 														</tr>
 													</tbody>
@@ -90,23 +87,21 @@
 												<form action='#' th:action="@{/innovationAdd}" method="post" th:object='${innovationForm}'>
 													<div class='form-group has-error'>
 														<label for='innoName'> Name </label>
-														<input class='form-control' size='20' type='text' th:field='*{innoName}' name='innoName' placeholder='innovation name' />
+														<input class='form-control' size='20' type='text' name='innoName' placeholder='innovation name' />
 													</div>
 													<div class='form-group has-error'>
 														<label for='innoDesc'> Description </label>
-														<input class='form-control' size='50' type='text' name='innoDesc' th:field='*{innoDesc}' placeholder='innovation description' />
+														<input class='form-control' size='50' type='text' name='innoDesc' placeholder='innovation description' />
 													</div>
 													<div class='form-group has-error'>
 														<label for='teamName'> Team </label>
 														<select name='teamName' class='form-control'>
-															<option th:each='team : ${teams}' th:value='${team.teamName}' th:field='*{teamName}' th:text='${team.teamName}'></option>
+															<option th:each='team : ${teams}' th:value='${team.teamName}' th:text='${team.teamName}'></option>
 														</select>
 													</div>
 													<div class='form-group'>
 														<button type='submit' class='form-control'> add innovation </button>
 													</div>
-													<input type='hidden' th:field='*{innoOwner}' th:value='${1}' />
-													<input type='hidden' name='src' th:value='${src}' />
 												</form>
 											</div>
 										</div>
@@ -170,7 +165,7 @@
 																<span th:if='${voter.getTeam().getTeamName().equals("not_in_team")}'> </span>
 																<span th:unless='${voter.getTeam().getTeamName().equals("not_in_team")}' th:text='${voter.getTeam().getTeamName()}'> </span>
 															</td>
-															<td class='text-md-center'>
+															<td>
 																<span th:if='${voter.voted}'> <i class='fa fa-check' style='color:aquamarine;'></i> </span>
 																<span th:unless='${voter.voted}'> <i class='fa fa-check' style='color:crimson;'></i> </span>
 															</td>
@@ -180,18 +175,18 @@
 
 											</div>
 											<div class='tab-pane fade in' id='voters-tab-add'>
-												<form action='#' th:action="@{/addVoter}" method="post" th:object='${voterForm}'>
+												<form action='#' th:action="@{/addVoter}" method="post" th:object='${VoterForm}'>
 													<div class='form-group has-error'>
 														<label for='fname'> First name </label>
-														<input class='form-control' size='20' type='text' th:field='*{fName}' name='fname' placeholder='first name' />
+														<input class='form-control' size='20' type='text' name='fName' placeholder='First Name' />
 													</div>
 													<div class='form-group has-error'>
-														<label for='sname'> Sir name </label>
-														<input class='form-control' size='20' type='text' name='sname' th:field='*{sName}' placeholder='sir name' />
+														<label for='sname'> Surname </label>
+														<input class='form-control' size='20' type='text' name='sName' placeholder='Surname' />
 													</div>
 													<div class='form-group'>
 														<label for='vType'> Type </label>
-														<select name='vType' class='form-control' th:field='*{vType}' onchange='teamMemberSelected(this)'>
+														<select name='vType' class='form-control' onchange='teamMemberSelected(this)'>
 															<option value="STUDENT"> student </option>
 															<option value="TEACHER"> teacher </option>
 															<option value="VISITOR"> guest </option>
@@ -200,15 +195,14 @@
 													</div>
 													<div class='form-group' id='voters-tab-add-team' style='display:none;'>
 														<label for='tName'> Team name </label>
-														<select name='tName' class='form-control' th:field='*{tName}'>
+														<select name='tName' class='form-control'>
 															<option value='not_in_team' selected='selected'> -- </option>
 															<option th:each='team : ${teams}' th:value='${team.teamName}' th:text='${team.teamName}'></option>
 														</select>
 													</div>
 													<div class='form-group'>
-														<button type='submit' class='form-control'> add voter </button>
+														<button type='submit' class='form-control'> Add Voter</button>
 													</div>
-													<input type='hidden' name='src' th:value='${src}' />
 												</form>
 											</div>
 										</div>
@@ -216,76 +210,6 @@
 								</div>
 							</div>
 						</div>
-						
-						<div class='tab-pane fade' id='teams-tab'>
-							<div class='container-fluid'>
-								<div class='row'>
-									<div class='col-md-12'>
-										<div class='row'>
-											<div class='col-md-12'>
-												<div class='jumbotron' style='background:none;'>
-													<h2 class='display-5 text-muted'> Teams </h2>
-												</div>
-											</div>
-										</div>
-										<div class='row'>
-											<div class='col-md-12'>
-											
-												<!-- teams navigation -->
-												<ul class='nav nav-tabs'>
-													<li class='nav-item active'>
-														<a data-toggle='tab' href='#teams-tab-list'> list </a>
-													</li>
-													<li class='nav-item p-l-1'>
-														<a data-toggle='tab' href='#teams-tab-add'> add </a>
-													</li>
-												</ul>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class='row p-t-1' style='overflow-y:auto; height:calc(100% - 300px)'>
-									<div class='col-md-12'>
-										<div class='tab-content'>
-											<div class='tab-pane fade in active' id='teams-tab-list'>
-											
-											<table class='table table-hover table-bordered'>
-													<thead>
-														<tr>
-															<td> <b> name </b> </td>
-														</tr>
-													</thead>
-													<tbody>
-														<tr th:each='team : ${teams}'>
-															<td class='truncate' th:text='${team.teamName}'></td>
-														</tr>
-													</tbody>
-												</table>
-
-											</div>
-											<div class='tab-pane fade in' id='teams-tab-add'>
-												<form action='#' th:action="@{/team/add}" method="post" th:object='${teamForm}'>
-													<div class='form-group has-error'>
-														<label for='fname'> Team name </label>
-														<input class='form-control' size='20' type='text' th:field='*{name}' name='teamName' placeholder='team name' />
-													</div>
-													
-													<div class='form-group'>
-														<button type='submit' class='form-control'> add team </button>
-													</div>
-													<input type='hidden' name='src' th:value='${src}' />
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							
-						</div>
-						
-						
 					</div>
 				</div>
 				

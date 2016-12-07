@@ -4,16 +4,12 @@ import FormValidators.InnovationForm;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,47 +42,83 @@ public class InnovationCtrl {
     	if(session.getAttribute("voter") == null){
     		return "redirect:/";
     	}
-    	
-    	Voter voter;
-    	
+    	Voter voter = new Voter();
     	voter = (Voter) session.getAttribute("voter");
+    	System.out.println("tämän äänestäjän tiimi on " + voter.getTeam());
     	
-    	List<Innovation> innovations = dao.findAll();
-    	
-    	if(voter.getTeam() == null || voter.getTeam().getTeamName() == "not_in_team"){
-    		innovations = dao.findAll();
-    	} else {
-    		innovations = dao.findAll().stream()
-    			.filter( innovation -> voter.getTeam().getTeamId() != innovation.getTeam().getTeamId() )
-          		.collect(Collectors.toList());
-    	}
-    	
+      	List<Innovation> innovations = dao.findAll();
+      	for (int i = 0; i < innovations.size(); i++) {
+      		if (voter.getTeam().getTeamId() == innovations.get(i).getTeam().getTeamId()) {
+      			innovations.remove(i);
+      		}
+		}
       	model.addAttribute("innovations", innovations);
-      	
       	return "innovations";
     }
     
     @RequestMapping(path="/innovationAdd", method=RequestMethod.POST)
-    public String addNew(@Valid @ModelAttribute(value="InnovationForm") InnovationForm innovationform, BindingResult result, @RequestParam("src") String src, HttpServletRequest request){
+    public String addNew(
+    		@ModelAttribute(value="InnovationForm") InnovationForm innovationform){
+    	Innovation inno = new Innovation();
+    	inno.setInnoName(innovationform.getInnoName());
+    	Team team = new Team();
+    	Voter testVoter1 = new Voter(); //placeholder
+    	testVoter1.setFirstName("Testi");
+    	testVoter1.setLastName("Kayttaja1");
+    	testVoter1.setTeam(team);
+    	testVoter1.setType("INNOMEM");
+    	Voter testVoter2 = new Voter(); //placeholder
+    	testVoter2.setFirstName("Testii");
+    	testVoter2.setLastName("Kayttaja2");
+    	testVoter2.setTeam(team);
+    	testVoter2.setType("INNOMEM");
+    	List<Voter> votersToAdd = new ArrayList<Voter>();
+    	votersToAdd.add(testVoter1);
+    	votersToAdd.add(testVoter2);
+    	team.setTeamName(innovationform.getTeamName());
+    	inno.setTeam(team);
+    	inno.setInnoDesc(innovationform.getInnoDesc());
+    	inno.setInnoOwner(innovationform.getInnoName());
     	
-    	if(result.hasErrors()){
-    		return "redirect:" + src;
+    	List<Team> teams = teamdao.findAll();
+    	List<Voter> voters = voterdao.findAll();
+    	
+    	for (int i =0; i< teams.size();i++) {
+    		if (team.getTeamName().equalsIgnoreCase(teams.get(i).getTeamName())) {
+    			team.setTeamId(teams.get(i).getTeamId());
+    		}
     	}
     	
-    	Innovation innovation = new Innovation();
-    	innovation.setInnoName(innovationform.getInnoName());
-    	innovation.setInnoDesc(innovationform.getInnoDesc());
-    	innovation.setInnoOwner(innovationform.getInnoOwner());
-    	innovation.setTeam(teamdao.findByTeamName(innovationform.getTeamName()));
-    	
-    	try{
-    		dao.addNew(innovation);
-    		return "redirect:" + src;
-    	}catch(Exception e){
-    		result.rejectValue("error", "403", "Invalid data");
-    		return "redirect:" + src;
+    	for (int i = 0; i < votersToAdd.size(); i++) {
+    		Voter voterToAdd = votersToAdd.get(i);
+    		boolean found = false;
+    		
+    		for (int j = 0; j < voters.size(); j++) {
+    			Voter voter = voters.get(j);
+    			
+    			if (voterToAdd.getFirstName().equals(voter.getFirstName()) &&
+    					voterToAdd.getLastName().equals(voter.getLastName())) {
+    				if (voter.getTeam().getTeamId() != 1) {
+    					System.out.println("" + voterToAdd.getFirstName() + " " + voterToAdd.getLastName() +
+    							" is already a member of a team.");
+    				}
+    				else {
+    					voterdao.updateTeam(voter, team);
+    					System.out.println("Updated team of " + voter.getFirstName() + " " + voter.getLastName());
+    				}
+    				found = true;
+    				break;
+    			}
+    		}
+    		
+    		if (!found) {
+    			voterdao.addVoter(voterToAdd);
+    		}
     	}
+
+    	dao.addNew(inno);
     	
+		return "redirect:/admin";
     }
 }
 
