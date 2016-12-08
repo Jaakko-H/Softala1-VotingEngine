@@ -68,7 +68,7 @@
 															<td> <b>name</b> </td>
 															<td> <b>description</b> </td>
 															<td> <b>team</b> </td>
-															<td> <b>actions</b> </td>
+															
 														</tr>
 													</thead>
 													<tbody>
@@ -76,9 +76,9 @@
 															<td class='truncate' th:text='${innovation.innoName}'></td>
 															<td class='truncate' th:text='${innovation.innoDesc}'></td>
 															<td class='truncate' th:text='${innovation.getTeam().getTeamName()}'></td>
-															<td class='truncate'>
-																<button class='btn btn-clear' style='color:crimson;'> <i class='fa fa-trash'></i> </button>
-															</td>
+<!-- 															<td class='truncate'> -->
+<!-- 																<button class='btn btn-clear' style='color:crimson;'> <i class='fa fa-trash'></i> </button> -->
+<!-- 															</td> -->
 														</tr>
 													</tbody>
 												</table>
