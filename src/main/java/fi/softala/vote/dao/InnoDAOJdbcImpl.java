@@ -89,4 +89,16 @@ public class InnoDAOJdbcImpl {
 		List<Innovation> innovations = jdbcTemplate.query(sql, params, mapper);
 		return innovations;
 	}
+	
+	public void Delete(long id){
+		String sql = "DELETE FROM inno where inno_id ='?'";
+		RowMapper<Innovation> mapper = new InnoRowMapper();
+		List<Innovation> innovations = jdbcTemplate.query(sql, mapper);
+		
+		
+		
+		return;
+		
+		
+	}
 }

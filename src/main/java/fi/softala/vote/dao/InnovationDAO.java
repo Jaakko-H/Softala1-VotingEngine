@@ -11,4 +11,6 @@ public interface InnovationDAO {
 	public abstract Innovation find(long id);
 
 	public abstract List<Innovation> findAll();
+	
+	public abstract Delete(long id);
 }
