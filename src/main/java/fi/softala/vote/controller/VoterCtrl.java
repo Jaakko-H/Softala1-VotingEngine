@@ -1,12 +1,10 @@
 package fi.softala.vote.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,43 +20,48 @@ import fi.softala.vote.model.Voter;
 @Controller
 public class VoterCtrl {
 	@Inject
-    private VoterDAOJdbcImpl dao;
-	
-	@Inject
-    private TeamDAOJdbcImpl teamdao;
-	
-    public VoterDAOJdbcImpl getDao() { return dao; }
-    
-    public void setDao(VoterDAOJdbcImpl dao) { this.dao = dao; }
-    
-    @RequestMapping(path="/addVoter", method=RequestMethod.POST)
-    public String addNewVoter(@Valid @ModelAttribute(value="VoterForm") VoterForm voterForm, BindingResult result,
-    		HttpSession session, @RequestParam("src") String src) {
-    	
-    	if(result.hasErrors()){
-    		return "redirect:" + src;
-    	}
-    	
-    	Voter voter = new Voter();
-    	
-    	
-    	voter.setFirstName(voterForm.getfName());
-    	voter.setLastName(voterForm.getsName());
-    	voter.setType(voterForm.getvType());
+	private VoterDAOJdbcImpl dao;
 
-    	Team team = new Team();
-    	
-    	if (voter.getType().equals("INNOMEM")){
-    		team = teamdao.findByTeamName(voterForm.gettName());
-    		voter.setTeam(team);
-    	} 
-    	else {
-	    	team.setTeamId(1);
-	    	voter.setTeam(team);
-    	}
-    
-    	dao.addVoter(voter); 
-    	
-    	return "redirect:" + src;
-    }
+	@Inject
+	private TeamDAOJdbcImpl teamdao;
+
+	public VoterDAOJdbcImpl getDao() {
+		return dao;
+	}
+
+	public void setDao(VoterDAOJdbcImpl dao) {
+		this.dao = dao;
+	}
+
+	// add new voter
+	@RequestMapping(path = "/addVoter", method = RequestMethod.POST)
+	public String addNewVoter(
+			@Valid @ModelAttribute(value = "VoterForm") VoterForm voterForm,
+			BindingResult result, HttpSession session,
+			@RequestParam("src") String src) {
+
+		if (result.hasErrors()) {
+			return "redirect:" + src;
+		}
+
+		Voter voter = new Voter();
+
+		voter.setFirstName(voterForm.getfName());
+		voter.setLastName(voterForm.getsName());
+		voter.setType(voterForm.getvType());
+
+		Team team = new Team();
+
+		if (voter.getType().equals("INNOMEM")) {
+			team = teamdao.findByTeamName(voterForm.gettName());
+			voter.setTeam(team);
+		} else {
+			team.setTeamId(1);
+			voter.setTeam(team);
+		}
+
+		dao.addVoter(voter);
+
+		return "redirect:" + src;
+	}
 }

@@ -19,19 +19,19 @@ public class Team {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long teamId;
-        
-    @NotNull
-    @NotEmpty()
-    @Size(min = 1, max = 50)
-    @Column(name = "team_name", nullable = false, columnDefinition="String default 'not_in_team'")
-	private String teamName;
 
-    @Column (name = "team_id", columnDefinition="Bigint default '1'")
+	@NotNull
+	@NotEmpty()
+	@Size(min = 1, max = 50)
+	@Column(name = "team_name", nullable = false, columnDefinition = "String default 'not_in_team'")
+	private String teamName; // team_id and team_name default setup =
+								// columnDefinition...
+
+	@Column(name = "team_id", columnDefinition = "Bigint default '1'")
+	// 1 = not_in_team
 	public long getTeamId() {
 		return teamId;
 	}
-    
-    // team_id ja team_name default setup = columnDefinition...
 
 	public void setTeamId(long teamId) {
 		this.teamId = teamId;
@@ -40,22 +40,25 @@ public class Team {
 	public String getTeamName() {
 		return teamName;
 	}
-	
+
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 
 	}
-	
+
 	@Override
-	public boolean equals(Object obj){
-		if(obj != this) return false;
-		if(!(obj instanceof Team)) return false;
+	public boolean equals(Object obj) {
+		if (obj != this)
+			return false;
+		if (!(obj instanceof Team))
+			return false;
 		Team team = (Team) obj;
-		return this.teamId == team.getTeamId() && this.getTeamName() == team.getTeamName();
+		return this.teamId == team.getTeamId()
+				&& this.getTeamName() == team.getTeamName();
 	}
-	
+
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return Objects.hash(this.teamId, this.teamName);
 	}
 
