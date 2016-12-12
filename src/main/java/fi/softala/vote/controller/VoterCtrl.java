@@ -33,11 +33,12 @@ public class VoterCtrl {
     
     @RequestMapping(path="/addVoter", method=RequestMethod.POST)
     public String addNewVoter(@Valid @ModelAttribute(value="VoterForm") VoterForm voterForm, BindingResult result,
-    		HttpSession session, @RequestParam("src") String src) {
+    		HttpSession session) {
     	
-    	if(result.hasErrors()){
-    		return "redirect:" + src;
-    	}
+//    	if(result.hasErrors()){
+//    		return "redirect:" + src;
+//    		@RequestParam("src") String src
+//    	}
     	
     	Voter voter = new Voter();
     	
@@ -59,6 +60,6 @@ public class VoterCtrl {
     
     	dao.addVoter(voter); 
     	
-    	return "redirect:" + src;
+    	return "redirect:/admin";
     }
 }
