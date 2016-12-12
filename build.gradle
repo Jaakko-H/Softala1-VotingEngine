@@ -31,8 +31,18 @@ repositories {
 }
 
 war {
+	from('/') {
+		include 'Docs/'
+		into('documentation/')
+	}
+
+	from('src/') {
+        include 'main/'
+        into('javaresources/')
+    }
+	
     baseName = 'votingEngine'
-    version =  '0.5.0'
+    version =  '1.0.0'
 }
 
 dependencies {
