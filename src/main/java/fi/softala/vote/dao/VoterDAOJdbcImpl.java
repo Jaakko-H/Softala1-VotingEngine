@@ -36,7 +36,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	@Override
 	// find voter by name
 	public Voter findByVoterName(String fname, String sname) throws Exception {
-		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ? AND type != 'INNOMEM' AND voted = 'N' ORDER BY voter_id ASC Limit 1";
+		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ? AND type != 'INNOMEM' ORDER BY voter_id ASC Limit 1";
 		Object[] params = new Object[] { fname, sname };
 
 		return jdbc.queryForObject(query, params, (result, row) -> {
@@ -159,6 +159,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	@Override
 	// update a voter's team_id
 	public void updateTeam(Voter voter, Team team) {
+		System.out.println("team.teamid: " + team.getTeamId() + ", voter.voterid:" + voter.getVoterId());
 		final String SQL = "UPDATE voter SET team_id=? WHERE voter_id=?";
 		Object[] params = new Object[] { team.getTeamId(), voter.getVoterId() };
 		jdbc.update(SQL, params);

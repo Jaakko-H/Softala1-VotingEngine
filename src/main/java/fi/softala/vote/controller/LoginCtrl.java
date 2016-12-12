@@ -1,8 +1,11 @@
 package fi.softala.vote.controller;
 
 import FormValidators.LoginForm;
+import fi.softala.vote.dao.InnoDAOJdbcImpl;
 import fi.softala.vote.dao.TeamDAOJdbcImpl;
+import fi.softala.vote.dao.VoteDAOJdbcImpl;
 import fi.softala.vote.dao.VoterDAOJdbcImpl;
+import fi.softala.vote.model.Innovation;
 import fi.softala.vote.model.Team;
 import fi.softala.vote.model.Voter;
 
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginCtrl {
 
 	@Inject
+	private VoteDAOJdbcImpl votedao;
+	@Inject
 	private VoterDAOJdbcImpl voterdao;
 	@Inject
 	private TeamDAOJdbcImpl dao;
@@ -38,7 +43,7 @@ public class LoginCtrl {
 
 	// log in
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String handleLogin(@Valid LoginForm loginForm, BindingResult result,
+	public String handleLogin(@Valid LoginForm loginForm, BindingResult result, Model model,
 			HttpSession session) {
 		if (result.hasErrors()) {
 			return "redirect:/login";
@@ -64,10 +69,32 @@ public class LoginCtrl {
 		try {
 			voter = voterdao.findByVoterName(loginForm.getVoterFirstName(),
 					loginForm.getVoterSirName());
-
-			session.setAttribute("voter", voter);
-			System.out.print(voter);
-			return "redirect:/innovations";
+      
+			if (voter.isVoted()) {
+				List<Innovation> innovations = innovationdao.findAll();
+				
+				// set vote count 
+				for( Innovation inno : innovations){
+					inno.setVoteCount(votedao.findByInnovation(inno).size());
+				}
+				
+				innovations.sort((obj1, obj2) -> {
+					return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
+				});
+				
+				int allvotes = votedao.findAllVotes().size();
+				
+				System.out.println(allvotes + " annetut ��net yhteens�");
+				
+				model.addAttribute("innovations", innovations);
+				model.addAttribute("allvotes", allvotes);
+				return "results";
+			}
+			else {
+				session.setAttribute("voter", voter);
+				System.out.print(voter);
+				return "redirect:/innovations";
+			}
 		} catch (Exception e) {
 			result.rejectValue("voterFirstName", "403",
 					"You are not invited to vote");

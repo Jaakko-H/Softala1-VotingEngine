@@ -219,6 +219,19 @@
 	</main>
 
 	<script>
+	$("#nimi").hide();
+	
+	$(document).ready(function(){
+		function something(){
+		    alert("Hello"); 
+		    }
+		
+		$("#sl1").on('change',function() {
+			
+			$("#radio_button").slideUp();
+			$("#nimi").slideDown();
+			
+	    });
 		
 		function teamMemberSelected(element){
 			element.value === 'INNOMEM' ? showTeamSelect() : hideTeamSelect();

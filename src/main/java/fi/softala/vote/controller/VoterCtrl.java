@@ -1,5 +1,7 @@
 package fi.softala.vote.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -20,48 +22,57 @@ import fi.softala.vote.model.Voter;
 @Controller
 public class VoterCtrl {
 	@Inject
-	private VoterDAOJdbcImpl dao;
-
+    private TeamDAOJdbcImpl teamdao;
 	@Inject
-	private TeamDAOJdbcImpl teamdao;
-
-	public VoterDAOJdbcImpl getDao() {
-		return dao;
-	}
-
-	public void setDao(VoterDAOJdbcImpl dao) {
-		this.dao = dao;
-	}
-
-	// add new voter
-	@RequestMapping(path = "/addVoter", method = RequestMethod.POST)
-	public String addNewVoter(
-			@Valid @ModelAttribute(value = "VoterForm") VoterForm voterForm,
-			BindingResult result, HttpSession session,
-			@RequestParam("src") String src) {
-
-		if (result.hasErrors()) {
-			return "redirect:" + src;
+    private VoterDAOJdbcImpl voterdao;
+	
+    public VoterDAOJdbcImpl getDao() { return voterdao; }
+    
+    public void setDao(VoterDAOJdbcImpl voterdao) { this.voterdao = voterdao; }
+    
+    // add new voter
+    @RequestMapping(path="/addVoter", method=RequestMethod.POST)
+    public String addNewVoter(@Valid VoterForm voterForm, BindingResult result, HttpSession session, @RequestParam("src") String src) {
+    	 System.out.println(result);
+    	if (result.hasErrors()) {
+    		result.rejectValue("fName", "403",
+					"You are not invited to vote");
+			  return "redirect:" + src;
+		}
+    	Voter voterToAdd = new Voter();
+    	List<Team> teams = teamdao.findAll();
+    	List<Voter> voters = voterdao.findAll();
+    	
+    	voterToAdd.setFirstName(voterForm.getfName());
+    	voterToAdd.setLastName(voterForm.getsName());
+    	voterToAdd.setType(voterForm.getvType());
+    	
+    	Team team = new Team();
+		boolean found = false;
+		
+		for (int i = 0; i < voters.size(); i++) {
+			Voter voter = voters.get(i);
+			
+			if (voterToAdd.getFirstName().equals(voter.getFirstName()) &&
+					voterToAdd.getLastName().equals(voter.getLastName())) {
+				if (voter.getTeam().getTeamId() != 9999) {
+					System.out.println("" + voterToAdd.getFirstName() + " " + voterToAdd.getLastName() +
+							" is already a member of a team.");
+				}
+				else {
+					voterdao.updateTeam(voter, team);
+					System.out.println("Updated team of " + voter.getFirstName() + " " + voter.getLastName());
+				}
+				found = true;
+				break;
+			}
+		}
+		
+		if (!found) {
+			voterdao.addVoter(voterToAdd);
 		}
 
-		Voter voter = new Voter();
+    	return "redirect:" + src;
+    }
 
-		voter.setFirstName(voterForm.getfName());
-		voter.setLastName(voterForm.getsName());
-		voter.setType(voterForm.getvType());
-
-		Team team = new Team();
-
-		if (voter.getType().equals("INNOMEM")) {
-			team = teamdao.findByTeamName(voterForm.gettName());
-			voter.setTeam(team);
-		} else {
-			team.setTeamId(1);
-			voter.setTeam(team);
-		}
-
-		dao.addVoter(voter);
-
-		return "redirect:" + src;
-	}
 }

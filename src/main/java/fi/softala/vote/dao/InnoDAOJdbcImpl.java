@@ -78,7 +78,7 @@ public class InnoDAOJdbcImpl implements InnovationDAO {
 	// find all innovations and their teams
 	public List<Innovation> findAll() {
 
-		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner, team_name from inno join team using(team_id)";
+		String sql = "select inno_id, inno_name, inno_desc, inno.team_id, inno_owner, team_name from inno join team using(team_id)";
 		RowMapper<Innovation> mapper = new InnoRowMapper();
 		List<Innovation> innovations = jdbcTemplate.query(sql, mapper);
 
