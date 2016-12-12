@@ -1,16 +1,14 @@
 package FormValidators;
 
-import fi.softala.vote.model.Team;
-
 public class InnovationForm {
 
-    public long innoId;
-    public String innoName;
-    public String innoDesc;
-    public String teamName;
-    public String error;
-    
-    public String getTeamName() {
+	public long innoId;
+	public String innoName;
+	public String innoDesc;
+	public String teamName;
+	public String error;
+
+	public String getTeamName() {
 		return teamName;
 	}
 
@@ -19,8 +17,8 @@ public class InnovationForm {
 	}
 
 	public String innoOwner;
-    
-    public long getInnoId() {
+
+	public long getInnoId() {
 		return innoId;
 	}
 
@@ -44,7 +42,6 @@ public class InnovationForm {
 		this.innoDesc = innoDesc;
 	}
 
-	
 	public String getInnoOwner() {
 		return innoOwner;
 	}
@@ -52,14 +49,13 @@ public class InnovationForm {
 	public void setInnoOwner(String innoOwner) {
 		this.innoOwner = innoOwner;
 	}
-	
-	public String getError(){
+
+	public String getError() {
 		return this.error;
 	}
-	
-	public void setError(String error){
+
+	public void setError(String error) {
 		this.error = error;
 	}
-	
-    
+
 }

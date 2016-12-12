@@ -6,13 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import fi.softala.vote.model.Team;
-import fi.softala.vote.model.Vote;
 import fi.softala.vote.model.Voter;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -28,8 +25,6 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	@Inject
 	private TeamDAOJdbcImpl teamdao;
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-
 	public JdbcTemplate getJdbcTemplate() {
 		return this.jdbc;
 	}
@@ -39,16 +34,16 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	}
 
 	@Override
+	// find voter by name
 	public Voter findByVoterName(String fname, String sname) throws Exception {
 		String query = "SELECT * FROM voter WHERE fname = ? AND sname = ? AND type != 'INNOMEM' AND voted = 'N' ORDER BY voter_id ASC Limit 1";
 		Object[] params = new Object[] { fname, sname };
 
 		return jdbc.queryForObject(query, params, (result, row) -> {
-			
+
 			Voter voter = new Voter();
 			voter.setFirstName(result.getString("fname"));
 			voter.setLastName(result.getString("sname"));
-			// voter.setTeam(new Team());
 			voter.setTeam(teamdao.find(result.getLong("team_id")));
 			voter.setType(result.getString("type"));
 			voter.setVoted(result.getBoolean("voted"));
@@ -58,14 +53,14 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 		});
 
 	}
-	
+
 	@Override
-	public Voter findByVoterTeam(String fname, String sname, String team_name) throws Exception {
+	// find voter by team
+	public Voter findByVoterTeam(String fname, String sname, String team_name)
+			throws Exception {
 		String query = "SELECT voter_id, fname, sname, type, voted, team_id FROM voter JOIN team USING(team_id)  WHERE fname = ? AND sname = ? AND team_name = ? AND voted = 'N' ORDER BY voter_id ASC Limit 1;";
 		Object[] params = new Object[] { fname, sname, team_name };
 
-		
-		
 		return jdbc.queryForObject(query, params, (result, row) -> {
 			Voter voter = new Voter();
 			voter.setVoterId(result.getLong("voter_id"));
@@ -73,17 +68,15 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 			voter.setLastName(result.getString("sname"));
 			voter.setType(result.getString("type"));
 			voter.setVoted(result.getBoolean("voted"));
-			//voter.setTeam(new Team());
 			voter.setTeam(teamdao.find(result.getLong("team_id")));
-			
-			
-			
+
 			System.out.println(voter);
 			return voter;
 		});
 	}
 
 	@Override
+	// add new voter
 	public Voter addVoter(Voter voter) {
 		String SQL = "insert into voter(fname, sname, type, team_id) values(?, ?, ?, ?)";
 		final String FNAME = voter.getFirstName();
@@ -112,6 +105,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	}
 
 	@Override
+	// find voter by id
 	public Voter find(long id) {
 		String query = " SELECT fname, sname, type, team_name, voted FROM voter JOIN team USING(team_id) WHERE voter_id = ?";
 		Object[] params = new Object[] { id };
@@ -134,8 +128,9 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 				});
 
 	}
-	
+
 	@Override
+	// find all voters
 	public List<Voter> findAll() {
 		String query = "SELECT * FROM voter";
 		return this.jdbc.query(query, (result, row) -> {
@@ -154,6 +149,7 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	}
 
 	@Override
+	// update voter's voted-status
 	public void updateVoted(long id) {
 		final String SQL = "UPDATE voter SET voted='Y' WHERE voter_id=?";
 		Object[] params = new Object[] { id };
@@ -161,12 +157,14 @@ public class VoterDAOJdbcImpl implements VoterDAO {
 	}
 
 	@Override
+	// update a voter's team_id
 	public void updateTeam(Voter voter, Team team) {
 		final String SQL = "UPDATE voter SET team_id=? WHERE voter_id=?";
 		Object[] params = new Object[] { team.getTeamId(), voter.getVoterId() };
 		jdbc.update(SQL, params);
 	}
 
+	// find voters (members) of a team
 	public List<Voter> findByTeamId(long teamId) {
 		final String SQL = "SELECT * FROM voter WHERE team_id = ?";
 		Object[] params = new Object[] { teamId };

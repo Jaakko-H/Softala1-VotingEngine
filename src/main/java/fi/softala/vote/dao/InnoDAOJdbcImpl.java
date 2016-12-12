@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 import fi.softala.vote.model.Innovation;
 
 @Repository
-public class InnoDAOJdbcImpl {
+public class InnoDAOJdbcImpl implements InnovationDAO {
 
 	@Inject
 	private JdbcTemplate jdbcTemplate;
@@ -31,6 +31,7 @@ public class InnoDAOJdbcImpl {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	// add new innovation
 	public Innovation addNew(Innovation inno) {
 		final String sql = "insert into inno(team_id, inno_name, inno_desc, inno_owner) values(?,?,?, ?)";
 
@@ -59,6 +60,7 @@ public class InnoDAOJdbcImpl {
 		return inno;
 	}
 
+	// find by innovation's id
 	public Innovation find(long id) {
 		String sql = "select inno_name, inno_desc, inno_id, inno.team_id, inno_owner, team_name from inno join team using(team_id) where inno_id = ?";
 		Object[] parameters = new Object[] { id };
@@ -73,6 +75,7 @@ public class InnoDAOJdbcImpl {
 		return inno;
 	}
 
+	// find all innovations and their teams
 	public List<Innovation> findAll() {
 
 		String sql = "select inno_id, inno_name, inno_desc, team_id, inno_owner, team_name from inno join team using(team_id)";
@@ -82,6 +85,7 @@ public class InnoDAOJdbcImpl {
 		return innovations;
 	}
 
+	// find all innovations by a team
 	public List<Innovation> findByTeamId(long teamId) {
 		String sql = "select * from inno where team_id = ?";
 		Object[] params = new Object[] { teamId };

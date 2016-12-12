@@ -1,4 +1,5 @@
 package fi.softala.vote.controller;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,19 +18,19 @@ public class MainCtrl {
 
 	@Inject
 	private TeamDAOJdbcImpl dao;
-	
-    @RequestMapping(path="/", method=RequestMethod.GET)
-    public String showLogin(HttpSession session, Model model){
-	if(session.getAttribute("voter") != null){
-		return "redirect:/innovations";
+
+	// front page, get teams except not_in_team
+	@RequestMapping(path = "/", method = RequestMethod.GET)
+	public String showLogin(HttpSession session, Model model) {
+		if (session.getAttribute("voter") != null) {
+			return "redirect:/innovations";
+		}
+
+		List<Team> teams = dao.findAll();
+		teams.remove(0);
+		model.addAttribute("teams", teams);
+
+		return "redirect:/login";
 	}
-    
-	
-	List<Team> teams = dao.findAll();
-	teams.remove(0);
-  	model.addAttribute("teams", teams);
-  	
-	return "redirect:/login";
-    }
-   
+
 }

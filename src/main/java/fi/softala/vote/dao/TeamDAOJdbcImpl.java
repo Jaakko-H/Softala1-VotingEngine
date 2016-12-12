@@ -30,6 +30,7 @@ public class TeamDAOJdbcImpl implements TeamDAO {
 	}
 
 	@Override
+	// find team by id
 	public Team find(long id) {
 
 		String query = "SELECT * FROM team WHERE team_id = ?";
@@ -44,6 +45,7 @@ public class TeamDAOJdbcImpl implements TeamDAO {
 	}
 
 	@Override
+	// find team by name
 	public Team findByTeamName(String teamName) {
 		String query = "SELECT * FROM team WHERE team_name = ?";
 		Object[] params = new Object[] { teamName };
@@ -56,6 +58,7 @@ public class TeamDAOJdbcImpl implements TeamDAO {
 	}
 
 	@Override
+	// find all teams
 	public List<Team> findAll() {
 		String query = "SELECT team_id, team_name FROM team";
 		return this.jdbc.query(query, (result, row) -> {
@@ -67,6 +70,7 @@ public class TeamDAOJdbcImpl implements TeamDAO {
 	}
 
 	@Override
+	// add new team
 	public Team addNew(Team team) {
 		String SQL = "INSERT INTO team(team_name) values(?)";
 		KeyHolder idHolder = new GeneratedKeyHolder();
@@ -82,7 +86,7 @@ public class TeamDAOJdbcImpl implements TeamDAO {
 		}, idHolder);
 
 		team.setTeamId(idHolder.getKey().longValue());
-		
+
 		return team;
 	}
 }

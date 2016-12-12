@@ -11,8 +11,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name = "vote")
 public class Vote {
@@ -32,9 +30,7 @@ public class Vote {
 	@org.hibernate.annotations.Type(type = "yes_no")
 	@NotNull
 	@Column(name = "legit")
-	private boolean legit;
-
-	// SQL default 'N', if vote is legit -> 'Y'
+	private boolean legit; // SQL default 'N', if vote is legit -> 'Y'
 
 	public boolean isLegit() {
 		return legit;

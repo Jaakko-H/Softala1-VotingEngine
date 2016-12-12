@@ -19,17 +19,17 @@ public class Innovation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long innoId;
-        
-                 @NotNull
-                 @NotEmpty
-                 @Size(min = 1, max = 50)
-                 @Column(name = "inno_name", nullable = false, unique = true)
+
+	@NotNull
+	@NotEmpty
+	@Size(min = 1, max = 50)
+	@Column(name = "inno_name", nullable = false, unique = true)
 	private String innoName;
-        
-                  @NotNull
-                  @NotEmpty
+
+	@NotNull
+	@NotEmpty
 	@Size(min = 1, max = 225)
-                  @Column(name = "inno_desc", nullable = false)
+	@Column(name = "inno_desc", nullable = false)
 	private String innoDesc;
 
 	@ManyToOne
@@ -38,8 +38,8 @@ public class Innovation {
 
 	@Size(min = 1, max = 100)
 	private String innoOwner;
-	
-	private long voteCount;
+
+	private long voteCount; // votes existing for this innovation
 
 	public long getInnoId() {
 		return innoId;
@@ -80,11 +80,11 @@ public class Innovation {
 	public void setInnoOwner(String innoOwner) {
 		this.innoOwner = innoOwner;
 	}
-	
+
 	public long getVoteCount() {
 		return voteCount;
 	}
-	
+
 	public void setVoteCount(long voteCount) {
 		this.voteCount = voteCount;
 	}
