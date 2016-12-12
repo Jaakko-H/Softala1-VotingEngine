@@ -1,7 +1,5 @@
 package fi.softala.vote.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import FormValidators.InnovationForm;
@@ -39,23 +37,28 @@ public class VoteCtrl {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	// create new vote for inno of inno_id
 	@RequestMapping(path = "/vote", method = RequestMethod.POST)
-	public String handleVote(InnovationForm innovationForm, BindingResult results, Model model, 
+	public String handleVote(InnovationForm innovationForm,
+			BindingResult results, Model model,
 			@RequestParam(required = true) long innoId, HttpSession session) {
 		Vote vote = new Vote();
 		Voter voter;
 
 		Innovation innovation = innovationdao.find(innoId);
-		
+
 		try {
 			voter = (Voter) session.getAttribute("voter");
-			System.out.println("mikä sinä olet " + innovation.getTeam() + "ja tiimi on " + voter.getTeam());
-			//INNOVAATION TIIMIN ARVOKSI TULEE NULL, INNOROWMAPPER EI TOIMI
+			System.out.println("mikä sinä olet " + innovation.getTeam()
+					+ "ja tiimi on " + voter.getTeam());
 			if (voter.getTeam().getTeamId() == innovation.getTeam().getTeamId()) {
-				results.rejectValue("error", "403","You can't vote your own innovation");
+				results.rejectValue("error", "403",
+						"You can't vote your own innovation");
 				return "redirect:/innovations";
-			} else if (voter.isVoted()) {
-				results.rejectValue("error", "403", "You can't vote the same again");
+			} else if (voter.isVoted()) { // user has already voted, redirect
+											// back to login
+				results.rejectValue("error", "403",
+						"You can't vote the same again");
 				log.info("you have already voted");
 				session.invalidate();
 				return "redirect:/login";
@@ -70,22 +73,21 @@ public class VoteCtrl {
 			voterdao.updateVoted(voter.getVoterId());
 
 			session.invalidate();
-			
+
 			List<Innovation> innovations = innovationdao.findAll();
-	
-			// set vote count 
-			for( Innovation inno : innovations){
+
+			// set vote count
+			for (Innovation inno : innovations) {
 				inno.setVoteCount(votedao.findByInnovation(inno).size());
 			}
-			
+
+			// sort innovations by their vote count, in descending order
 			innovations.sort((obj1, obj2) -> {
 				return Long.compare(obj2.getVoteCount(), obj1.getVoteCount());
 			});
-			
+
 			int allvotes = votedao.findAllVotes().size();
-			
-			System.out.println(allvotes + " annetut ��net yhteens�");
-			
+
 			model.addAttribute("innovations", innovations);
 			model.addAttribute("allvotes", allvotes);
 			return "results";

@@ -10,40 +10,47 @@ public class VoterForm {
 	@NotNull
 	@NotEmpty(message="firstname can't be empty")
 	@Size(min=2, max=20, message="Firstname size must be between 2 to 20 chars")
-    public String fName;
+    public String fName;  // first name
 	 
 	@NotNull
 	@NotEmpty(message="Surname can't be empty")
 	@Size(min=2, max=20, message="Surname size must be between 2 to 20 chars")
-    public String sName;
+    public String sName; // surname
 	 
-    public String vType;
-    public String tName;
-    
+    public String vType; // voter type, SQL default; VISITOR - STUDENT, TEACHER,
+							// INNOMEM
+    public String tName;// team name
+
 	public String getfName() {
 		return fName;
 	}
+
 	public void setfName(String fName) {
 		this.fName = fName;
 	}
+
 	public String getsName() {
 		return sName;
 	}
+
 	public void setsName(String sName) {
 		this.sName = sName;
 	}
+
 	public String getvType() {
 		return vType;
 	}
+
 	public void setvType(String vType) {
 		this.vType = vType;
 	}
-    
+
 	public String gettName() {
 		return tName;
 	}
+
 	public void settName(String tName) {
 		this.tName = tName;
 	}
-    
+
 }

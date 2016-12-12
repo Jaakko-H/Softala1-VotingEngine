@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,6 @@ import fi.softala.vote.model.Voter;
 public class VoterCtrl {
 	@Inject
     private TeamDAOJdbcImpl teamdao;
-	
 	@Inject
     private VoterDAOJdbcImpl voterdao;
 	
@@ -32,13 +30,14 @@ public class VoterCtrl {
     
     public void setDao(VoterDAOJdbcImpl voterdao) { this.voterdao = voterdao; }
     
+    // add new voter
     @RequestMapping(path="/addVoter", method=RequestMethod.POST)
-    public String addNewVoter(@Valid VoterForm voterForm, BindingResult result, HttpSession session) {
+    public String addNewVoter(@Valid VoterForm voterForm, BindingResult result, HttpSession session, @RequestParam("src") String src) {
     	 System.out.println(result);
     	if (result.hasErrors()) {
     		result.rejectValue("fName", "403",
 					"You are not invited to vote");
-			return "redirect:/admin";
+			  return "redirect:" + src;
 		}
     	Voter voterToAdd = new Voter();
     	List<Team> teams = teamdao.findAll();
@@ -72,16 +71,8 @@ public class VoterCtrl {
 		if (!found) {
 			voterdao.addVoter(voterToAdd);
 		}
-    	
-//    	if (voter.getType().equals("INNOMEM")){
-//    		team = teamdao.findByTeamName(voterForm.gettName());
-//    		voter.setTeam(team);
-//    	} 
-//    	else {
-//	    	team.setTeamId(1);
-//	    	voter.setTeam(team);
-//    	}
-    
-    	return "redirect:/admin";
+
+    	return "redirect:" + src;
     }
+
 }

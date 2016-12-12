@@ -21,45 +21,31 @@ public class Voter {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long voterId;
 
-                  @NotNull
-                  @NotEmpty
+	@NotNull
+	@NotEmpty
 	@Size(min = 1, max = 225)
 	private String firstName;
 
-                  @NotNull
-                  @NotEmpty
+	@NotNull
+	@NotEmpty
 	@Size(min = 1, max = 225)
 	private String lastName;
 
-                  @NotNull
-                  @NotEmpty
+	@NotNull
+	@NotEmpty
 	@Size(min = 7, max = 7)
 	@Column(name = "type")
-	private String type;
-	// SQL default; visitor - student, teacher, innomem
+	private String type; // SQL default; VISITOR - STUDENT, TEACHER, INNOMEM
 
-                  @NotEmpty
+	@NotEmpty
 	@org.hibernate.annotations.Type(type = "yes_no")
 	@NotNull
 	@Column(name = "voted")
-	private boolean voted;
-	// SQL default 'N', if has voted -> 'Y'
+	private boolean voted; // SQL default 'N', if has voted -> 'Y'
 
 	@ManyToOne
 	@JoinColumn(name = "team_id")
 	private Team team;
-
-	/*
-	 * if to validate team members to not vote their own innovation via java...?
-	 * 
-	 * @OneToOne
-	 * 
-	 * @JoinColumn(name = "member_id") private TeamMember teammember;
-	 * 
-	 * $ desc table team_member; $ alter table team_member add member_id
-	 * bigint(20) primary key auto_increment; $ alter table team_member drop
-	 * column member_id;
-	 */
 
 	public long getVoterId() {
 		return voterId;
@@ -115,7 +101,5 @@ public class Voter {
 				+ ", lastName=" + lastName + ", type=" + type + ", voted="
 				+ voted + ", team=" + team + "]";
 	}
-	
-	
 
 }

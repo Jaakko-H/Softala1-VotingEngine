@@ -10,11 +10,27 @@ ul, li {
 	
 }
 
-.innovation {
-    padding:3px;
-    border-bottom: 1px dashed lightgrey;
-    margin-bottom:5px;
+.inno-result {
+	
 }
+
+.inno-result:first-child {
+	background:aquamarine;
+	transform:scale(1.1);
+	color:rgba(0,0,0,0.9);
+}
+
+.inno-result:nth-child(2){
+	transform:scale(1);
+	color:rgba(0,0,0,0.7);
+}
+
+.inno-result {
+	transform:scale(0.9);
+	color:rgba(0,0,0,0.5);
+	font-size:110%;
+}
+
 
 
 .error {

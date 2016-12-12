@@ -8,13 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
+// configuration to override hidden xml-files
 public class AppConfig {
 	@Bean
 	public BasicDataSource basicDataSource() {
 		return new BasicDataSource();
 	}
+
 	@Bean
-    public JdbcTemplate jdbcTemplate(BasicDataSource dataSource) {
+	public JdbcTemplate jdbcTemplate(BasicDataSource dataSource) {
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
 		dataSource.setUrl("jdbc:mariadb://localhost/aanestys");
 		dataSource.setUsername("aanestys");
@@ -27,6 +29,6 @@ public class AppConfig {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        return new JdbcTemplate(dataSource);
-    }
+		return new JdbcTemplate(dataSource);
+	}
 }

@@ -8,14 +8,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 public class VotingEngineApplication extends SpringBootServletInitializer {
-	 
+
 	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(VotingEngineApplication.class);
-    }
-	
+	protected SpringApplicationBuilder configure(
+			SpringApplicationBuilder application) {
+		return application.sources(VotingEngineApplication.class);
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(VotingEngineApplication.class, args);
 	}

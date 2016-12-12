@@ -14,9 +14,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,36 +28,33 @@ public class LoginCtrl {
 	@Inject
 	private VoterDAOJdbcImpl voterdao;
 	@Inject
-	private InnoDAOJdbcImpl innovationdao;
-	
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	@Inject
 	private TeamDAOJdbcImpl dao;
-	
 
+	// log in, find all teams except not_in_team(1)
 	@RequestMapping(path = "/login", method = RequestMethod.GET)
 	public String viewLogin(LoginForm loginForm, Model model) {
-		 
+
 		List<Team> teams = dao.findAll();
 		teams.remove(0);
-	  	model.addAttribute("teams", teams);
-	  	
-	  	
+		model.addAttribute("teams", teams);
+
 		return "login";
 	}
 
+	// log in
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String handleLogin(@Valid LoginForm loginForm, BindingResult result, Model model,
 			HttpSession session) {
 		if (result.hasErrors()) {
-			return "login";
+			return "redirect:/login";
 		}
 		System.out.println(loginForm.getVoterTeam() + " hello");
 		Voter voter;
 		if (!loginForm.getVoterTeam().equalsIgnoreCase("not_in_team")) {
 			try {
-				voter = voterdao.findByVoterTeam(loginForm.getVoterFirstName(), loginForm.getVoterSirName(), loginForm.getVoterTeam());
-				
+				voter = voterdao.findByVoterTeam(loginForm.getVoterFirstName(),
+						loginForm.getVoterSirName(), loginForm.getVoterTeam());
+
 				session.setAttribute("voter", voter);
 				System.out.print(voter);
 				return "redirect:/innovations";
@@ -75,7 +69,7 @@ public class LoginCtrl {
 		try {
 			voter = voterdao.findByVoterName(loginForm.getVoterFirstName(),
 					loginForm.getVoterSirName());
-			
+      
 			if (voter.isVoted()) {
 				List<Innovation> innovations = innovationdao.findAll();
 				
@@ -105,7 +99,7 @@ public class LoginCtrl {
 			result.rejectValue("voterFirstName", "403",
 					"You are not invited to vote");
 			System.out.println("No Vote");
-			return "login";
+			return "redirect:/login";
 		}
 	}
 }
