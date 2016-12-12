@@ -16,21 +16,23 @@ import fi.softala.vote.model.Team;
 @Controller
 public class TeamCtrl {
 
-	@Inject 
+	@Inject
 	private TeamDAOJdbcImpl teamdao;
-	
-	@RequestMapping(path="/team/add", method=RequestMethod.POST)
-	public String create(@RequestParam("src") String src, @Valid TeamForm teamform, BindingResult result){
-		
-		if(result.hasErrors()){
+
+	// add new team
+	@RequestMapping(path = "/team/add", method = RequestMethod.POST)
+	public String create(@RequestParam("src") String src,
+			@Valid TeamForm teamform, BindingResult result) {
+
+		if (result.hasErrors()) {
 			return "redirect:" + src;
 		}
-		
+
 		Team team = new Team();
 		team.setTeamName(teamform.getName());
 		teamdao.addNew(team);
-		
+
 		return "redirect:" + src;
 	}
-	
+
 }

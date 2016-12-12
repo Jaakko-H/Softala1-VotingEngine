@@ -9,15 +9,15 @@ public class TeamForm {
 
 	@NotNull
 	@NotEmpty
-	@Size(min=3, max=25)
+	@Size(min = 3, max = 25)
 	private String name;
-	
-	public void setName(String name){
+
+	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	}
-	
+
 }
