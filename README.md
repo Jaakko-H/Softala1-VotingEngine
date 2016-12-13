@@ -8,3 +8,6 @@
 
 # hide dependencies
 Customize view, enable external libraries
+
+# admin login
+No credentials required, use empty fields.
